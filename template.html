@@ -1115,12 +1115,8 @@
                     entityHtml += `</span>`;
                     
                     // Show secondary name if available
-                    if (lang === 'zh' && d.entityEn) {
-                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
-                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
-                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
-                    }
-                    
+                    // removed per request - still searchable via searchInput logic
+
                     // Source Link Logic
                     if (d.primarySource) {
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">{{table_source}}</a>`;
