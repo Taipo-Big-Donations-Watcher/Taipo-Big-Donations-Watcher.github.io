@@ -26,7 +26,7 @@ const TEMPLATE_PATH = path.join(__dirname, 'template.html');
 const I18N_DIR = path.join(__dirname, 'src', 'i18n');
 
 const LANGUAGES = ['en', 'zh'];
-const DEFAULT_LANG = 'en';
+const DEFAULT_LANG = 'zh';
 const SITE_URL = 'https://taipo-big-donations-watcher.github.io';
 
 // Google Sheets URL for raw data badge
@@ -274,10 +274,10 @@ function generateRootRedirect(defaultLang) {
   <script>
     // Detect browser language and redirect
     const lang = navigator.language || navigator.userLanguage;
-    if (lang.startsWith('zh')) {
-      window.location.href = '/zh/';
-    } else {
+    if (lang.startsWith('en')) {
       window.location.href = '/en/';
+    } else {
+      window.location.href = '/zh/';
     }
   </script>
 </head>
@@ -462,25 +462,10 @@ async function build() {
     // Fetch and generate SEO pages
     console.log('\nFetching SEO page configurations...');
     const seoData = await fetchSeoPages();
-    let seoConfigs = [];
-    
     if (seoData) {
-      seoConfigs = seoData.rows
+      const seoConfigs = seoData.rows
         .map(parseSeoPageConfig)
         .filter(Boolean);
-    }
-    
-    // Manual override for "Over 1M" page
-    seoConfigs.push({
-        slug: 'donations-over-1m',
-        titleEn: 'Donations Over HK$1 Million - Tai Po Fire Relief',
-        titleZh: '超過100萬港元之捐款 - 大埔火災救援',
-        descriptionEn: 'List of major donations for Tai Po fire relief exceeding HK$1 Million.',
-        descriptionZh: '大埔宏福苑火災救援：超過100萬港元之大額承諾捐款名單。',
-        filterConfig: { minAmount: 1000000, sort: 'value-desc' }
-    });
-
-    if (seoConfigs.length > 0) {
       generateSeoPages(template, donations, seoConfigs, buildTime);
     }
     
