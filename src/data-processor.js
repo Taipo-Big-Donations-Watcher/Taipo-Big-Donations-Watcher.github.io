@@ -6,6 +6,7 @@
  */
 
 const { translateCategory, getCategoryIcon } = require('./i18n/categories');
+const ENTITY_TRANSLATIONS = require('./i18n/entities');
 
 /**
  * Default column name to index mapping
@@ -191,12 +192,27 @@ function processDonations(rows, headers = null) {
  * @returns {Object} - Translated donation object
  */
 function translateDonation(donation, lang) {
+  // Determine English entity name
+  let entityEn = donation.entityEn;
+  if (!entityEn && ENTITY_TRANSLATIONS[donation.entity]) {
+    entityEn = ENTITY_TRANSLATIONS[donation.entity];
+  }
+
+  // Translate receiver if needed
+  let through = donation.through;
+  if (lang === 'en' && through && ENTITY_TRANSLATIONS[through]) {
+    through = ENTITY_TRANSLATIONS[through];
+  }
+
   return {
     ...donation,
+    through, // Update translated receiver
     // Use English entity name if available, otherwise use Chinese
-    entityDisplay: lang === 'en' && donation.entityEn 
-      ? donation.entityEn 
+    entityDisplay: lang === 'en' && entityEn 
+      ? entityEn 
       : donation.entity,
+    // Ensure entityEn is populated for frontend checks
+    entityEn: entityEn || donation.entityEn,
     // Translated categories
     capitalDisplay: translateCategory('capital', donation.capital, lang),
     industryDisplay: translateCategory('industry', donation.industry, lang),
