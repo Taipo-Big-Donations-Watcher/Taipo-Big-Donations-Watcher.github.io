@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taipo-big-donations-watcher.github.io/sitemap.xml

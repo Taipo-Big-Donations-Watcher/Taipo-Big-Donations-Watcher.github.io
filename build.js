@@ -27,7 +27,10 @@ const I18N_DIR = path.join(__dirname, 'src', 'i18n');
 
 const LANGUAGES = ['en', 'zh'];
 const DEFAULT_LANG = 'en';
-const BASE_URL = ''; // Set to your domain if needed for absolute URLs
+const SITE_URL = 'https://taipo-big-donations-watcher.github.io';
+
+// Track all generated pages for sitemap
+const generatedPages = [];
 
 /**
  * Load i18n translation file
@@ -116,7 +119,7 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
   // Include index.html for file:// compatibility
   const otherLang = lang === 'en' ? 'zh' : 'en';
   const pageVars = {
-    base_url: BASE_URL,
+    base_url: SITE_URL,
     build_time: buildTime,
     switch_language_url: `../${otherLang}/index.html`,
     footer_disclaimer: lang === 'zh' 
@@ -134,6 +137,13 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
   // Write index.html for this language
   fs.writeFileSync(path.join(langDir, 'index.html'), html);
   console.log(`  ✓ /${lang}/index.html (${donations.length} donations)`);
+  
+  // Track for sitemap
+  generatedPages.push({
+    path: `/${lang}/`,
+    priority: '1.0',
+    changefreq: 'daily',
+  });
   
   return { langDir, i18n, translatedDonations };
 }
@@ -194,7 +204,7 @@ function generateSeoPages(template, donations, seoConfigs, buildTime) {
       const otherLang = lang === 'en' ? 'zh' : 'en';
       
       const pageVars = {
-        base_url: BASE_URL,
+        base_url: SITE_URL,
         build_time: buildTime,
         site_title: title || i18n.site_title,
         page_description: description || i18n.page_description,
@@ -212,8 +222,55 @@ function generateSeoPages(template, donations, seoConfigs, buildTime) {
       ensureDir(outputDir);
       fs.writeFileSync(path.join(outputDir, 'index.html'), html);
       console.log(`  ✓ /${lang}/${config.slug}/ (${filteredDonations.length} donations)`);
+      
+      // Track for sitemap
+      generatedPages.push({
+        path: `/${lang}/${config.slug}/`,
+        priority: '0.8',
+        changefreq: 'daily',
+      });
     });
   }
+}
+
+/**
+ * Generate sitemap.xml for SEO
+ */
+function generateSitemap(buildTime) {
+  console.log('Generating sitemap.xml...');
+  
+  const lastmod = buildTime.split('T')[0]; // YYYY-MM-DD format
+  
+  const urls = generatedPages.map(page => `  <url>
+    <loc>${SITE_URL}${page.path}</loc>
+    <lastmod>${lastmod}</lastmod>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
+  </url>`).join('\n');
+  
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>`;
+  
+  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemap);
+  console.log(`  ✓ sitemap.xml (${generatedPages.length} URLs)`);
+}
+
+/**
+ * Generate robots.txt
+ */
+function generateRobotsTxt() {
+  console.log('Generating robots.txt...');
+  
+  const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+  
+  fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), robotsTxt);
+  console.log('  ✓ robots.txt');
 }
 
 /**
@@ -298,6 +355,11 @@ async function build() {
     console.log('');
     generateDataJson(donations, stats, buildTime);
     
+    // Generate sitemap and robots.txt
+    console.log('');
+    generateSitemap(buildTime);
+    generateRobotsTxt();
+    
     console.log('\n' + '='.repeat(50));
     console.log('Build complete!');
     console.log(`Output: ${DIST_DIR}`);
@@ -307,6 +369,8 @@ async function build() {
     console.log('  /en/index.html     (English version)');
     console.log('  /zh/index.html     (Chinese version)');
     console.log('  /data.json         (JSON API)');
+    console.log('  /sitemap.xml       (SEO sitemap)');
+    console.log('  /robots.txt        (crawler rules)');
     console.log('='.repeat(50));
     
   } catch (error) {
