@@ -29,6 +29,9 @@ const LANGUAGES = ['en', 'zh'];
 const DEFAULT_LANG = 'en';
 const SITE_URL = 'https://taipo-big-donations-watcher.github.io';
 
+// Google Sheets URL for raw data badge
+const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing';
+
 // Track all generated pages for sitemap
 const generatedPages = [];
 
@@ -120,6 +123,8 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
   const otherLang = lang === 'en' ? 'zh' : 'en';
   const pageVars = {
     base_url: SITE_URL,
+    sheets_url: SHEETS_URL,
+    favicon_path: '../favicon.png',
     build_time: buildTime,
     switch_language_url: `../${otherLang}/index.html`,
     footer_disclaimer: lang === 'zh' 
@@ -205,6 +210,8 @@ function generateSeoPages(template, donations, seoConfigs, buildTime) {
       
       const pageVars = {
         base_url: SITE_URL,
+        sheets_url: SHEETS_URL,
+        favicon_path: '../../favicon.png',
         build_time: buildTime,
         site_title: title || i18n.site_title,
         page_description: description || i18n.page_description,
@@ -360,6 +367,14 @@ async function build() {
     generateSitemap(buildTime);
     generateRobotsTxt();
     
+    // Copy favicon
+    const faviconSrc = path.join(__dirname, 'favicon.png');
+    const faviconDest = path.join(DIST_DIR, 'favicon.png');
+    if (fs.existsSync(faviconSrc)) {
+      fs.copyFileSync(faviconSrc, faviconDest);
+      console.log('  ✓ favicon.png');
+    }
+    
     console.log('\n' + '='.repeat(50));
     console.log('Build complete!');
     console.log(`Output: ${DIST_DIR}`);
@@ -371,6 +386,7 @@ async function build() {
     console.log('  /data.json         (JSON API)');
     console.log('  /sitemap.xml       (SEO sitemap)');
     console.log('  /robots.txt        (crawler rules)');
+    console.log('  /favicon.png       (site icon)');
     console.log('='.repeat(50));
     
   } catch (error) {

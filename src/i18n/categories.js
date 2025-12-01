@@ -72,7 +72,7 @@ const INDUSTRY_MAP = {
   // Industrial
   '電訊': { en: 'Telecommunications', zh: '電訊', icon: '📡' },
   '能源': { en: 'Energy', zh: '能源', icon: '⚡' },
-  '礦業': { en: 'Mining', zh: '礦業', icon: '⛏️' },
+  '原材料': { en: 'Raw Materials', zh: '原材料', icon: '⛏️' },
   '鋁業': { en: 'Aluminum', zh: '鋁業', icon: '🔩' },
   '家電': { en: 'Home Appliances', zh: '家電', icon: '🏠' },
   '電子製造': { en: 'Electronics Manufacturing', zh: '電子製造', icon: '🔌' },

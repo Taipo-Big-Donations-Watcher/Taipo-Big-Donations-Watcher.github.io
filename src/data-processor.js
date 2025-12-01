@@ -122,8 +122,24 @@ function transformRow(row, columnMap) {
   };
   
   const totalValue = parseAmount(getValue('totalValue'));
-  const cashValue = parseAmount(getValue('cashValue'));
-  const goodsValue = parseAmount(getValue('goodsValue'));
+  let cashValue = parseAmount(getValue('cashValue'));
+  let goodsValue = parseAmount(getValue('goodsValue'));
+  
+  // Sanitization logic:
+  // 1. If neither cash nor goods is filled, assume all is cash
+  // 2. If only one is filled and total is available, calculate the other
+  if (cashValue === null && goodsValue === null && totalValue !== null) {
+    // Assume all is cash
+    cashValue = totalValue;
+    goodsValue = 0;
+  } else if (cashValue !== null && goodsValue === null && totalValue !== null) {
+    // Calculate goods from total - cash
+    goodsValue = Math.max(0, totalValue - cashValue);
+  } else if (cashValue === null && goodsValue !== null && totalValue !== null) {
+    // Calculate cash from total - goods
+    cashValue = Math.max(0, totalValue - goodsValue);
+  }
+  // If only one is filled and total is unavailable, don't attempt to calculate
   
   return {
     // Entity names (Chinese is primary, English is optional)
