@@ -58,11 +58,35 @@ function loadEnv() {
 }
 
 /**
+ * Load service account credentials
+ * Supports both:
+ * - GOOGLE_SERVICE_ACCOUNT_FILE: path to JSON file (for CI/CD)
+ * - GOOGLE_SERVICE_ACCOUNT: inline JSON wrapped in backticks (for local dev)
+ */
+function loadServiceAccount(env) {
+  // Check for file-based credentials first (CI/CD)
+  if (env.GOOGLE_SERVICE_ACCOUNT_FILE) {
+    const filePath = path.join(__dirname, '..', env.GOOGLE_SERVICE_ACCOUNT_FILE);
+    if (fs.existsSync(filePath)) {
+      const content = fs.readFileSync(filePath, 'utf-8');
+      return JSON.parse(content);
+    }
+  }
+  
+  // Fall back to inline JSON (local development)
+  if (env.GOOGLE_SERVICE_ACCOUNT) {
+    return JSON.parse(env.GOOGLE_SERVICE_ACCOUNT);
+  }
+  
+  throw new Error('No service account credentials found. Set GOOGLE_SERVICE_ACCOUNT or GOOGLE_SERVICE_ACCOUNT_FILE');
+}
+
+/**
  * Create authenticated Google Sheets client
  */
 async function createSheetsClient() {
   const env = loadEnv();
-  const serviceAccount = JSON.parse(env.GOOGLE_SERVICE_ACCOUNT);
+  const serviceAccount = loadServiceAccount(env);
   
   const auth = new google.auth.GoogleAuth({
     credentials: serviceAccount,

@@ -41,19 +41,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create .env.local from secrets
+      - name: Create credentials from secrets
         env:
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
           GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
         run: |
-          node -e "
-            const fs = require('fs');
-            const sheetId = process.env.GOOGLE_SHEET_ID;
-            const serviceAccount = process.env.GOOGLE_SERVICE_ACCOUNT;
-            const content = 'GOOGLE_SHEET_ID=\"' + sheetId + '\"\nGOOGLE_SERVICE_ACCOUNT=\`' + serviceAccount + '\`';
-            fs.writeFileSync('.env.local', content);
-            console.log('.env.local created successfully');
-          "
+          # Write service account JSON to a file
+          echo "$GOOGLE_SERVICE_ACCOUNT" > service-account.json
+          
+          # Create .env.local referencing the JSON file
+          echo "GOOGLE_SHEET_ID=\"$GOOGLE_SHEET_ID\"" > .env.local
+          echo "GOOGLE_SERVICE_ACCOUNT_FILE=service-account.json" >> .env.local
+          
+          echo "Credentials created successfully"
 
       - name: Build static site
         run: npm run build
