@@ -25,12 +25,13 @@
   "table_date": "日期",
   "table_source": "來源",
   
+  "search_placeholder": "搜尋捐款者...",
   "filter_all": "全部",
-  "filter_by_capital": "按來源地",
-  "filter_by_industry": "按行業",
-  "filter_by_type": "按類型",
+  "filter_by_capital": "所有來源地",
+  "filter_by_industry": "所有行業",
+  "filter_by_type": "所有類型",
   
   "amount_unclear": "未知",
-  "no_data": "暫無資料"
+  "no_data": "沒有找到相關捐款記錄。",
+  "footer_disclaimer": "資料來源於公開宣佈。如有錯誤，歡迎指正。"
 }
-

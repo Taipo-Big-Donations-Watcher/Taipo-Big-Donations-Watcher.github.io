@@ -12,9 +12,9 @@
   "switch_language_url": "/zh/",
   
   "stats_title": "Statistics",
-  "stats_records": "donations",
+  "stats_records": "Donations",
   "stats_total_pledged": "Total Pledged",
-  "stats_known_amounts": "with known amounts",
+  "stats_known_amounts": "Known Amounts",
   "stats_last_updated": "Last Updated",
   
   "table_entity": "Donor",
@@ -25,12 +25,13 @@
   "table_date": "Date",
   "table_source": "Source",
   
+  "search_placeholder": "Search entities...",
   "filter_all": "All",
-  "filter_by_capital": "By Origin",
-  "filter_by_industry": "By Industry",
-  "filter_by_type": "By Type",
+  "filter_by_capital": "All Origins",
+  "filter_by_industry": "All Industries",
+  "filter_by_type": "All Types",
   
   "amount_unclear": "Unclear",
-  "no_data": "No data available"
+  "no_data": "No matching donations found.",
+  "footer_disclaimer": "Data sourced from public announcements. Corrections welcome."
 }
-

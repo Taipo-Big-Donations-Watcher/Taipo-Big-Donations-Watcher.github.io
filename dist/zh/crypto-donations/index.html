@@ -8,140 +8,276 @@
     <link rel="alternate" hreflang="en" href="https://taipo-big-donations-watcher.github.io/en/">
     <link rel="alternate" hreflang="zh-Hant" href="https://taipo-big-donations-watcher.github.io/zh/">
     <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #2d3436;
+            --heading-color: #1e272e;
+            --accent-color: #2c3e50; /* Somber Navy */
+            --border-color: #dfe6e9;
+            --card-bg: #ffffff;
+            --muted-text: #636e72;
+            --highlight-bg: #f1f2f6;
+        }
+
         * {
             box-sizing: border-box;
         }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
-            background: #fafafa;
+            color: var(--text-color);
+            background: var(--bg-color);
         }
+
+        /* Header & Navigation */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
         }
+
         h1 {
             margin: 0;
             font-size: 1.8em;
+            color: var(--heading-color);
+            font-weight: 700;
         }
+
         .subtitle {
-            color: #666;
+            color: var(--muted-text);
+            font-size: 1em;
             margin-top: 5px;
         }
+
         .lang-switch {
-            padding: 8px 16px;
-            background: #333;
-            color: white;
+            padding: 6px 12px;
+            background: transparent;
+            color: var(--accent-color);
             text-decoration: none;
+            border: 1px solid var(--accent-color);
             border-radius: 4px;
             font-size: 0.9em;
+            transition: all 0.2s ease;
         }
+
         .lang-switch:hover {
-            background: #555;
+            background: var(--accent-color);
+            color: white;
         }
+
+        /* Statistics Cards */
         .stats {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            gap: 20px;
+            margin-bottom: 30px;
         }
-        .stat-item {
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             text-align: center;
+            border-top: 3px solid var(--accent-color);
         }
+
         .stat-value {
             font-size: 1.8em;
-            font-weight: bold;
-            color: #d63031;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin: 5px 0;
         }
+
         .stat-label {
-            color: #666;
+            color: var(--muted-text);
             font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
+        /* Controls Section */
+        .controls {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: white;
+            min-width: 120px;
+            cursor: pointer;
+        }
+
+        /* Table */
         .table-container {
             overflow-x: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            background: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 800px; /* Ensure table doesn't squish on mobile */
         }
-        th, td {
-            text-align: left;
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-        }
+
         th {
-            background-color: #f8f9fa;
+            background-color: #f1f2f6;
+            color: var(--heading-color);
             font-weight: 600;
+            text-align: left;
+            padding: 15px;
+            border-bottom: 2px solid var(--border-color);
+            cursor: pointer;
+            user-select: none;
             position: sticky;
             top: 0;
-            white-space: nowrap;
         }
+
+        th:hover {
+            background-color: #e2e6ea;
+        }
+
+        th::after {
+            content: '↕';
+            font-size: 0.8em;
+            margin-left: 5px;
+            opacity: 0.3;
+        }
+
+        th.sorted-asc::after {
+            content: '↑';
+            opacity: 1;
+        }
+
+        th.sorted-desc::after {
+            content: '↓';
+            opacity: 1;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
         tr:hover {
-            background-color: #f8f9fa;
+            background-color: #fafafa;
         }
-        .amount {
-            font-family: "SF Mono", Monaco, monospace;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        .tag {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.85em;
-            background: #e9ecef;
-            white-space: nowrap;
-        }
-        .tag-capital {
-            background: #dfe6e9;
-        }
-        .tag-industry {
-            background: #ffeaa7;
-        }
-        .tag-type {
-            background: #dfe6e9;
-        }
+
+        /* Cell Styles */
         .entity-name {
             font-weight: 600;
+            display: block;
+            color: var(--heading-color);
         }
+
         .entity-en {
-            color: #666;
+            color: var(--muted-text);
             font-size: 0.85em;
             display: block;
         }
+
         .source-link {
             font-size: 0.8em;
-            color: #0984e3;
+            color: var(--muted-text);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 4px;
+            border-bottom: 1px dotted var(--muted-text);
         }
+
+        .source-link:hover {
+            color: var(--accent-color);
+            border-bottom-style: solid;
+        }
+
+        .amount {
+            font-family: "SF Mono", Monaco, monospace;
+            font-weight: 700;
+            color: var(--heading-color);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #f1f2f6;
+            color: var(--text-color);
+            white-space: nowrap;
+        }
+
+        /* Footer */
         footer {
-            margin-top: 30px;
-            padding: 20px;
+            margin-top: 40px;
             text-align: center;
-            color: #666;
+            color: var(--muted-text);
             font-size: 0.9em;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
         }
+
+        .disclaimer {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.4em;
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
             }
-            th, td {
-                padding: 8px 10px;
+            
+            .filter-group {
+                flex-direction: column;
             }
+            
+            select {
+                width: 100%;
+            }
+            
             .stats {
                 grid-template-columns: 1fr 1fr;
             }
@@ -158,21 +294,34 @@
     </header>
     
     <div class="stats">
-        <div class="stat-item">
-            <div class="stat-value" id="stat-count">-</div>
+        <div class="stat-card">
             <div class="stat-label">筆捐款</div>
+            <div class="stat-value" id="stat-count">-</div>
         </div>
-        <div class="stat-item">
-            <div class="stat-value" id="stat-amount">-</div>
+        <div class="stat-card">
             <div class="stat-label">認捐總額</div>
+            <div class="stat-value" id="stat-amount">-</div>
         </div>
-        <div class="stat-item">
-            <div class="stat-value" id="stat-known">-</div>
+        <div class="stat-card">
             <div class="stat-label">已確認金額</div>
+            <div class="stat-value" id="stat-known">-</div>
         </div>
-        <div class="stat-item">
-            <div class="stat-value" id="stat-updated">-</div>
-            <div class="stat-label">最後更新</div>
+    </div>
+
+    <div class="controls">
+        <div class="search-box">
+            <input type="text" id="search-input" class="search-input" placeholder="搜尋捐款者...">
+        </div>
+        <div class="filter-group">
+            <select id="filter-capital">
+                <option value="">所有來源地</option>
+            </select>
+            <select id="filter-industry">
+                <option value="">所有行業</option>
+            </select>
+            <select id="filter-type">
+                <option value="">所有類型</option>
+            </select>
         </div>
     </div>
 
@@ -180,26 +329,30 @@
         <table id="donation-table">
             <thead>
                 <tr>
-                    <th>捐款者</th>
-                    <th>資本來源</th>
-                    <th>行業</th>
-                    <th>類型</th>
-                    <th>金額 (港幣)</th>
-                    <th>日期</th>
+                    <th data-sort="entity">捐款者</th>
+                    <th data-sort="capital">資本來源</th>
+                    <th data-sort="industry">行業</th>
+                    <th data-sort="type">類型</th>
+                    <th data-sort="amountRaw">金額 (港幣)</th>
+                    <th data-sort="date">日期</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="table-body">
                 <!-- Rows will be populated by JS -->
             </tbody>
         </table>
     </div>
+    
+    <div id="no-results" style="text-align:center; padding: 40px; display: none; color: #666;">
+        沒有找到相關捐款記錄。
+    </div>
 
     <footer>
-        <p>資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
-        <p>最後更新: <span id="build-time">2025-12-01T06:10:11.040Z</span></p>
+        <p class="disclaimer">資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
+        <p>最後更新: <span id="build-time">2025-12-01T06:21:22.082Z</span></p>
     </footer>
 
-    <!-- Donation data injected by build script -->
+    <!-- Data Injection -->
     <script type="application/json" id="donation-data">
 [
   {
@@ -930,76 +1083,266 @@
 ]
     </script>
 
-    <!-- Page metadata -->
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-01T06:10:11.040Z"}
+        {"lang": "zh", "buildTime": "2025-12-01T06:21:22.082Z"}
     </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // State
+            let allDonations = [];
+            let currentDonations = [];
+            let lang = 'en';
+            let sortField = 'amountRaw';
+            let sortDir = 'desc';
+            
+            // DOM Elements
+            const tableBody = document.getElementById('table-body');
+            const searchInput = document.getElementById('search-input');
+            const filterCapital = document.getElementById('filter-capital');
+            const filterIndustry = document.getElementById('filter-industry');
+            const filterType = document.getElementById('filter-type');
+            const noResults = document.getElementById('no-results');
+            
             try {
                 const dataElement = document.getElementById('donation-data');
                 const metaElement = document.getElementById('page-meta');
                 
-                if (!dataElement || !dataElement.textContent.trim()) {
-                    console.warn('No data found in #donation-data');
-                    return;
+                if (dataElement && dataElement.textContent.trim()) {
+                    allDonations = JSON.parse(dataElement.textContent);
+                    const meta = JSON.parse(metaElement.textContent);
+                    lang = meta.lang || 'en';
+                    
+                    // Initial Setup
+                    initStats();
+                    initFilters();
+                    readUrlParams();
+                    renderTable();
+                    
+                    // Event Listeners
+                    searchInput.addEventListener('input', handleSearch);
+                    filterCapital.addEventListener('change', handleFilter);
+                    filterIndustry.addEventListener('change', handleFilter);
+                    filterType.addEventListener('change', handleFilter);
+                    
+                    document.querySelectorAll('th[data-sort]').forEach(th => {
+                        th.addEventListener('click', () => handleSort(th.dataset.sort));
+                    });
                 }
+            } catch (e) {
+                console.error('Error initializing:', e);
+            }
 
-                const donations = JSON.parse(dataElement.textContent);
-                const meta = JSON.parse(metaElement.textContent);
-                const lang = meta.lang || 'en';
-                
-                // Calculate stats
+            function initStats() {
                 let totalAmount = 0;
                 let knownCount = 0;
-                donations.forEach(d => {
+                
+                allDonations.forEach(d => {
                     if (d.amountRaw !== null) {
                         totalAmount += d.amountRaw;
                         knownCount++;
                     }
                 });
                 
-                // Update stats display
-                document.getElementById('stat-count').textContent = donations.length.toLocaleString();
+                document.getElementById('stat-count').textContent = allDonations.length.toLocaleString();
                 document.getElementById('stat-amount').textContent = '$' + totalAmount.toLocaleString();
-                document.getElementById('stat-known').textContent = knownCount + '/' + donations.length;
-                document.getElementById('stat-updated').textContent = new Date(meta.buildTime).toLocaleDateString(
+                document.getElementById('stat-known').textContent = knownCount;
+                
+                const dateStr = document.getElementById('build-time').textContent;
+                document.getElementById('build-time').textContent = new Date(dateStr).toLocaleString(
                     lang === 'zh' ? 'zh-HK' : 'en-US',
-                    { year: 'numeric', month: 'short', day: 'numeric' }
+                    { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }
                 );
+            }
 
-                // Render table
-                const tbody = document.querySelector('#donation-table tbody');
-                tbody.innerHTML = '';
+            function initFilters() {
+                // Helper to populate select
+                const populate = (select, field, displayField) => {
+                    const values = new Set();
+                    allDonations.forEach(d => {
+                        const val = d[displayField] || d[field];
+                        if (val) values.add(val);
+                    });
+                    
+                    Array.from(values).sort().forEach(val => {
+                        const option = document.createElement('option');
+                        option.value = val;
+                        option.textContent = val;
+                        select.appendChild(option);
+                    });
+                };
+                
+                populate(filterCapital, 'capital', 'capitalDisplay');
+                populate(filterIndustry, 'industry', 'industryDisplay');
+                populate(filterType, 'type', 'typeDisplay');
+            }
 
-                donations.forEach(d => {
+            function handleSearch() {
+                filterData();
+            }
+
+            function handleFilter() {
+                filterData();
+            }
+
+            function handleSort(field) {
+                if (sortField === field) {
+                    sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortField = field;
+                    sortDir = 'desc'; // Default to desc for most things
+                    if (field === 'entity' || field === 'capital' || field === 'industry') {
+                        sortDir = 'asc';
+                    }
+                }
+                
+                // Update UI headers
+                document.querySelectorAll('th').forEach(th => {
+                    th.classList.remove('sorted-asc', 'sorted-desc');
+                    if (th.dataset.sort === field) {
+                        th.classList.add(`sorted-${sortDir}`);
+                    }
+                });
+                
+                filterData();
+            }
+
+            function filterData() {
+                const query = searchInput.value.toLowerCase();
+                const capital = filterCapital.value;
+                const industry = filterIndustry.value;
+                const type = filterType.value;
+                
+                currentDonations = allDonations.filter(d => {
+                    // Search
+                    if (query) {
+                        const text = [
+                            d.entity, 
+                            d.entityDisplay, 
+                            d.entityEn,
+                            d.industryDisplay,
+                            d.capitalDisplay
+                        ].join(' ').toLowerCase();
+                        if (!text.includes(query)) return false;
+                    }
+                    
+                    // Filters
+                    if (capital && (d.capitalDisplay || d.capital) !== capital) return false;
+                    if (industry && (d.industryDisplay || d.industry) !== industry) return false;
+                    if (type && (d.typeDisplay || d.type) !== type) return false;
+                    
+                    return true;
+                });
+                
+                sortData();
+                updateUrl();
+                renderTable();
+            }
+
+            function sortData() {
+                currentDonations.sort((a, b) => {
+                    let aVal, bVal;
+                    
+                    // Handle different field types
+                    if (sortField === 'amountRaw') {
+                        aVal = a.amountRaw || 0;
+                        bVal = b.amountRaw || 0;
+                    } else if (sortField === 'date') {
+                        aVal = a.date || '';
+                        bVal = b.date || '';
+                    } else {
+                        // Text fields - use display value
+                        const displayKey = sortField + 'Display';
+                        aVal = (a[displayKey] || a[sortField] || '').toString();
+                        bVal = (b[displayKey] || b[sortField] || '').toString();
+                    }
+                    
+                    if (typeof aVal === 'string') {
+                        return sortDir === 'asc' 
+                            ? aVal.localeCompare(bVal, lang === 'zh' ? 'zh-HK' : 'en')
+                            : bVal.localeCompare(aVal, lang === 'zh' ? 'zh-HK' : 'en');
+                    } else {
+                        return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
+                    }
+                });
+            }
+
+            function renderTable() {
+                tableBody.innerHTML = '';
+                
+                if (currentDonations.length === 0) {
+                    noResults.style.display = 'block';
+                    return;
+                }
+                
+                noResults.style.display = 'none';
+                
+                // Performance optimization: only render first 100 rows if too many
+                const displayLimit = 100;
+                const itemsToShow = currentDonations.slice(0, displayLimit);
+                
+                itemsToShow.forEach(d => {
                     const tr = document.createElement('tr');
                     
-                    // Entity cell with optional English name
                     let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    // Show secondary name if available
                     if (lang === 'zh' && d.entityEn) {
                         entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
                     } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
                         entityHtml += `<span class="entity-en">${d.entity}</span>`;
                     }
+                    
                     if (d.primarySource) {
-                        entityHtml += `<br><a href="${d.primarySource}" target="_blank" class="source-link">來源 ↗</a>`;
+                        entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">來源</a>`;
                     }
                     
                     tr.innerHTML = `
                         <td>${entityHtml}</td>
-                        <td><span class="tag tag-capital">${d.capitalDisplay || d.capital || '-'}</span></td>
-                        <td><span class="tag tag-industry">${d.industryDisplay || d.industry || '-'}</span></td>
-                        <td><span class="tag tag-type">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td><span class="tag">${d.capitalDisplay || d.capital || '-'}</span></td>
+                        <td><span class="tag">${d.industryDisplay || d.industry || '-'}</span></td>
+                        <td><span class="tag">${d.typeDisplay || d.type || '-'}</span></td>
                         <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
-                        <td>${d.date || '-'}</td>
+                        <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
-                    tbody.appendChild(tr);
+                    tableBody.appendChild(tr);
                 });
+                
+                if (currentDonations.length > displayLimit) {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td colspan="6" style="text-align:center; padding: 20px; color: #666">
+                        ... and ${currentDonations.length - displayLimit} more records
+                    </td>`;
+                    tableBody.appendChild(tr);
+                }
+            }
 
-            } catch (e) {
-                console.error('Error parsing donation data:', e);
+            function updateUrl() {
+                const params = new URLSearchParams();
+                if (searchInput.value) params.set('q', searchInput.value);
+                if (filterCapital.value) params.set('capital', filterCapital.value);
+                if (filterIndustry.value) params.set('industry', filterIndustry.value);
+                if (filterType.value) params.set('type', filterType.value);
+                
+                // Only push state if changed to avoid spamming history
+                const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+                window.history.replaceState({}, '', newUrl);
+            }
+
+            function readUrlParams() {
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('q')) searchInput.value = params.get('q');
+                if (params.has('capital')) filterCapital.value = params.get('capital');
+                if (params.has('industry')) filterIndustry.value = params.get('industry');
+                if (params.has('type')) filterType.value = params.get('type');
+                
+                // Trigger initial filter if params exist
+                if (params.toString()) {
+                    filterData();
+                } else {
+                    // Just initial sort
+                    sortData();
+                    renderTable();
+                }
             }
         });
     </script>
