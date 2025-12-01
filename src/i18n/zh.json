@@ -40,6 +40,11 @@
   
   "switch_language": "English",
   
+  "nav_home": "首頁",
+  "nav_stats": "統計",
+  "nav_about": "關於",
+  "nav_links": "有用連結",
+  
   "stats_records": "筆捐款",
   "stats_total_pledged": "認捐總額",
   "stats_known_amounts": "已確認金額",

@@ -54,6 +54,7 @@
             gap: 15px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 20px;
+            position: relative;
         }
 
         h1 {
@@ -63,10 +64,22 @@
             font-weight: 700;
         }
 
-        .subtitle {
-            color: var(--muted-text);
-            font-size: 1em;
-            margin-top: 5px;
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color);
         }
 
         .lang-switch {
@@ -83,6 +96,40 @@
         .lang-switch:hover {
             background: var(--accent-color);
             color: white;
+        }
+
+        /* Burger Menu (Mobile) */
+        .burger-menu {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--heading-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 15px;
+                border-top: 1px solid #eee;
+                margin-top: 15px;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .burger-menu {
+                display: block;
+            }
+            
+            header {
+                padding-bottom: 15px; /* Adjust for collapsed state */
+            }
         }
 
         /* Header Badges */
@@ -313,6 +360,14 @@
             display: block;
             margin-top: 4px;
         }
+        
+        .note-icon {
+            color: var(--accent-color);
+            margin-left: 5px;
+            cursor: help;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
 
         .amount {
             font-family: inherit; /* Match body font */
@@ -410,7 +465,15 @@
                 </a>
             </div>
         </div>
-        <a href="../../zh/chinese-companies/index.html" class="lang-switch">中文</a>
+        
+        <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation">☰</button>
+        
+        <nav class="nav-menu" id="nav-menu">
+            <a href="https://taipo-big-donations-watcher.github.io/en/" class="nav-link">Home</a>
+            <a href="https://taipo-big-donations-watcher.github.io/en/about/" class="nav-link">About</a>
+            <a href="https://taipo-redirect.com/" target="_blank" class="nav-link">Helpful Links</a>
+            <a href="../../zh/chinese-companies/index.html" class="lang-switch">中文</a>
+        </nav>
     </header>
     
     <div class="intro">
@@ -473,7 +536,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-01T17:00:37.950Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-01T19:14:33.460Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1951,7 +2014,7 @@
     "goodsAmountRaw": 0,
     "note": "",
     "through": "",
-    "primarySource": "",
+    "primarySource": "https://weibo.com/1650507560/QfPfSFi9Y",
     "secondarySource": "",
     "verificationLink": "",
     "date": "",
@@ -2405,11 +2468,11 @@
     "amountDisplay": "$10,000,000"
   },
   {
-    "entity": "雅迪",
+    "entity": "雅迪（1585）",
     "entityEn": "",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "電動車",
+    "industry": "汽車",
     "type": "企業",
     "amount": "$10,000,000",
     "amountRaw": 10000000,
@@ -2423,10 +2486,10 @@
     "secondarySource": "https://bau.com.hk/web/article/1444635198758338560/web/content_1444635198758338560.html",
     "verificationLink": "",
     "date": "",
-    "entityDisplay": "雅迪",
+    "entityDisplay": "雅迪（1585）",
     "capitalDisplay": "China",
-    "industryDisplay": "Electric Vehicles",
-    "industryIcon": "🔋",
+    "industryDisplay": "Automotive",
+    "industryIcon": "🚗",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -2465,14 +2528,14 @@
     "type": "企業",
     "amount": "$6,000,000",
     "amountRaw": 6000000,
-    "cashAmount": "$6,000,000",
-    "cashAmountRaw": 6000000,
-    "goodsAmount": "$0",
-    "goodsAmountRaw": 0,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "$3,000,000",
+    "goodsAmountRaw": 3000000,
     "note": "300萬元現金及價值300萬元的衣物和日用品",
     "through": "",
     "primarySource": "",
-    "secondarySource": "",
+    "secondarySource": "https://www.wenweipo.com/a/202511/28/AP69294e08e4b098d782b64b54.html",
     "verificationLink": "",
     "date": "",
     "entityDisplay": "天虹國際（2678）",
@@ -2809,7 +2872,7 @@
     "goodsAmountRaw": 0,
     "note": "",
     "through": "",
-    "primarySource": "",
+    "primarySource": "https://www.meituan.com/zh-HK/news/NN251127158001269",
     "secondarySource": "",
     "verificationLink": "",
     "date": "",
@@ -2836,7 +2899,7 @@
     "note": "500萬元現金及1,000份物資包",
     "through": "",
     "primarySource": "",
-    "secondarySource": "",
+    "secondarySource": "https://www.hkcd.com.hk/hkcdweb/content/2025/11/27/content_8727357.html",
     "verificationLink": "",
     "date": "",
     "entityDisplay": "優品360（2360）",
@@ -3578,7 +3641,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-01T17:00:37.950Z"}
+        {"lang": "en", "buildTime": "2025-12-01T19:14:33.460Z"}
     </script>
 
     <script>
@@ -3590,6 +3653,16 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // Burger Menu Toggle
+            const burgerMenu = document.getElementById('burger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            
+            if (burgerMenu && navMenu) {
+                burgerMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                });
+            }
+
             // Flags Mapping
             const FLAGS = {
                 'Hong Kong': '🇭🇰', '香港': '🇭🇰',
@@ -4123,13 +4196,19 @@
                 
                 noResults.style.display = 'none';
                 const donationType = filterDonationType.value;
-                const receiverLabel = lang === 'zh' ? 'via' : 'via ';
                 
                 // Show ALL rows
                 currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
-                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}`;
+                    
+                    // Note Tooltip (i)
+                    if (d.note) {
+                        entityHtml += `<span class="note-icon" title="${d.note}">ⓘ</span>`;
+                    }
+                    entityHtml += `</span>`;
+                    
                     // Show secondary name if available
                     if (lang === 'zh' && d.entityEn) {
                         entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
@@ -4169,9 +4248,9 @@
                         amountHtml += `<a href="${d.verificationLink}" target="_blank" class="verification-icon" title="Verified Payment">✓</a>`;
                     }
                     
-                    // Add receiver if exists
+                    // Add receiver if exists (just name)
                     if (d.through) {
-                        amountHtml += `<span class="receiver-text">${receiverLabel}${d.through}</span>`;
+                        amountHtml += `<span class="receiver-text">${d.through}</span>`;
                     }
                     
                     tr.innerHTML = `

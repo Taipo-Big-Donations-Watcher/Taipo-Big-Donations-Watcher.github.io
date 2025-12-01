@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{html_lang}}">
+<html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{site_title}}</title>
-    <meta name="description" content="{{page_description}}">
-    <link rel="icon" type="image/png" href="{{favicon_path}}">
-    <link rel="alternate" hreflang="en" href="{{base_url}}/en/">
-    <link rel="alternate" hreflang="zh-Hant" href="{{base_url}}/zh/">
+    <title>關於 - 大埔火災捐款追蹤</title>
+    <meta name="description" content="追蹤 {count} 筆捐款，總額 {amount} 港幣，用於大埔宏福苑火災救援。">
+    <link rel="icon" type="image/png" href="../../favicon.png">
+    <link rel="alternate" hreflang="en" href="https://taipo-big-donations-watcher.github.io/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="https://taipo-big-donations-watcher.github.io/zh/">
     <style>
         :root {
             --bg-color: #f8f9fa;
@@ -449,17 +449,24 @@
             }
         }
     </style>
-</head>
+<style>
+      .stats, .controls, .table-container, #no-results { display: none !important; }
+      .intro { max-width: 800px; margin: 0 auto 40px; }
+      .intro h2 { margin-top: 0; }
+      .intro h3 { margin-top: 25px; margin-bottom: 10px; color: var(--accent-color); }
+      .intro ul { padding-left: 20px; margin-bottom: 20px; }
+      .intro li { margin-bottom: 8px; }
+    </style></head>
 <body>
     <header>
         <div>
-            <h1>{{site_title}}</h1>
+            <h1>關於 - 大埔火災捐款追蹤</h1>
             <div class="header-badges">
                 <a href="https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io" target="_blank" class="badge">
                     <span class="badge-label">GitHub</span>
                     <span class="badge-value">Source</span>
                 </a>
-                <a href="{{sheets_url}}" target="_blank" class="badge">
+                <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank" class="badge">
                     <span class="badge-label">Raw Data</span>
                     <span class="badge-value green">Google Sheets</span>
                 </a>
@@ -469,37 +476,52 @@
         <button class="burger-menu" id="burger-menu" aria-label="Toggle navigation">☰</button>
         
         <nav class="nav-menu" id="nav-menu">
-            <a href="{{base_url}}/{{lang}}/" class="nav-link">{{nav_home}}</a>
-            <a href="{{base_url}}/{{lang}}/about/" class="nav-link">{{nav_about}}</a>
-            <a href="https://taipo-redirect.com/" target="_blank" class="nav-link">{{nav_links}}</a>
-            <a href="{{switch_language_url}}" class="lang-switch">{{switch_language}}</a>
+            <a href="https://taipo-big-donations-watcher.github.io/zh/" class="nav-link">首頁</a>
+            <a href="https://taipo-big-donations-watcher.github.io/zh/about/" class="nav-link">關於</a>
+            <a href="https://taipo-redirect.com/" target="_blank" class="nav-link">有用連結</a>
+            <a href="../../en/about/index.html" class="lang-switch">English</a>
         </nav>
     </header>
     
-    <div class="intro">
-        <p class="intro-subtitle">{{site_subtitle}}</p>
-        <hr>
-        <h2 class="summary-text" id="dynamic-summary"></h2>
-    </div>
+    
+      <div class="intro">
+        <h2>關於本項目</h2>
+        <p><strong>大埔火災捐款追蹤器</strong>是一個民間發起的項目，旨在追蹤及整合各界就 2025 年 11 月 26 日大埔宏福苑火災的承諾捐款。</p>
+        
+        <h3>目的</h3>
+        <ul>
+          <li><strong>資訊透明：</strong> 整合零散報導，建立單一的公開資料庫。</li>
+          <li><strong>鼓勵捐助：</strong> 展示各界支援，鼓勵更多人參與。</li>
+          <li><strong>公眾監察：</strong> 追蹤善款去向，確保落實到位。</li>
+          <li><strong>悼念反思：</strong> 紀錄逝者，強調生命無價。</li>
+        </ul>
+        
+        <h3>數據來源</h3>
+        <p>所有數據均源自公開的新聞報導及官方聲明。數據庫存放於 Google Sheets，每 6 小時自動同步。</p>
+        
+        <h3>聯絡與更正</h3>
+        <p>如發現數據有誤，歡迎在 <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+      </div>
+    
 
     <div class="controls">
         <div class="search-box">
-            <input type="text" id="search-input" class="search-input" placeholder="{{search_placeholder}}">
+            <input type="text" id="search-input" class="search-input" placeholder="搜尋捐款者...">
         </div>
         <div class="filter-group">
             <select id="filter-capital">
-                <option value="">{{filter_by_capital}}</option>
+                <option value="">所有來源地</option>
             </select>
             <select id="filter-industry">
-                <option value="">{{filter_by_industry}}</option>
+                <option value="">所有行業</option>
             </select>
             <select id="filter-type">
-                <option value="">{{filter_by_type}}</option>
+                <option value="">所有類型</option>
             </select>
             <select id="filter-donation-type">
-                <option value="">{{filter_by_donation_type}}</option>
-                <option value="cash">{{donation_type_cash}}</option>
-                <option value="goods">{{donation_type_goods}}</option>
+                <option value="">所有捐款</option>
+                <option value="cash">💵 現金</option>
+                <option value="goods">📦 物資</option>
             </select>
         </div>
     </div>
@@ -516,12 +538,12 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th class="no-sort">{{table_entity}}</th>
-                    <th data-sort="capital">{{table_capital}}</th>
-                    <th data-sort="industry">{{table_industry}}</th>
-                    <th data-sort="type">{{table_type}}</th>
-                    <th data-sort="amountRaw" id="amount-header">{{table_amount}}</th>
-                    <th data-sort="date">{{table_date}}</th>
+                    <th class="no-sort">捐款者</th>
+                    <th data-sort="capital">資本來源</th>
+                    <th data-sort="industry">行業</th>
+                    <th data-sort="type">類型</th>
+                    <th data-sort="amountRaw" id="amount-header">金額 (港幣)</th>
+                    <th data-sort="date">日期</th>
                 </tr>
             </thead>
             <tbody id="table-body">
@@ -531,12 +553,12 @@
     </div>
     
     <div id="no-results" style="text-align:center; padding: 40px; display: none; color: #666;">
-        {{no_data}}
+        沒有找到相關捐款記錄。
     </div>
 
     <footer>
-        <p class="disclaimer">{{footer_disclaimer_pre}} <a href="https://t.me/ayip002" target="_blank" style="color:inherit">{{footer_corrections}}</a></p>
-        <p>{{stats_last_updated}}: <span id="build-time">{{build_time}}</span></p>
+        <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
+        <p>最後更新: <span id="build-time">2025-12-01T19:14:33.460Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -546,7 +568,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "{{lang}}", "buildTime": "{{build_time}}"}
+        {"lang": "zh", "buildTime": "2025-12-01T19:14:33.460Z"}
     </script>
 
     <script>
@@ -1123,9 +1145,9 @@
                     
                     // Source Link Logic
                     if (d.primarySource) {
-                        entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">{{table_source}}</a>`;
+                        entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">來源</a>`;
                     } else if (d.secondarySource) {
-                        entityHtml += `<a href="${d.secondarySource}" target="_blank" class="source-link">{{table_source}}&sup2;</a>`;
+                        entityHtml += `<a href="${d.secondarySource}" target="_blank" class="source-link">來源&sup2;</a>`;
                     }
                     
                     // Flags & Icons

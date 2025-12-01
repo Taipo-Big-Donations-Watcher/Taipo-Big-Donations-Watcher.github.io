@@ -1,11 +1,11 @@
 {
-  "buildTime": "2025-12-01T17:00:37.950Z",
+  "buildTime": "2025-12-01T19:14:33.460Z",
   "stats": {
-    "totalCount": 275,
-    "totalAmount": 2650592000,
-    "totalCash": 2546872000,
-    "totalGoods": 103720000,
-    "withKnownAmount": 260
+    "totalCount": 276,
+    "totalAmount": 2660492000,
+    "totalCash": 2553772000,
+    "totalGoods": 106720000,
+    "withKnownAmount": 261
   },
   "byCapital": {
     "香港": {
@@ -17,8 +17,8 @@
       "amount": 8000000
     },
     "中國": {
-      "count": 125,
-      "amount": 1227900000
+      "count": 126,
+      "amount": 1237800000
     },
     "日本": {
       "count": 2,
@@ -139,8 +139,8 @@
       "amount": 56000000
     },
     "娛樂": {
-      "count": 32,
-      "amount": 62507000
+      "count": 33,
+      "amount": 72407000
     },
     "原材料": {
       "count": 4,
@@ -191,8 +191,8 @@
       "amount": 27000000
     },
     "汽車": {
-      "count": 6,
-      "amount": 45000000
+      "count": 7,
+      "amount": 55000000
     },
     "遊戲": {
       "count": 1,
@@ -201,10 +201,6 @@
     "交通運輸": {
       "count": 3,
       "amount": 13500000
-    },
-    "電動車": {
-      "count": 1,
-      "amount": 10000000
     },
     "紡織": {
       "count": 2,
@@ -241,8 +237,8 @@
       "amount": 445000000
     },
     "社團": {
-      "count": 12,
-      "amount": 55200000
+      "count": 13,
+      "amount": 65100000
     },
     "藝人": {
       "count": 25,
@@ -285,7 +281,7 @@
       "goodsAmountRaw": null,
       "note": "第一時間免費堂食，大埔4間分店11月27日至30日所有收入（不扣成本）將全數捐贈",
       "through": "東華三院甘霖援急基金",
-      "primarySource": "",
+      "primarySource": "https://www.facebook.com/share/p/17cppnV7Wp/",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -465,7 +461,7 @@
       "goodsAmountRaw": null,
       "note": "未來30天內提供500間客房",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.instagram.com/p/DRmTaDGD8vj/",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -1506,7 +1502,7 @@
       "note": "提供共20個、為期兩個月的康蘭居",
       "through": "大埔宏福苑火災賑災基金",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "http://hm.people.com.cn/n/2013/0422/c42272-21235002.html",
       "verificationLink": "",
       "date": ""
     },
@@ -1566,7 +1562,7 @@
       "note": "",
       "through": "大埔宏福苑援助基金（56%）\n香港青年協會（44%）",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "https://hk.finance.yahoo.com/news/%E7%BD%AE%E5%9C%B0%E5%85%AC%E5%8F%B8%E5%9F%BA%E9%87%91%E6%9C%83%E6%8D%90%E5%87%BA%E9%80%BE1-000%E8%90%AC%E5%85%83-%E6%94%AF%E6%8F%B4%E5%A4%A7%E5%9F%94%E7%81%AB%E7%81%BD%E5%8F%97%E5%BD%B1%E9%9F%BF%E4%BA%BA%E5%A3%AB-073807747.html",
       "verificationLink": "",
       "date": ""
     },
@@ -1584,8 +1580,8 @@
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
       "note": "",
-      "through": "大埔宏福苑援助基金（67%）\n消防處福利基金（33%）",
-      "primarySource": "",
+      "through": "大埔宏福苑援助基金（95%）\n消防處福利基金（5%）",
+      "primarySource": "https://www.facebook.com/share/p/1Fg4FTJnn9/",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -2565,7 +2561,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://weibo.com/1650507560/QfPfSFi9Y",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -2625,7 +2621,7 @@
       "goodsAmountRaw": 0,
       "note": "現金+1000張床褥",
       "through": "楊受成慈善基金",
-      "primarySource": "",
+      "primarySource": "https://www.emperorgroup.com/tc/media_centre/latest_news/eegtaipofire",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -2685,7 +2681,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://weibo.com/2153621264/QfNX2uZi3?refer_flag=1001030103_",
       "secondarySource": "https://hk.finance.yahoo.com/news/%E5%BE%A9%E6%98%9F%E5%9F%BA%E9%87%91%E6%9C%83%E6%8D%90%E8%B4%881000%E8%90%AC%E6%B8%AF%E5%85%83%E7%B7%8A%E6%80%A5%E9%A6%B3%E6%8F%B4%E5%A4%A7%E5%9F%94%E7%81%AB%E7%81%BD%E6%95%91%E6%8F%B4%E5%B7%A5%E4%BD%9C-113318395.html",
       "verificationLink": "",
       "date": ""
@@ -3131,11 +3127,11 @@
       "date": ""
     },
     {
-      "entity": "雅迪",
+      "entity": "雅迪（1585）",
       "entityEn": "",
       "group": "中資企業",
       "capital": "中國",
-      "industry": "電動車",
+      "industry": "汽車",
       "type": "企業",
       "amount": "$10,000,000",
       "amountRaw": 10000000,
@@ -3147,6 +3143,26 @@
       "through": "香港江蘇社團總會",
       "primarySource": "",
       "secondarySource": "https://bau.com.hk/web/article/1444635198758338560/web/content_1444635198758338560.html",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "黄晓明明天爱心基金",
+      "entityEn": "",
+      "group": "中國社團",
+      "capital": "中國",
+      "industry": "娛樂",
+      "type": "社團",
+      "amount": "$9,900,000",
+      "amountRaw": 9900000,
+      "cashAmount": "$9,900,000",
+      "cashAmountRaw": 9900000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "感谢 @黄晓明 @佟丽娅 @许凯soso @万茜 @张远Bird @丁禹兮 @龚俊Simon @黄磊微博 @多妈7788 @李一桐Q @张子枫 @宋威龙99 @李沁 @那英 @我是李雪琴啊 @张晚意 @王栎鑫 @歐陽娜娜Nana @黄渤 携手聚力。目前爱心捐赠已达900万元，款项一半直接汇入香港，为受灾同胞的过渡安置、生活补给注入即时保障；一半根据香港当地建议，定向用于家园重建，协助流离的家庭早日拥有新的港湾。",
+      "through": "",
+      "primarySource": "https://weibo.com/5221445738/QgnlSx8Ur",
+      "secondarySource": "",
       "verificationLink": "",
       "date": ""
     },
@@ -3219,14 +3235,14 @@
       "type": "企業",
       "amount": "$6,000,000",
       "amountRaw": 6000000,
-      "cashAmount": "$6,000,000",
-      "cashAmountRaw": 6000000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
+      "cashAmount": "$3,000,000",
+      "cashAmountRaw": 3000000,
+      "goodsAmount": "$3,000,000",
+      "goodsAmountRaw": 3000000,
       "note": "300萬元現金及價值300萬元的衣物和日用品",
       "through": "",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "https://www.wenweipo.com/a/202511/28/AP69294e08e4b098d782b64b54.html",
       "verificationLink": "",
       "date": ""
     },
@@ -3625,7 +3641,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.hysan.com.hk/app/uploads/2025/11/%E6%96%B0%E8%81%9E%E7%A8%BF_%E5%B8%8C%E6%85%8E%E8%88%88%E6%A5%AD%EF%BC%8814.HK%EF%BC%89%E6%8D%90%E6%AC%BE500%E8%90%AC%E6%B8%AF%E5%85%83-%E6%94%AF%E6%8F%B4%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E8%AD%A6%E4%BA%8B%E6%95%85%E5%8F%97%E5%BD%B1%E9%9F%BF%E5%B1%85%E6%B0%91.pdf",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -3645,7 +3661,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.meituan.com/zh-HK/news/NN251127158001269",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -3666,7 +3682,7 @@
       "note": "",
       "through": "",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "https://bau.com.hk/web/article/1443691603318554624/web/content_1443691603318554624.html",
       "verificationLink": "",
       "date": ""
     },
@@ -3706,7 +3722,7 @@
       "note": "500萬元現金及1,000份物資包",
       "through": "",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "https://www.hkcd.com.hk/hkcdweb/content/2025/11/27/content_8727357.html",
       "verificationLink": "",
       "date": ""
     },
@@ -3725,7 +3741,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.facebook.com/share/p/16ors2J9ZJ/",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -4506,7 +4522,7 @@
       "note": "",
       "through": "香港明愛（33%）\n救世軍（67%）",
       "primarySource": "",
-      "secondarySource": "",
+      "secondarySource": "https://invest.hket.com/article/4045747/%E5%AE%8F%E7%A6%8F%E8%8B%91%E5%A4%A7%E7%81%AB%EF%BD%9C%E7%BE%8E%E8%81%AF%E9%9B%86%E5%9C%98%E6%8D%90%E5%87%BA150%E8%90%AC%E7%82%BA%E6%9C%89%E9%9C%80%E8%A6%81%E7%9A%84%E4%BA%BA%E5%A3%AB%E4%BD%9C%E5%87%BA%E6%94%AF%E6%8F%B4",
       "verificationLink": "",
       "date": ""
     },
@@ -4563,12 +4579,12 @@
       "cashAmountRaw": 1100000,
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
-      "note": "1百萬RMB，唔知有冇同復星重疊",
-      "through": "",
-      "primarySource": "",
+      "note": "1百萬RMB",
+      "through": "上海復星公益基金會",
+      "primarySource": "https://weibo.com/7747325954/QfNQn5mQz",
       "secondarySource": "",
-      "verificationLink": "",
-      "date": ""
+      "verificationLink": "https://weibo.com/7747325954/QfNQn5mQz",
+      "date": "28/12/2025"
     },
     {
       "entity": "Sheldon（BitMart 創始人）、孔劍平Jack Kong（Nano Labs 創始人）、Jessica Young（ME Group CEO）",
@@ -5084,11 +5100,11 @@
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
       "note": "",
-      "through": "復星基金會",
-      "primarySource": "",
+      "through": "上海復星公益基金會",
+      "primarySource": "https://weibo.com/7747325954/QfQ4ZttyN",
       "secondarySource": "",
-      "verificationLink": "",
-      "date": ""
+      "verificationLink": "https://weibo.com/7747325954/QfQ4ZttyN",
+      "date": "27/12/2025"
     },
     {
       "entity": "陳小春及應采兒",

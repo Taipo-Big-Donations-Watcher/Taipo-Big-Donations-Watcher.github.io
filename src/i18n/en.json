@@ -40,6 +40,11 @@
   
   "switch_language": "中文",
   
+  "nav_home": "Home",
+  "nav_stats": "Statistics",
+  "nav_about": "About",
+  "nav_links": "Helpful Links",
+  
   "stats_records": "Donations",
   "stats_total_pledged": "Total Pledged",
   "stats_known_amounts": "Known Amounts",

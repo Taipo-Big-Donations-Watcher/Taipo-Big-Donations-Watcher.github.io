@@ -154,6 +154,114 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
 }
 
 /**
+ * Generate About pages for each language
+ */
+function generateAboutPages(template, buildTime) {
+  console.log('Generating about pages...');
+  
+  for (const lang of LANGUAGES) {
+    const i18n = loadI18n(lang);
+    const otherLang = lang === 'en' ? 'zh' : 'en';
+    
+    // About Content (Bilingual)
+    const contentEn = `
+      <div class="intro">
+        <h2>About This Project</h2>
+        <p>The <strong>Tai Po Fire Donations Watcher</strong> is a community-driven initiative to track and consolidate pledged donations regarding the Tai Po Wang Fuk Court fire on November 26, 2025.</p>
+        
+        <h3>Purpose</h3>
+        <ul>
+          <li><strong>Clarity:</strong> Providing a centralized source of truth for all public donations.</li>
+          <li><strong>Encouragement:</strong> Visualizing contributions to encourage more support.</li>
+          <li><strong>Watchdog:</strong> Tracking how funds are transferred to those in need.</li>
+          <li><strong>Memorial:</strong> Memorializing the lives lost and highlighting the irreplaceable loss.</li>
+        </ul>
+        
+        <h3>Data Source</h3>
+        <p>All data is sourced from public announcements and news reports. The database is hosted on Google Sheets and syncs every 6 hours.</p>
+        
+        <h3>Contact & Corrections</h3>
+        <p>If you find any errors or missing information, please <a href="${SHEETS_URL}" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
+      </div>
+    `;
+    
+    const contentZh = `
+      <div class="intro">
+        <h2>關於本項目</h2>
+        <p><strong>大埔火災捐款追蹤器</strong>是一個民間發起的項目，旨在追蹤及整合各界就 2025 年 11 月 26 日大埔宏福苑火災的承諾捐款。</p>
+        
+        <h3>目的</h3>
+        <ul>
+          <li><strong>資訊透明：</strong> 整合零散報導，建立單一的公開資料庫。</li>
+          <li><strong>鼓勵捐助：</strong> 展示各界支援，鼓勵更多人參與。</li>
+          <li><strong>公眾監察：</strong> 追蹤善款去向，確保落實到位。</li>
+          <li><strong>悼念反思：</strong> 紀錄逝者，強調生命無價。</li>
+        </ul>
+        
+        <h3>數據來源</h3>
+        <p>所有數據均源自公開的新聞報導及官方聲明。數據庫存放於 Google Sheets，每 6 小時自動同步。</p>
+        
+        <h3>聯絡與更正</h3>
+        <p>如發現數據有誤，歡迎在 <a href="${SHEETS_URL}" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+      </div>
+    `;
+    
+    const content = lang === 'zh' ? contentZh : contentEn;
+    
+    // Reuse template but replace the main content area
+    // We need to strip the table and controls from the template or hide them
+    // Since our template is rigid, let's just use a simple replacement trick
+    
+    const pageVars = {
+      base_url: SITE_URL,
+      sheets_url: SHEETS_URL,
+      favicon_path: '../../favicon.png',
+      build_time: buildTime,
+      switch_language_url: `../../${otherLang}/about/index.html`,
+      footer_disclaimer: i18n.footer_disclaimer_pre + ' ' + i18n.footer_corrections,
+      page_description: i18n.page_description,
+      site_title: (lang === 'zh' ? '關於 - ' : 'About - ') + i18n.site_title,
+    };
+    
+    let html = applyI18n(template, i18n, pageVars);
+    
+    // Replace the main dynamic content area with static about content
+    // We'll look for specific markers in the template or just replace the whole body content structure
+    // A better way given the template structure is to hide controls/stats and inject content
+    
+    // Let's use a regex to inject our content into the .intro div and hide the rest
+    html = html.replace(
+      /<div class="intro">[\s\S]*?<\/div>/,
+      content
+    );
+    
+    // Hide stats, controls, and table using inline CSS injection
+    const hideCss = `<style>
+      .stats, .controls, .table-container, #no-results { display: none !important; }
+      .intro { max-width: 800px; margin: 0 auto 40px; }
+      .intro h2 { margin-top: 0; }
+      .intro h3 { margin-top: 25px; margin-bottom: 10px; color: var(--accent-color); }
+      .intro ul { padding-left: 20px; margin-bottom: 20px; }
+      .intro li { margin-bottom: 8px; }
+    </style>`;
+    html = html.replace('</head>', hideCss + '</head>');
+    
+    // Output
+    const outputDir = path.join(DIST_DIR, lang, 'about');
+    ensureDir(outputDir);
+    fs.writeFileSync(path.join(outputDir, 'index.html'), html);
+    console.log(`  ✓ /${lang}/about/index.html`);
+    
+    // Track for sitemap
+    generatedPages.push({
+      path: `/${lang}/about/`,
+      priority: '0.5',
+      changefreq: 'monthly',
+    });
+  }
+}
+
+/**
  * Generate root redirect page
  */
 function generateRootRedirect(defaultLang) {
@@ -344,6 +452,9 @@ async function build() {
     for (const lang of LANGUAGES) {
       generateLangPages(template, donations, stats, lang, buildTime);
     }
+    
+    // Generate About pages
+    generateAboutPages(template, buildTime);
     
     // Generate root redirect
     generateRootRedirect(DEFAULT_LANG);
