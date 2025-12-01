@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香港慈善機構捐款</title>
+    <meta name="description" content="香港慈善機構的捐款">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="/zh/">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fafafa;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .subtitle {
+            color: #666;
+            margin-top: 5px;
+        }
+        .lang-switch {
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .lang-switch:hover {
+            background: #555;
+        }
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d63031;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .amount {
+            font-family: "SF Mono", Monaco, monospace;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #e9ecef;
+            white-space: nowrap;
+        }
+        .tag-capital {
+            background: #dfe6e9;
+        }
+        .tag-industry {
+            background: #ffeaa7;
+        }
+        .tag-type {
+            background: #dfe6e9;
+        }
+        .entity-name {
+            font-weight: 600;
+        }
+        .entity-en {
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+        }
+        .source-link {
+            font-size: 0.8em;
+            color: #0984e3;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            th, td {
+                padding: 8px 10px;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>香港慈善機構捐款</h1>
+            <div class="subtitle">宏福苑火災救援捐款記錄</div>
+        </div>
+        <a href="../../en/hk-charities/index.html" class="lang-switch">English</a>
+    </header>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="stat-count">-</div>
+            <div class="stat-label">筆捐款</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-amount">-</div>
+            <div class="stat-label">認捐總額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-known">-</div>
+            <div class="stat-label">已確認金額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-updated">-</div>
+            <div class="stat-label">最後更新</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="donation-table">
+            <thead>
+                <tr>
+                    <th>捐款者</th>
+                    <th>資本來源</th>
+                    <th>行業</th>
+                    <th>類型</th>
+                    <th>金額 (港幣)</th>
+                    <th>日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
+        <p>最後更新: <span id="build-time">2025-12-01T04:41:15.870Z</span></p>
+    </footer>
+
+    <!-- Donation data injected by build script -->
+    <script type="application/json" id="donation-data">
+[
+  {
+    "entity": "李嘉誠基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$80,000,000",
+    "amountRaw": 80000000,
+    "cashAmount": "$80,000,000",
+    "cashAmountRaw": 80000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "設立緊急援助基金，支援註冊慈善機構；紀律部隊專項基金",
+    "primarySource": "https://www.lksf.org/li-ka-shing-foundation-announces-an-immediate-hk30-million-emergency-relief-fund-to-support-fire-affected-communities-in-tai-po-wang-fuk-court-housing-complex/?lang=hk",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "李嘉誠基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$80,000,000"
+  },
+  {
+    "entity": "公益金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$50,000,000",
+    "amountRaw": 50000000,
+    "cashAmount": "$50,000,000",
+    "cashAmountRaw": 50000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.commchest.org/tc/news/press-release/detail/1105",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "公益金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$50,000,000"
+  },
+  {
+    "entity": "李文達與蔡美靈慈善基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-84-%E6%96%B9%E6%A8%B9%E7%A6%8F%E5%A0%82%E5%9F%BA%E9%87%91%E5%8F%8A%E6%96%B9%E6%BD%A4%E8%8F%AF%E5%9F%BA%E9%87%91%E6%8D%90500%E8%90%AC",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "李文達與蔡美靈慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "霍英東基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "霍英東基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "邵氏基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "邵氏基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "華潤慈善基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "華潤慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "置地公司基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$10,800,000",
+    "amountRaw": 10800000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金1千萬、香港青年協會80萬",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "置地公司基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$10,800,000"
+  },
+  {
+    "entity": "方樹福堂基金及方潤華基金",
+    "entityEn": "",
+    "group": "香港社團",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "社團",
+    "amount": "$5,000,000",
+    "amountRaw": 5000000,
+    "cashAmount": "$5,000,000",
+    "cashAmountRaw": 5000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "方樹福堂基金及方潤華基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "社團",
+    "amountDisplay": "$5,000,000"
+  },
+  {
+    "entity": "大灣區青年公益",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$4,000,000",
+    "amountRaw": 4000000,
+    "cashAmount": "$4,000,000",
+    "cashAmountRaw": 4000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.edigest.hk/%e6%99%82%e4%ba%8b/%e5%a4%a7%e5%9f%94%e7%81%ab%e7%81%bd-%e5%96%84%e6%ac%be-%e7%a0%b410%e5%84%84-%e5%8d%b3%e6%99%82%e8%b2%a1%e7%b6%93-1966931/3/",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "大灣區青年公益",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$4,000,000"
+  },
+  {
+    "entity": "香港青年學生動力基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$4,000,000",
+    "amountRaw": 4000000,
+    "cashAmount": "$4,000,000",
+    "cashAmountRaw": 4000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-112-%E5%AE%89%E6%B0%B8-%E6%8D%90%E6%AC%BE100%E8%90%AC%E5%85%83",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "香港青年學生動力基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$4,000,000"
+  },
+  {
+    "entity": "保良局",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "保良局扶弱基金",
+    "primarySource": "https://www.poleungkuk.org.hk/news/emergencysupportfortaipofire",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "2025年11月26日 上午12:00:00",
+    "entityDisplay": "保良局",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "仁濟醫院",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "仁濟緊急援助基金",
+    "primarySource": "",
+    "secondarySource": "https://www.healthyd.com/articles/body/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E7%81%BD-%E7%A4%BE%E7%A6%8F%E6%A9%9F%E6%A7%8B%E6%8F%B4%E5%8A%A9",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "仁濟醫院",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "博愛醫院",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://pokoi.org.hk/news/donation-activities/106655-%e5%8d%9a%e6%84%9b%e9%86%ab%e9%99%a2%e8%aa%a0%e9%82%80%e5%90%84%e7%95%8c%e5%90%88%e5%8a%9b%e6%94%af%e6%8f%b4%e5%a4%a7%e5%9f%94%e5%ae%8f%e7%a6%8f%e8%8b%91%e5%8f%97%e5%bd%b1%e9%9f%bf%e5%b1%85%e6%b0%91",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "博愛醫院",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "東華三院",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "東華三院甘霖援急基金",
+    "primarySource": "https://www.tungwah.org.hk/en/press-release/%E6%9D%B1%E8%8F%AF%E4%B8%89%E9%99%A2%E8%A1%B7%E5%BF%83%E6%84%9F%E8%AC%9D%E5%90%84%E7%95%8C%E6%94%9C%E6%89%8B%E6%94%AF%E6%8F%B4%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%8B%E6%95%85n/",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "東華三院",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "香港醫學會慈善基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-108-%E9%83%BD%E5%B8%82%E9%BA%97%E4%BA%BA%E4%B8%BB%E5%B8%AD%E5%80%8B%E4%BA%BA%E5%90%8D%E7%BE%A9%E6%8D%90100%E8%90%AC%E5%85%83",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "香港醫學會慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$1,000,000"
+  }
+]
+    </script>
+
+    <!-- Page metadata -->
+    <script type="application/json" id="page-meta">
+        {"lang": "zh", "buildTime": "2025-12-01T04:41:15.870Z"}
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const dataElement = document.getElementById('donation-data');
+                const metaElement = document.getElementById('page-meta');
+                
+                if (!dataElement || !dataElement.textContent.trim()) {
+                    console.warn('No data found in #donation-data');
+                    return;
+                }
+
+                const donations = JSON.parse(dataElement.textContent);
+                const meta = JSON.parse(metaElement.textContent);
+                const lang = meta.lang || 'en';
+                
+                // Calculate stats
+                let totalAmount = 0;
+                let knownCount = 0;
+                donations.forEach(d => {
+                    if (d.amountRaw !== null) {
+                        totalAmount += d.amountRaw;
+                        knownCount++;
+                    }
+                });
+                
+                // Update stats display
+                document.getElementById('stat-count').textContent = donations.length.toLocaleString();
+                document.getElementById('stat-amount').textContent = '$' + totalAmount.toLocaleString();
+                document.getElementById('stat-known').textContent = knownCount + '/' + donations.length;
+                document.getElementById('stat-updated').textContent = new Date(meta.buildTime).toLocaleDateString(
+                    lang === 'zh' ? 'zh-HK' : 'en-US',
+                    { year: 'numeric', month: 'short', day: 'numeric' }
+                );
+
+                // Render table
+                const tbody = document.querySelector('#donation-table tbody');
+                tbody.innerHTML = '';
+
+                donations.forEach(d => {
+                    const tr = document.createElement('tr');
+                    
+                    // Entity cell with optional English name
+                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    if (lang === 'zh' && d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
+                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
+                    }
+                    if (d.primarySource) {
+                        entityHtml += `<br><a href="${d.primarySource}" target="_blank" class="source-link">來源 ↗</a>`;
+                    }
+                    
+                    tr.innerHTML = `
+                        <td>${entityHtml}</td>
+                        <td><span class="tag tag-capital">${d.capitalDisplay || d.capital || '-'}</span></td>
+                        <td><span class="tag tag-industry">${d.industryDisplay || d.industry || '-'}</span></td>
+                        <td><span class="tag tag-type">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
+                        <td>${d.date || '-'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (e) {
+                console.error('Error parsing donation data:', e);
+            }
+        });
+    </script>
+</body>
+</html>

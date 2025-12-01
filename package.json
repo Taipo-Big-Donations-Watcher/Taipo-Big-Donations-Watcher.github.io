@@ -1,0 +1,27 @@
+{
+  "name": "taipo-fire-donations-watcher",
+  "version": "1.0.0",
+  "description": "SEO-oriented website tracking donations for the Tai Po Wang Fuk Court fire relief",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "fetch": "node fetch-sheets.js",
+    "generate-columns": "node generate-column-suggestions.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io/issues"
+  },
+  "homepage": "https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io#readme",
+  "dependencies": {
+    "googleapis": "^166.0.0"
+  }
+}

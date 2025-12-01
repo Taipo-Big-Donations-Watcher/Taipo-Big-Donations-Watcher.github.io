@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Artists Donations</title>
+    <meta name="description" content="All donations from Korean celebrities for the Tai Po Wang Fuk Court fire relief">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="/zh/">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fafafa;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .subtitle {
+            color: #666;
+            margin-top: 5px;
+        }
+        .lang-switch {
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .lang-switch:hover {
+            background: #555;
+        }
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d63031;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .amount {
+            font-family: "SF Mono", Monaco, monospace;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #e9ecef;
+            white-space: nowrap;
+        }
+        .tag-capital {
+            background: #dfe6e9;
+        }
+        .tag-industry {
+            background: #ffeaa7;
+        }
+        .tag-type {
+            background: #dfe6e9;
+        }
+        .entity-name {
+            font-weight: 600;
+        }
+        .entity-en {
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+        }
+        .source-link {
+            font-size: 0.8em;
+            color: #0984e3;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            th, td {
+                padding: 8px 10px;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Korean Artists Donations</h1>
+            <div class="subtitle">Wang Fuk Court Fire Relief Donations Tracker</div>
+        </div>
+        <a href="../../zh/korean-artists/index.html" class="lang-switch">中文</a>
+    </header>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="stat-count">-</div>
+            <div class="stat-label">donations</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-amount">-</div>
+            <div class="stat-label">Total Pledged</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-known">-</div>
+            <div class="stat-label">with known amounts</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-updated">-</div>
+            <div class="stat-label">Last Updated</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="donation-table">
+            <thead>
+                <tr>
+                    <th>Donor</th>
+                    <th>Origin</th>
+                    <th>Industry</th>
+                    <th>Type</th>
+                    <th>Amount (HKD)</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>Data sourced from public announcements. Corrections welcome.</p>
+        <p>Last Updated: <span id="build-time">2025-12-01T04:41:15.870Z</span></p>
+    </footer>
+
+    <!-- Donation data injected by build script -->
+    <script type="application/json" id="donation-data">
+[
+  {
+    "entity": "Super Junior",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Super Junior",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "I-DLE",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "復星基金會",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "I-DLE",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "G-DRAGON/GD",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "",
+    "secondarySource": "https://www.hk01.com/%E5%8D%B3%E6%99%82%E5%9C%8B%E9%9A%9B/60298933/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD-gd%E6%AC%8A%E5%BF%97%E9%BE%8D%E5%90%91%E9%A6%99%E6%B8%AF%E6%94%BF%E5%BA%9C%E6%8F%B4%E5%8A%A9%E5%9F%BA%E9%87%91%E6%8D%90%E6%AC%BE100%E8%90%AC%E5%85%83",
+    "verificationLink": "",
+    "date": "2025年11月29日 上午12:00:00",
+    "entityDisplay": "G-DRAGON/GD",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "aespa",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$500,000",
+    "amountRaw": 500000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "香港紅十字會",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "aespa",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$500,000"
+  },
+  {
+    "entity": "NCT WISH",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$500,000",
+    "amountRaw": 500000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "NCT WISH",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$500,000"
+  },
+  {
+    "entity": "EXO-CBX",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$500,000",
+    "amountRaw": 500000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "韓國紅十字會",
+    "primarySource": "",
+    "secondarySource": "https://www.kpopmap.com/zh-TW/exo-cbxs-chen-baekhyun-xiumin-donate-to-hong-kong-fire/",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "EXO-CBX",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$500,000"
+  },
+  {
+    "entity": "RIIZE",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$250,000",
+    "amountRaw": 250000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "RIIZE",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$250,000"
+  },
+  {
+    "entity": "WayV",
+    "entityEn": "",
+    "group": "韓國藝人",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "藝人",
+    "amount": "$250,000",
+    "amountRaw": 250000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "WayV",
+    "capitalDisplay": "South Korea",
+    "industryDisplay": "Entertainment",
+    "typeDisplay": "Celebrity",
+    "amountDisplay": "$250,000"
+  }
+]
+    </script>
+
+    <!-- Page metadata -->
+    <script type="application/json" id="page-meta">
+        {"lang": "en", "buildTime": "2025-12-01T04:41:15.870Z"}
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const dataElement = document.getElementById('donation-data');
+                const metaElement = document.getElementById('page-meta');
+                
+                if (!dataElement || !dataElement.textContent.trim()) {
+                    console.warn('No data found in #donation-data');
+                    return;
+                }
+
+                const donations = JSON.parse(dataElement.textContent);
+                const meta = JSON.parse(metaElement.textContent);
+                const lang = meta.lang || 'en';
+                
+                // Calculate stats
+                let totalAmount = 0;
+                let knownCount = 0;
+                donations.forEach(d => {
+                    if (d.amountRaw !== null) {
+                        totalAmount += d.amountRaw;
+                        knownCount++;
+                    }
+                });
+                
+                // Update stats display
+                document.getElementById('stat-count').textContent = donations.length.toLocaleString();
+                document.getElementById('stat-amount').textContent = '$' + totalAmount.toLocaleString();
+                document.getElementById('stat-known').textContent = knownCount + '/' + donations.length;
+                document.getElementById('stat-updated').textContent = new Date(meta.buildTime).toLocaleDateString(
+                    lang === 'zh' ? 'zh-HK' : 'en-US',
+                    { year: 'numeric', month: 'short', day: 'numeric' }
+                );
+
+                // Render table
+                const tbody = document.querySelector('#donation-table tbody');
+                tbody.innerHTML = '';
+
+                donations.forEach(d => {
+                    const tr = document.createElement('tr');
+                    
+                    // Entity cell with optional English name
+                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    if (lang === 'zh' && d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
+                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
+                    }
+                    if (d.primarySource) {
+                        entityHtml += `<br><a href="${d.primarySource}" target="_blank" class="source-link">Source ↗</a>`;
+                    }
+                    
+                    tr.innerHTML = `
+                        <td>${entityHtml}</td>
+                        <td><span class="tag tag-capital">${d.capitalDisplay || d.capital || '-'}</span></td>
+                        <td><span class="tag tag-industry">${d.industryDisplay || d.industry || '-'}</span></td>
+                        <td><span class="tag tag-type">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
+                        <td>${d.date || '-'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (e) {
+                console.error('Error parsing donation data:', e);
+            }
+        });
+    </script>
+</body>
+</html>

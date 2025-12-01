@@ -1,0 +1,36 @@
+{
+  "lang": "en",
+  "html_lang": "en",
+  "site_title": "Tai Po Fire Donations Watcher",
+  "site_subtitle": "Wang Fuk Court Fire Relief Donations Tracker",
+  "page_description": "Tracking {count} donations totaling HKD {amount} for the Tai Po Wang Fuk Court fire relief.",
+  
+  "nav_home": "Home",
+  "nav_stats": "Statistics",
+  "nav_about": "About",
+  "switch_language": "中文",
+  "switch_language_url": "/zh/",
+  
+  "stats_title": "Statistics",
+  "stats_records": "donations",
+  "stats_total_pledged": "Total Pledged",
+  "stats_known_amounts": "with known amounts",
+  "stats_last_updated": "Last Updated",
+  
+  "table_entity": "Donor",
+  "table_capital": "Origin",
+  "table_industry": "Industry",
+  "table_type": "Type",
+  "table_amount": "Amount (HKD)",
+  "table_date": "Date",
+  "table_source": "Source",
+  
+  "filter_all": "All",
+  "filter_by_capital": "By Origin",
+  "filter_by_industry": "By Industry",
+  "filter_by_type": "By Type",
+  
+  "amount_unclear": "Unclear",
+  "no_data": "No data available"
+}
+

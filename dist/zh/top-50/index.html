@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五十大捐款</title>
+    <meta name="description" content="大埔火災最大的50筆捐款">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="/zh/">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fafafa;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .subtitle {
+            color: #666;
+            margin-top: 5px;
+        }
+        .lang-switch {
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .lang-switch:hover {
+            background: #555;
+        }
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d63031;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .amount {
+            font-family: "SF Mono", Monaco, monospace;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #e9ecef;
+            white-space: nowrap;
+        }
+        .tag-capital {
+            background: #dfe6e9;
+        }
+        .tag-industry {
+            background: #ffeaa7;
+        }
+        .tag-type {
+            background: #dfe6e9;
+        }
+        .entity-name {
+            font-weight: 600;
+        }
+        .entity-en {
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+        }
+        .source-link {
+            font-size: 0.8em;
+            color: #0984e3;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            th, td {
+                padding: 8px 10px;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>五十大捐款</h1>
+            <div class="subtitle">宏福苑火災救援捐款記錄</div>
+        </div>
+        <a href="../../en/top-50/index.html" class="lang-switch">English</a>
+    </header>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="stat-count">-</div>
+            <div class="stat-label">筆捐款</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-amount">-</div>
+            <div class="stat-label">認捐總額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-known">-</div>
+            <div class="stat-label">已確認金額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-updated">-</div>
+            <div class="stat-label">最後更新</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="donation-table">
+            <thead>
+                <tr>
+                    <th>捐款者</th>
+                    <th>資本來源</th>
+                    <th>行業</th>
+                    <th>類型</th>
+                    <th>金額 (港幣)</th>
+                    <th>日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
+        <p>最後更新: <span id="build-time">2025-12-01T04:41:15.870Z</span></p>
+    </footer>
+
+    <!-- Donation data injected by build script -->
+    <script type="application/json" id="donation-data">
+[
+  {
+    "entity": "大埔宏福苑援助基金",
+    "entityEn": "",
+    "group": "香港政府",
+    "capital": "香港",
+    "industry": "政府",
+    "type": "政府",
+    "amount": "$300,000,000",
+    "amountRaw": 300000000,
+    "cashAmount": "$300,000,000",
+    "cashAmountRaw": 300000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "https://www.news.gov.hk/chi/2025/11/20251127/20251127_191621_256.html",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "大埔宏福苑援助基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "政府",
+    "typeDisplay": "政府",
+    "amountDisplay": "$300,000,000"
+  },
+  {
+    "entity": "馬會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "博彩",
+    "type": "機構",
+    "amount": "$100,000,000",
+    "amountRaw": 100000000,
+    "cashAmount": "$100,000,000",
+    "cashAmountRaw": 100000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "馬會慈善信託基金",
+    "primarySource": "https://www.hkjc.com/english/pressrelease/mcs01_showhtml.asp?filename=20251127_182250_E_NEWS.htm",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "馬會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "博彩",
+    "typeDisplay": "機構",
+    "amountDisplay": "$100,000,000"
+  },
+  {
+    "entity": "李嘉誠基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$80,000,000",
+    "amountRaw": 80000000,
+    "cashAmount": "$80,000,000",
+    "cashAmountRaw": 80000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "設立緊急援助基金，支援註冊慈善機構；紀律部隊專項基金",
+    "primarySource": "https://www.lksf.org/li-ka-shing-foundation-announces-an-immediate-hk30-million-emergency-relief-fund-to-support-fire-affected-communities-in-tai-po-wang-fuk-court-housing-complex/?lang=hk",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "李嘉誠基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$80,000,000"
+  },
+  {
+    "entity": "公益金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$50,000,000",
+    "amountRaw": 50000000,
+    "cashAmount": "$50,000,000",
+    "cashAmountRaw": 50000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.commchest.org/tc/news/press-release/detail/1105",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "公益金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$50,000,000"
+  },
+  {
+    "entity": "溫氏股份（300498）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "農牧業",
+    "type": "企業",
+    "amount": "$40,000,000",
+    "amountRaw": 40000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "溫氏股份（300498）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "農牧業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$40,000,000"
+  },
+  {
+    "entity": "京東集團（9618）/佳寶",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "電商",
+    "type": "企業",
+    "amount": "$33,000,000",
+    "amountRaw": 33000000,
+    "cashAmount": "$0",
+    "cashAmountRaw": 0,
+    "goodsAmount": "$33,000,000",
+    "goodsAmountRaw": 33000000,
+    "note": "價值超過3,000萬元人民幣的物資",
+    "through": "香港中聯辦",
+    "primarySource": "",
+    "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E8%BF%9113%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE65%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "京東集團（9618）/佳寶",
+    "capitalDisplay": "中國",
+    "industryDisplay": "電商",
+    "typeDisplay": "企業",
+    "amountDisplay": "$33,000,000"
+  },
+  {
+    "entity": "安踏（2020）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "服裝",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$20,000,000",
+    "goodsAmountRaw": 20000000,
+    "note": "1,000萬元現金及價值2,000萬元的禦寒裝備",
+    "through": "",
+    "primarySource": "https://weibo.com/7679523207/QfKPboTEt",
+    "secondarySource": "https://cj.sina.cn/article/norm_detail?url=https%3A%2F%2Ffinance.sina.com.cn%2Ftob%2F2025-11-27%2Fdoc-infyvhsh0227224.shtml&from=redirect&autocallup=no&isfromsina=no",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午11:01:00",
+    "entityDisplay": "安踏（2020）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "服裝",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "波司登集團 （3998）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "服裝",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$20,000,000",
+    "goodsAmountRaw": 20000000,
+    "note": "1,000萬元現金及價值2,000萬元的禦寒裝備",
+    "through": "",
+    "primarySource": "https://weibo.com/u/2951605050",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "波司登集團 （3998）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "服裝",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "加多寶集團",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "食品飲料",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.hkcd.com.hk/hkcdweb/content/2025/11/29/content_8727874.html",
+    "verificationLink": "",
+    "date": "2025年11月29日 上午12:00:00",
+    "entityDisplay": "加多寶集團",
+    "capitalDisplay": "中國",
+    "industryDisplay": "食品飲料",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "馬雲基金",
+    "entityEn": "",
+    "group": "中國機構",
+    "capital": "中國",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://weibo.com/5691000683/QfLA487UZ",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "2025年11月27日 下午12:57:00",
+    "entityDisplay": "馬雲基金",
+    "capitalDisplay": "中國",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "恒基兆業/李兆基基金",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "房地產",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "李兆基基金",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "恒基兆業/李兆基基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "房地產",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "滙豐和恒生銀行",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.about.hsbc.com.hk/zh-hk/news-and-media/hsbc-and-hang-seng-bank-pledge-hkd-30-million-for-wang-fuk-court-post-fire-relief-efforts",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午12:00:00",
+    "entityDisplay": "滙豐和恒生銀行",
+    "capitalDisplay": "香港",
+    "industryDisplay": "金融",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "澳門政府",
+    "entityEn": "",
+    "group": "澳門機構",
+    "capital": "澳門",
+    "industry": "政府",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://hk.finance.yahoo.com/news/%E6%BE%B3%E9%96%80%E6%94%BF%E5%BA%9C%E5%90%91%E9%A6%99%E6%B8%AF%E6%8D%90%E5%8A%A93-000%E8%90%AC%E5%85%83-%E6%94%AF%E6%8C%81%E7%81%AB%E7%81%BD%E6%95%91%E6%8F%B4%E5%8F%8A%E9%87%8D%E5%BB%BA%E5%B7%A5%E4%BD%9C-083116398.html",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "澳門政府",
+    "capitalDisplay": "澳門",
+    "industryDisplay": "政府",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "李文達與蔡美靈慈善基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-84-%E6%96%B9%E6%A8%B9%E7%A6%8F%E5%A0%82%E5%9F%BA%E9%87%91%E5%8F%8A%E6%96%B9%E6%BD%A4%E8%8F%AF%E5%9F%BA%E9%87%91%E6%8D%90500%E8%90%AC",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "李文達與蔡美靈慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "九龍倉",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "房地產",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "九龍倉",
+    "capitalDisplay": "香港",
+    "industryDisplay": "房地產",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "嘉里集團",
+    "entityEn": "",
+    "group": "馬資企業",
+    "capital": "馬來西亞",
+    "industry": "綜合企業",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-84-%E6%96%B9%E6%A8%B9%E7%A6%8F%E5%A0%82%E5%9F%BA%E9%87%91%E5%8F%8A%E6%96%B9%E6%BD%A4%E8%8F%AF%E5%9F%BA%E9%87%91%E6%8D%90500%E8%90%AC",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "嘉里集團",
+    "capitalDisplay": "馬來西亞",
+    "industryDisplay": "綜合企業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "騰訊公益慈善基金會",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "慈善",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "27日早上啟動首批捐款1,000萬港元。當天下午，騰訊公益慈善基金會宣布追加2,000萬港元，悉數捐贈緊急援助基金。",
+    "through": "（政府）大埔宏福苑援助基金2千萬",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "騰訊公益慈善基金會",
+    "capitalDisplay": "中國",
+    "industryDisplay": "慈善",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "霍英東基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "霍英東基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "中國宏橋（1378）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "鋁業",
+    "type": "企業",
+    "amount": "$30,000,000",
+    "amountRaw": 30000000,
+    "cashAmount": "$30,000,000",
+    "cashAmountRaw": 30000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E8%BF%9113%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE65%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "中國宏橋（1378）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "鋁業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "中海外/中建",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "建築",
+    "type": "企業",
+    "amount": "$22,080,000",
+    "amountRaw": 22080000,
+    "cashAmount": "$22,080,000",
+    "cashAmountRaw": 22080000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "http://www.hkcea.com/TopicsDeatail?name=%E6%B4%BB%E5%8A%A8%E5%86%85%E5%AE%B9&id=5878&from=/",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "中海外/中建",
+    "capitalDisplay": "中國",
+    "industryDisplay": "建築",
+    "typeDisplay": "企業",
+    "amountDisplay": "$22,080,000"
+  },
+  {
+    "entity": "遼寧方大集團",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "綜合企業",
+    "type": "企業",
+    "amount": "$22,000,000",
+    "amountRaw": 22000000,
+    "cashAmount": "$22,000,000",
+    "cashAmountRaw": 22000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "2千萬元人民幣",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.wenweipo.com/epaper/view/newsDetail/1994472078585237504.html",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "遼寧方大集團",
+    "capitalDisplay": "中國",
+    "industryDisplay": "綜合企業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$22,000,000"
+  },
+  {
+    "entity": "阿里巴巴",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "電商",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "阿里巴巴",
+    "capitalDisplay": "中國",
+    "industryDisplay": "電商",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "粵海集團",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "綜合企業",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "http://www.hkcea.com/TopicsDeatail?name=%E6%B4%BB%E5%8A%A8%E5%86%85%E5%AE%B9&id=5878&from=/",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "粵海集團",
+    "capitalDisplay": "中國",
+    "industryDisplay": "綜合企業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "中遠海運",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "航運",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "http://www.hkcea.com/TopicsDeatail?name=%E6%B4%BB%E5%8A%A8%E5%86%85%E5%AE%B9&id=5878&from=/",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "中遠海運",
+    "capitalDisplay": "中國",
+    "industryDisplay": "航運",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "蜜雪冰城（2097）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "食品飲料",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E8%BF%9113%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE65%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "蜜雪冰城（2097）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "食品飲料",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "李寧",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "服裝",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "2千萬元現金及裝備",
+    "through": "",
+    "primarySource": "https://weibo.com/1716244511/QfMuI6QI5",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "李寧",
+    "capitalDisplay": "中國",
+    "industryDisplay": "服裝",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "周大福",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "珠寶零售",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "周大福",
+    "capitalDisplay": "香港",
+    "industryDisplay": "珠寶零售",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "特步",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "服裝",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "2千萬元現金及裝備",
+    "through": "",
+    "primarySource": "https://weibo.com/1752698114/QfLONevZT",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "特步",
+    "capitalDisplay": "中國",
+    "industryDisplay": "服裝",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "順豐",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "物流",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "順豐",
+    "capitalDisplay": "中國",
+    "industryDisplay": "物流",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "MAMA AWARDS",
+    "entityEn": "",
+    "group": "韓國機構",
+    "capital": "韓國",
+    "industry": "娛樂",
+    "type": "機構",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "MAMA AWARDS",
+    "capitalDisplay": "韓國",
+    "industryDisplay": "娛樂",
+    "typeDisplay": "機構",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "新鴻基地產（0016）",
+    "entityEn": "",
+    "group": "香港公司",
+    "capital": "香港",
+    "industry": "房地產",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "旗下酒店免費提供共160個房間",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "新鴻基地產（0016）",
+    "capitalDisplay": "香港",
+    "industryDisplay": "房地產",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "信和集團及黃廷方慈善基金",
+    "entityEn": "",
+    "group": "香港公司",
+    "capital": "香港",
+    "industry": "房地產",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "旗下酒店免費提供共160個房間",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "信和集團及黃廷方慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "房地產",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "招商局",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "綜合企業",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "招商局",
+    "capitalDisplay": "中國",
+    "industryDisplay": "綜合企業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "邵氏基金會",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "邵氏基金會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "保誠保險",
+    "entityEn": "",
+    "group": "英資企業",
+    "capital": "英國",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金1千萬、受影響客戶1千萬",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "保誠保險",
+    "capitalDisplay": "英國",
+    "industryDisplay": "金融",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "中銀香港（2388）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "中銀香港（2388）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "金融",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "友邦香港",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "友邦慈善基金",
+    "primarySource": "https://www.aia.com.hk/zh-hk/about-aia/about-us/media-centre/press-releases/2025/aia-press-release-20251127",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "友邦香港",
+    "capitalDisplay": "香港",
+    "industryDisplay": "金融",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "華潤慈善基金",
+    "entityEn": "",
+    "group": "香港機構",
+    "capital": "香港",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "華潤慈善基金",
+    "capitalDisplay": "香港",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "宏利",
+    "entityEn": "",
+    "group": "加資企業",
+    "capital": "加拿大",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "每位宏福苑受影響客戶提供港幣5,000元現金援助",
+    "through": "香港紅十字會",
+    "primarySource": "https://www.manulife.com.hk/zh-hk/individual/about/newsroom/manulife-donates-hkd-20-million-to-support-communities-affected-by-tai-po-fire.html",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "宏利",
+    "capitalDisplay": "加拿大",
+    "industryDisplay": "金融",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "紫金礦業（2899）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "礦業",
+    "type": "企業",
+    "amount": "$20,000,000",
+    "amountRaw": 20000000,
+    "cashAmount": "$20,000,000",
+    "cashAmountRaw": 20000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://hk.finance.yahoo.com/news/%E7%B4%AB%E9%87%91-02899-hk-%E6%8D%90%E8%B4%882-000%E8%90%AC%E5%85%83%E6%94%AF%E6%8F%B4%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD%E7%81%BD%E5%BE%8C%E5%BB%BA%E8%A8%AD-085603735.html",
+    "verificationLink": "",
+    "date": "2025年11月30日 上午12:00:00",
+    "entityDisplay": "紫金礦業（2899）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "礦業",
+    "typeDisplay": "企業",
+    "amountDisplay": "$20,000,000"
+  },
+  {
+    "entity": "361集團（1361）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "服裝",
+    "type": "企業",
+    "amount": "$15,000,000",
+    "amountRaw": 15000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "361集團（1361）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "服裝",
+    "typeDisplay": "企業",
+    "amountDisplay": "$15,000,000"
+  },
+  {
+    "entity": "DFI零售集團",
+    "entityEn": "",
+    "group": "英資企業",
+    "capital": "英國",
+    "industry": "零售",
+    "type": "企業",
+    "amount": "$15,000,000",
+    "amountRaw": 15000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$5,000,000",
+    "goodsAmountRaw": 5000000,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.dotdotnews.com/a/202511/28/AP69296e86e4b0c32d4f60fa95.html",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "DFI零售集團",
+    "capitalDisplay": "英國",
+    "industryDisplay": "零售",
+    "typeDisplay": "企業",
+    "amountDisplay": "$15,000,000"
+  },
+  {
+    "entity": "震雄投資（0057）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "機械製造",
+    "type": "企業",
+    "amount": "$15,000,000",
+    "amountRaw": 15000000,
+    "cashAmount": "$15,000,000",
+    "cashAmountRaw": 15000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金",
+    "primarySource": "",
+    "secondarySource": "https://inews.hket.com/article/4044597/tai-po-fire-corporate-donations-2025#toc-4044597-84-%E6%96%B9%E6%A8%B9%E7%A6%8F%E5%A0%82%E5%9F%BA%E9%87%91%E5%8F%8A%E6%96%B9%E6%BD%A4%E8%8F%AF%E5%9F%BA%E9%87%91%E6%8D%90500%E8%90%AC",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "震雄投資（0057）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "機械製造",
+    "typeDisplay": "企業",
+    "amountDisplay": "$15,000,000"
+  },
+  {
+    "entity": "Bitget",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$12,000,000",
+    "amountRaw": 12000000,
+    "cashAmount": "$12,000,000",
+    "cashAmountRaw": 12000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "- 香港仁济医院 HK$5,000,000 支援紧急医疗、伤者治疗及受影响家庭康复\n\n- 香港救世军 HK$3,500,000 提供经济援助、临时安置、生活物资及生活重建\n\n- 香港保良局 HK$3,500,000 负责心理辅导、社区支援及灾后长期跟进",
+    "primarySource": "https://x.com/Bitget_zh/status/1994282758919577771",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "https://x.com/xiejiayinBitget/status/1994363622819303504",
+    "date": "",
+    "entityDisplay": "Bitget",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$12,000,000"
+  },
+  {
+    "entity": "Bright Hill 恆峰國際集團",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$12,000,000",
+    "amountRaw": 12000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://sunrisemedium.com/pressrelease/4830/a484tjglrdj64xmg",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Bright Hill 恆峰國際集團",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$12,000,000"
+  },
+  {
+    "entity": "紫荊文化集團",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "傳媒",
+    "type": "企業",
+    "amount": "$12,000,000",
+    "amountRaw": 12000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$2,000,000",
+    "goodsAmountRaw": 2000000,
+    "note": "捐款1000萬港元。集團旗下聯合出版集團為受災學生緊急捐贈價值200萬港元的教科書和文具用品。",
+    "through": "",
+    "primarySource": "https://bau.com.hk/site/article/1443904717234388992/app/content_1443904717234388992.html?from=share",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "紫荊文化集團",
+    "capitalDisplay": "中國",
+    "industryDisplay": "傳媒",
+    "typeDisplay": "企業",
+    "amountDisplay": "$12,000,000"
+  },
+  {
+    "entity": "韓紅愛心慈善基金",
+    "entityEn": "",
+    "group": "韓國機構",
+    "capital": "韓國",
+    "industry": "慈善",
+    "type": "機構",
+    "amount": "$11,000,000",
+    "amountRaw": 11000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "10,000,000RMB",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "韓紅愛心慈善基金",
+    "capitalDisplay": "韓國",
+    "industryDisplay": "慈善",
+    "typeDisplay": "機構",
+    "amountDisplay": "$11,000,000"
+  },
+  {
+    "entity": "恒隆集團",
+    "entityEn": "",
+    "group": "港資企業",
+    "capital": "香港",
+    "industry": "房地產",
+    "type": "企業",
+    "amount": "$11,000,000",
+    "amountRaw": 11000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "提供共20個、為期兩個月的康蘭居",
+    "through": "大埔宏福苑火災賑災基金",
+    "primarySource": "",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "恒隆集團",
+    "capitalDisplay": "香港",
+    "industryDisplay": "房地產",
+    "typeDisplay": "企業",
+    "amountDisplay": "$11,000,000"
+  },
+  {
+    "entity": "瑞幸咖啡",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "食品飲料",
+    "type": "企業",
+    "amount": "$11,000,000",
+    "amountRaw": 11000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "10,000,000RMB",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.hk01.com/%E5%8D%B3%E6%99%82%E4%B8%AD%E5%9C%8B/60298556/%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB-%E6%8C%81%E6%9B%B4-%E7%91%9E%E5%B9%B8%E5%92%96%E5%95%A1%E6%8D%90%E6%AC%BE1000%E8%90%AC%E5%85%83%E4%BA%BA%E6%B0%91%E5%B9%A3-%E5%90%91%E9%81%87%E9%9B%A3%E8%80%85%E8%87%B4%E5%93%80",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "瑞幸咖啡",
+    "capitalDisplay": "中國",
+    "industryDisplay": "食品飲料",
+    "typeDisplay": "企業",
+    "amountDisplay": "$11,000,000"
+  },
+  {
+    "entity": "中華總商會",
+    "entityEn": "",
+    "group": "香港社團",
+    "capital": "香港",
+    "industry": "商會",
+    "type": "社團",
+    "amount": "$11,000,000",
+    "amountRaw": 11000000,
+    "cashAmount": "$11,000,000",
+    "cashAmountRaw": 11000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.hk01.com/%E7%A4%BE%E6%9C%83%E6%96%B0%E8%81%9E/60298169/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD-%E5%85%A9%E5%A4%A7%E5%95%86%E6%9C%83%E5%90%84%E6%8D%90100%E8%90%AC%E5%85%83-%E7%A9%8D%E6%A5%B5%E5%8B%95%E5%93%A1%E5%87%BA%E9%8C%A2%E5%87%BA%E5%8A%9B",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "中華總商會",
+    "capitalDisplay": "香港",
+    "industryDisplay": "商會",
+    "typeDisplay": "社團",
+    "amountDisplay": "$11,000,000"
+  }
+]
+    </script>
+
+    <!-- Page metadata -->
+    <script type="application/json" id="page-meta">
+        {"lang": "zh", "buildTime": "2025-12-01T04:41:15.870Z"}
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const dataElement = document.getElementById('donation-data');
+                const metaElement = document.getElementById('page-meta');
+                
+                if (!dataElement || !dataElement.textContent.trim()) {
+                    console.warn('No data found in #donation-data');
+                    return;
+                }
+
+                const donations = JSON.parse(dataElement.textContent);
+                const meta = JSON.parse(metaElement.textContent);
+                const lang = meta.lang || 'en';
+                
+                // Calculate stats
+                let totalAmount = 0;
+                let knownCount = 0;
+                donations.forEach(d => {
+                    if (d.amountRaw !== null) {
+                        totalAmount += d.amountRaw;
+                        knownCount++;
+                    }
+                });
+                
+                // Update stats display
+                document.getElementById('stat-count').textContent = donations.length.toLocaleString();
+                document.getElementById('stat-amount').textContent = '$' + totalAmount.toLocaleString();
+                document.getElementById('stat-known').textContent = knownCount + '/' + donations.length;
+                document.getElementById('stat-updated').textContent = new Date(meta.buildTime).toLocaleDateString(
+                    lang === 'zh' ? 'zh-HK' : 'en-US',
+                    { year: 'numeric', month: 'short', day: 'numeric' }
+                );
+
+                // Render table
+                const tbody = document.querySelector('#donation-table tbody');
+                tbody.innerHTML = '';
+
+                donations.forEach(d => {
+                    const tr = document.createElement('tr');
+                    
+                    // Entity cell with optional English name
+                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    if (lang === 'zh' && d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
+                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
+                    }
+                    if (d.primarySource) {
+                        entityHtml += `<br><a href="${d.primarySource}" target="_blank" class="source-link">來源 ↗</a>`;
+                    }
+                    
+                    tr.innerHTML = `
+                        <td>${entityHtml}</td>
+                        <td><span class="tag tag-capital">${d.capitalDisplay || d.capital || '-'}</span></td>
+                        <td><span class="tag tag-industry">${d.industryDisplay || d.industry || '-'}</span></td>
+                        <td><span class="tag tag-type">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
+                        <td>${d.date || '-'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (e) {
+                console.error('Error parsing donation data:', e);
+            }
+        });
+    </script>
+</body>
+</html>

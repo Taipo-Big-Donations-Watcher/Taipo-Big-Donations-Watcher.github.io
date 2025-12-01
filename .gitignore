@@ -1,36 +1,30 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Dependencies
+node_modules/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
+# Environment variables (contains secrets)
 .env
+.env.local
+.env.*.local
 
-# vercel
-.vercel
+# Build outputs
+# Note: dist/ is committed for GitHub Pages, but can be gitignored if using Actions
+# dist/
+build/
+.cache/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Generated files (can be regenerated)
+column-suggestions.tsv
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/

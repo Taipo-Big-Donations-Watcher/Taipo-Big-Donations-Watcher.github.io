@@ -1,0 +1,36 @@
+{
+  "lang": "zh",
+  "html_lang": "zh-HK",
+  "site_title": "大埔火災捐款追蹤",
+  "site_subtitle": "宏福苑火災救援捐款記錄",
+  "page_description": "追蹤 {count} 筆捐款，總額 {amount} 港幣，用於大埔宏福苑火災救援。",
+  
+  "nav_home": "首頁",
+  "nav_stats": "統計",
+  "nav_about": "關於",
+  "switch_language": "English",
+  "switch_language_url": "/en/",
+  
+  "stats_title": "統計數據",
+  "stats_records": "筆捐款",
+  "stats_total_pledged": "認捐總額",
+  "stats_known_amounts": "已確認金額",
+  "stats_last_updated": "最後更新",
+  
+  "table_entity": "捐款者",
+  "table_capital": "資本來源",
+  "table_industry": "行業",
+  "table_type": "類型",
+  "table_amount": "金額 (港幣)",
+  "table_date": "日期",
+  "table_source": "來源",
+  
+  "filter_all": "全部",
+  "filter_by_capital": "按來源地",
+  "filter_by_industry": "按行業",
+  "filter_by_type": "按類型",
+  
+  "amount_unclear": "未知",
+  "no_data": "暫無資料"
+}
+

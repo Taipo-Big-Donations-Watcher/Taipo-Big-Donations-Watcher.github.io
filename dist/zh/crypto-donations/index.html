@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加密貨幣業界捐款</title>
+    <meta name="description" content="加密貨幣業界的所有捐款">
+    <link rel="alternate" hreflang="en" href="/en/">
+    <link rel="alternate" hreflang="zh-Hant" href="/zh/">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background: #fafafa;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        .subtitle {
+            color: #666;
+            margin-top: 5px;
+        }
+        .lang-switch {
+            padding: 8px 16px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .lang-switch:hover {
+            background: #555;
+        }
+        .stats {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #d63031;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            white-space: nowrap;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+        .amount {
+            font-family: "SF Mono", Monaco, monospace;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            background: #e9ecef;
+            white-space: nowrap;
+        }
+        .tag-capital {
+            background: #dfe6e9;
+        }
+        .tag-industry {
+            background: #ffeaa7;
+        }
+        .tag-type {
+            background: #dfe6e9;
+        }
+        .entity-name {
+            font-weight: 600;
+        }
+        .entity-en {
+            color: #666;
+            font-size: 0.85em;
+            display: block;
+        }
+        .source-link {
+            font-size: 0.8em;
+            color: #0984e3;
+        }
+        footer {
+            margin-top: 30px;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.4em;
+            }
+            th, td {
+                padding: 8px 10px;
+            }
+            .stats {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>加密貨幣業界捐款</h1>
+            <div class="subtitle">宏福苑火災救援捐款記錄</div>
+        </div>
+        <a href="../../en/crypto-donations/index.html" class="lang-switch">English</a>
+    </header>
+    
+    <div class="stats">
+        <div class="stat-item">
+            <div class="stat-value" id="stat-count">-</div>
+            <div class="stat-label">筆捐款</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-amount">-</div>
+            <div class="stat-label">認捐總額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-known">-</div>
+            <div class="stat-label">已確認金額</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value" id="stat-updated">-</div>
+            <div class="stat-label">最後更新</div>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table id="donation-table">
+            <thead>
+                <tr>
+                    <th>捐款者</th>
+                    <th>資本來源</th>
+                    <th>行業</th>
+                    <th>類型</th>
+                    <th>金額 (港幣)</th>
+                    <th>日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be populated by JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <footer>
+        <p>資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
+        <p>最後更新: <span id="build-time">2025-12-01T04:41:15.870Z</span></p>
+    </footer>
+
+    <!-- Donation data injected by build script -->
+    <script type="application/json" id="donation-data">
+[
+  {
+    "entity": "Bitget",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$12,000,000",
+    "amountRaw": 12000000,
+    "cashAmount": "$12,000,000",
+    "cashAmountRaw": 12000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "- 香港仁济医院 HK$5,000,000 支援紧急医疗、伤者治疗及受影响家庭康复\n\n- 香港救世军 HK$3,500,000 提供经济援助、临时安置、生活物资及生活重建\n\n- 香港保良局 HK$3,500,000 负责心理辅导、社区支援及灾后长期跟进",
+    "primarySource": "https://x.com/Bitget_zh/status/1994282758919577771",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "https://x.com/xiejiayinBitget/status/1994363622819303504",
+    "date": "",
+    "entityDisplay": "Bitget",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$12,000,000"
+  },
+  {
+    "entity": "Bright Hill 恆峰國際集團",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$12,000,000",
+    "amountRaw": 12000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://sunrisemedium.com/pressrelease/4830/a484tjglrdj64xmg",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Bright Hill 恆峰國際集團",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$12,000,000"
+  },
+  {
+    "entity": "AB Foundation",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "中國和平統一促進會香港總會",
+    "primarySource": "https://x.com/ABCharityFund/status/1994333649186214234",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "AB Foundation",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "Avenir Group",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/wublockchain12/status/1993992809523892692",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月27日 下午06:38:00",
+    "entityDisplay": "Avenir Group",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "Binance 幣安",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/binancezh/status/1994050872045666614",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午10:29:00",
+    "entityDisplay": "Binance 幣安",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "Crypto.com",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "香港紅十字會",
+    "primarySource": "https://x.com/cryptocom/status/1994333292011622653",
+    "secondarySource": "https://www.panewslab.com/zh-hant/articles/5ce59b1f-ada5-47cf-9243-c8e899dd5277",
+    "verificationLink": "",
+    "date": "2025年11月28日 下午05:11:00",
+    "entityDisplay": "Crypto.com",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "Gate",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "unclear",
+    "cashAmountRaw": null,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/Gate_zh/status/1994059251019600373",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月27日 上午11:02:00",
+    "entityDisplay": "Gate",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "HTX / TRON",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/trondaoCN/status/1994250463600930903",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月28日 上午11:42:00",
+    "entityDisplay": "HTX / TRON",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "OKX",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "（政府）大埔宏福苑援助基金1千萬",
+    "primarySource": "https://x.com/okx/status/1994083843821982178",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "https://x.com/star_okx/status/1994354368825401569",
+    "date": "2025年11月28日 上午12:40:00",
+    "entityDisplay": "OKX",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "Yunfeng Financial Group 雲峰金融",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://mp.weixin.qq.com/s/5vmZzoYWmhEqfApvPtivsA",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月27日 下午01:59:00",
+    "entityDisplay": "Yunfeng Financial Group 雲峰金融",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "HashKey",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://group.hashkey.com/en/newsroom/hashkey-makes-emergency-donation-of-10-million-hkd-to-support-tai-po-fire-rescue-efforts",
+    "secondarySource": "https://time-weekly.com/wap-article/325642",
+    "verificationLink": "",
+    "date": "2025年11月29日 上午12:00:00",
+    "entityDisplay": "HashKey",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
+  },
+  {
+    "entity": "BingX",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$5,000,000",
+    "amountRaw": 5000000,
+    "cashAmount": "$5,000,000",
+    "cashAmountRaw": 5000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/BingXOfficial/status/1994283044631662930",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月28日 下午01:51:00",
+    "entityDisplay": "BingX",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$5,000,000"
+  },
+  {
+    "entity": "MEXC",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$5,000,000",
+    "amountRaw": 5000000,
+    "cashAmount": "$5,000,000",
+    "cashAmountRaw": 5000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/MEXCZH/status/1994273783264498134",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "2025年11月28日 下午01:14:00",
+    "entityDisplay": "MEXC",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$5,000,000"
+  },
+  {
+    "entity": "KN Group",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://mp.weixin.qq.com/s/e0jtCFtgICHn2Xcw7SDAfw",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "KN Group",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "Matrixport",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/Matrixport_CN/status/1994264562926014591",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Matrixport",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "OSL",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/osldotcom/status/1994016129581502814",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "OSL",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "ViaBTC",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$3,000,000",
+    "amountRaw": 3000000,
+    "cashAmount": "$3,000,000",
+    "cashAmountRaw": 3000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.viabtc.com/zh-hant/blog/News-viabtc-donates-hkd-3-million-to-support-fire-relief-and-community-reconstruction-480?category=0",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "ViaBTC",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$3,000,000"
+  },
+  {
+    "entity": "DL Holdings 德林控股",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$2,000,000",
+    "amountRaw": 2000000,
+    "cashAmount": "$2,000,000",
+    "cashAmountRaw": 2000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "仁濟緊急援助基金",
+    "primarySource": "https://mp.weixin.qq.com/s/Lf85oPY7vmJVSyfVn2kblw",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "DL Holdings 德林控股",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$2,000,000"
+  },
+  {
+    "entity": "Ju.com",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$2,000,000",
+    "amountRaw": 2000000,
+    "cashAmount": "$2,000,000",
+    "cashAmountRaw": 2000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/Jucom_ZH/status/1994333543279853908",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Ju.com",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$2,000,000"
+  },
+  {
+    "entity": "KuCoin",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$2,000,000",
+    "amountRaw": 2000000,
+    "cashAmount": "$2,000,000",
+    "cashAmountRaw": 2000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.kucoin.com/blog/en-kucoin-donates-hkd-2-million-to-support-relief-efforts-following-the-tai-po-fire-incident-in-hong-kong",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "KuCoin",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$2,000,000"
+  },
+  {
+    "entity": "Sheldon（BitMart 創始人）、孔劍平Jack Kong（Nano Labs 創始人）、Jessica Young（ME Group CEO）",
+    "entityEn": "",
+    "group": "幣圈名人",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "個人",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.wenweipo.com/a/202511/28/AP69291708e4b098d782b63cf9.html",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Sheldon（BitMart 創始人）、孔劍平Jack Kong（Nano Labs 創始人）、Jessica Young（ME Group CEO）",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "個人",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "BiFinance",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/BiFinanceE/status/1994309719411044861",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "BiFinance",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "Cobo",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "香港紅十字會",
+    "primarySource": "https://d.foresightnews.pro/news/detail/91442",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Cobo",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "Nano Labs / ME Group",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/NanoLabsLtd/status/1994343769026462194",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "Nano Labs / ME Group",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "New Huo Technology 新火科技",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://mp.weixin.qq.com/s/T6E1m7rG2zi74s30TJkycQ",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "New Huo Technology 新火科技",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "RD Technologies 圓幣科技",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://mp.weixin.qq.com/s/RDq55pRmzwmr3DpKoRrGfA",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "RD Technologies 圓幣科技",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "MicroBit Capital",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$780,000",
+    "amountRaw": 780000,
+    "cashAmount": "$780,000",
+    "cashAmountRaw": 780000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "10萬美元",
+    "through": "香港青年學生動力基金",
+    "primarySource": "https://www.theblock.co/press-releases/380795/microbit-capital-announces-us100000-donation-in-response-to-tai-po-fire-tragedy",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "MicroBit Capital",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$780,000"
+  },
+  {
+    "entity": "UXUY HK",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$305,000",
+    "amountRaw": 305000,
+    "cashAmount": "$305,000",
+    "cashAmountRaw": 305000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "44BNB@27/11/2025",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://bbx.com/zh-Hans/article/503333",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "UXUY HK",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$305,000"
+  },
+  {
+    "entity": "SlowMist",
+    "entityEn": "",
+    "group": "幣圈企業",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$200,000",
+    "amountRaw": 200000,
+    "cashAmount": "$200,000",
+    "cashAmountRaw": 200000,
+    "goodsAmount": "unclear",
+    "goodsAmountRaw": null,
+    "note": "",
+    "through": "",
+    "primarySource": "https://x.com/MetaEraCN/status/1994084203554562526",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "SlowMist",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "typeDisplay": "企業",
+    "amountDisplay": "$200,000"
+  }
+]
+    </script>
+
+    <!-- Page metadata -->
+    <script type="application/json" id="page-meta">
+        {"lang": "zh", "buildTime": "2025-12-01T04:41:15.870Z"}
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const dataElement = document.getElementById('donation-data');
+                const metaElement = document.getElementById('page-meta');
+                
+                if (!dataElement || !dataElement.textContent.trim()) {
+                    console.warn('No data found in #donation-data');
+                    return;
+                }
+
+                const donations = JSON.parse(dataElement.textContent);
+                const meta = JSON.parse(metaElement.textContent);
+                const lang = meta.lang || 'en';
+                
+                // Calculate stats
+                let totalAmount = 0;
+                let knownCount = 0;
+                donations.forEach(d => {
+                    if (d.amountRaw !== null) {
+                        totalAmount += d.amountRaw;
+                        knownCount++;
+                    }
+                });
+                
+                // Update stats display
+                document.getElementById('stat-count').textContent = donations.length.toLocaleString();
+                document.getElementById('stat-amount').textContent = '$' + totalAmount.toLocaleString();
+                document.getElementById('stat-known').textContent = knownCount + '/' + donations.length;
+                document.getElementById('stat-updated').textContent = new Date(meta.buildTime).toLocaleDateString(
+                    lang === 'zh' ? 'zh-HK' : 'en-US',
+                    { year: 'numeric', month: 'short', day: 'numeric' }
+                );
+
+                // Render table
+                const tbody = document.querySelector('#donation-table tbody');
+                tbody.innerHTML = '';
+
+                donations.forEach(d => {
+                    const tr = document.createElement('tr');
+                    
+                    // Entity cell with optional English name
+                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
+                    if (lang === 'zh' && d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
+                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
+                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
+                    }
+                    if (d.primarySource) {
+                        entityHtml += `<br><a href="${d.primarySource}" target="_blank" class="source-link">來源 ↗</a>`;
+                    }
+                    
+                    tr.innerHTML = `
+                        <td>${entityHtml}</td>
+                        <td><span class="tag tag-capital">${d.capitalDisplay || d.capital || '-'}</span></td>
+                        <td><span class="tag tag-industry">${d.industryDisplay || d.industry || '-'}</span></td>
+                        <td><span class="tag tag-type">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
+                        <td>${d.date || '-'}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (e) {
+                console.error('Error parsing donation data:', e);
+            }
+        });
+    </script>
+</body>
+</html>
