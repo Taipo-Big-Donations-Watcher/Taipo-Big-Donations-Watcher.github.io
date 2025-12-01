@@ -67,6 +67,8 @@
   "filter_by_industry": "所有行業",
   "filter_by_type": "所有類型",
   "filter_by_donation_type": "所有捐款",
+  "filter_min_amount": "最低金額",
+  "filter_max_amount": "最高金額",
   "donation_type_cash": "💵 現金",
   "donation_type_goods": "📦 物資",
   

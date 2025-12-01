@@ -197,44 +197,79 @@
 
         /* Controls Section */
         .controls {
+            margin-bottom: 25px;
             background: var(--card-bg);
             padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        .search-bar {
             margin-bottom: 20px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            align-items: center;
         }
-
-        .search-box {
-            flex: 1;
-            min-width: 250px;
-            position: relative;
-        }
-
+        
         .search-input {
             width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+            padding: 12px 15px;
             font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.2s;
+            background-color: #fff;
+        }
+        
+        .search-input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.1);
         }
 
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+        }
+        
         .filter-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .filter-select, .filter-input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 0.9em;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            color: var(--text-color);
+            appearance: none; /* Remove default arrow */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.763L10.825 4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        select {
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background-color: white;
-            min-width: 120px;
-            cursor: pointer;
+        .filter-input {
+            background-image: none;
+            cursor: text;
+        }
+        
+        .filter-select:hover, .filter-input:hover {
+            border-color: #bbb;
+        }
+
+        .filter-select:focus, .filter-input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        /* Remove arrow for number input */
+        .filter-input::-webkit-inner-spin-button, 
+        .filter-input::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
         }
         
         select option:disabled {
@@ -483,24 +518,38 @@
     </div>
 
     <div class="controls">
-        <div class="search-box">
+        <div class="search-bar">
             <input type="text" id="search-input" class="search-input" placeholder="Search entities...">
         </div>
-        <div class="filter-group">
-            <select id="filter-capital">
-                <option value="">All Origins</option>
-            </select>
-            <select id="filter-industry">
-                <option value="">All Industries</option>
-            </select>
-            <select id="filter-type">
-                <option value="">All Types</option>
-            </select>
-            <select id="filter-donation-type">
-                <option value="">All Donations</option>
-                <option value="cash">💵 Cash Only</option>
-                <option value="goods">📦 Goods Only</option>
-            </select>
+        <div class="filters-grid">
+            <div class="filter-group">
+                <select id="filter-capital" class="filter-select">
+                    <option value="">All Origins</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <select id="filter-industry" class="filter-select">
+                    <option value="">All Industries</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <select id="filter-type" class="filter-select">
+                    <option value="">All Types</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <select id="filter-donation-type" class="filter-select">
+                    <option value="">All Donations</option>
+                    <option value="cash">💵 Cash Only</option>
+                    <option value="goods">📦 Goods Only</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <input type="number" id="filter-min-amount" class="filter-input" placeholder="Min Amount" min="0">
+            </div>
+            <div class="filter-group">
+                <input type="number" id="filter-max-amount" class="filter-input" placeholder="Max Amount" min="0">
+            </div>
         </div>
     </div>
 
@@ -536,7 +585,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-01T19:26:00.769Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-01T19:40:38.497Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1301,7 +1350,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-01T19:26:00.769Z"}
+        {"lang": "en", "buildTime": "2025-12-01T19:40:38.497Z"}
     </script>
 
     <script>
@@ -1421,6 +1470,8 @@
             const filterIndustry = document.getElementById('filter-industry');
             const filterType = document.getElementById('filter-type');
             const filterDonationType = document.getElementById('filter-donation-type');
+            const filterMinAmount = document.getElementById('filter-min-amount');
+            const filterMaxAmount = document.getElementById('filter-max-amount');
             const amountHeader = document.getElementById('amount-header');
             const noResults = document.getElementById('no-results');
             const dynamicSummary = document.getElementById('dynamic-summary');
@@ -1461,6 +1512,8 @@
                     filterIndustry.addEventListener('change', handleFilter);
                     filterType.addEventListener('change', handleFilter);
                     filterDonationType.addEventListener('change', handleFilter);
+                    filterMinAmount.addEventListener('input', handleFilter);
+                    filterMaxAmount.addEventListener('input', handleFilter);
                     
                     document.querySelectorAll('th[data-sort]').forEach(th => {
                         th.addEventListener('click', () => handleSort(th.dataset.sort));
@@ -1672,6 +1725,9 @@
                 const capitalVal = filterCapital.value;
                 const industryVal = filterIndustry.value;
                 const typeVal = filterType.value;
+                const donationTypeVal = filterDonationType.value;
+                const minAmount = filterMinAmount.value ? parseFloat(filterMinAmount.value) : null;
+                const maxAmount = filterMaxAmount.value ? parseFloat(filterMaxAmount.value) : null;
                 const query = searchInput.value.toLowerCase();
                 
                 // Helper to filter data with specific exclusions
@@ -1690,6 +1746,21 @@
                         if (excludeFilter !== 'capital' && capitalVal && (d.capitalDisplay || d.capital) !== capitalVal) return false;
                         if (excludeFilter !== 'industry' && industryVal && (d.industryDisplay || d.industry) !== industryVal) return false;
                         if (excludeFilter !== 'type' && typeVal && (d.typeDisplay || d.type) !== typeVal) return false;
+                        
+                        // Amount Logic
+                        let amountToCheck;
+                        if (donationTypeVal === 'cash') {
+                            if (d.cashAmountRaw === null || d.cashAmountRaw === 0) return false;
+                            amountToCheck = d.cashAmountRaw;
+                        } else if (donationTypeVal === 'goods') {
+                            if (d.goodsAmountRaw === null || d.goodsAmountRaw === 0) return false;
+                            amountToCheck = d.goodsAmountRaw;
+                        } else {
+                            amountToCheck = d.amountRaw;
+                        }
+                        
+                        if (minAmount !== null && (amountToCheck === null || amountToCheck < minAmount)) return false;
+                        if (maxAmount !== null && (amountToCheck === null || amountToCheck > maxAmount)) return false;
                         
                         return true;
                     });
@@ -1778,6 +1849,9 @@
                 const capital = filterCapital.value;
                 const industry = filterIndustry.value;
                 const type = filterType.value;
+                const donationType = filterDonationType.value;
+                const minAmount = filterMinAmount.value ? parseFloat(filterMinAmount.value) : null;
+                const maxAmount = filterMaxAmount.value ? parseFloat(filterMaxAmount.value) : null;
                 
                 currentDonations = allDonations.filter(d => {
                     // Search
@@ -1796,6 +1870,22 @@
                     if (capital && (d.capitalDisplay || d.capital) !== capital) return false;
                     if (industry && (d.industryDisplay || d.industry) !== industry) return false;
                     if (type && (d.typeDisplay || d.type) !== type) return false;
+                    
+                    // Donation Type Logic
+                    let amountToCheck;
+                    if (donationType === 'cash') {
+                        if (d.cashAmountRaw === null || d.cashAmountRaw === 0) return false;
+                        amountToCheck = d.cashAmountRaw;
+                    } else if (donationType === 'goods') {
+                        if (d.goodsAmountRaw === null || d.goodsAmountRaw === 0) return false;
+                        amountToCheck = d.goodsAmountRaw;
+                    } else {
+                        amountToCheck = d.amountRaw;
+                    }
+                    
+                    // Min/Max Amount Filters
+                    if (minAmount !== null && (amountToCheck === null || amountToCheck < minAmount)) return false;
+                    if (maxAmount !== null && (amountToCheck === null || amountToCheck > maxAmount)) return false;
                     
                     return true;
                 });
@@ -1868,14 +1958,7 @@
                         entityHtml += `<span class="note-icon" title="${d.note}">ⓘ</span>`;
                     }
                     entityHtml += `</span>`;
-                    
-                    // Show secondary name if available
-                    if (lang === 'zh' && d.entityEn) {
-                        entityHtml += `<span class="entity-en">${d.entityEn}</span>`;
-                    } else if (lang === 'en' && d.entityEn && d.entity !== d.entityEn) {
-                        entityHtml += `<span class="entity-en">${d.entity}</span>`;
-                    }
-                    
+
                     // Source Link Logic
                     if (d.primarySource) {
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">Source</a>`;
@@ -1932,6 +2015,8 @@
                 if (filterIndustry.value) params.set('industry', filterIndustry.value);
                 if (filterType.value) params.set('type', filterType.value);
                 if (filterDonationType.value) params.set('donationType', filterDonationType.value);
+                if (filterMinAmount.value) params.set('min', filterMinAmount.value);
+                if (filterMaxAmount.value) params.set('max', filterMaxAmount.value);
                 
                 // Only push state if changed to avoid spamming history
                 const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
@@ -1945,6 +2030,8 @@
                 if (params.has('industry')) filterIndustry.value = params.get('industry');
                 if (params.has('type')) filterType.value = params.get('type');
                 if (params.has('donationType')) filterDonationType.value = params.get('donationType');
+                if (params.has('min')) filterMinAmount.value = params.get('min');
+                if (params.has('max')) filterMaxAmount.value = params.get('max');
                 
                 // Always filter data to ensure consistent state
                 filterData();

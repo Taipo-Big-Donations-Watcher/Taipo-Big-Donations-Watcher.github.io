@@ -155,6 +155,7 @@ async function fetchSeoPages() {
 
 module.exports = {
   loadEnv,
+  loadServiceAccount,
   createSheetsClient,
   fetchDonations,
   fetchSeoPages,

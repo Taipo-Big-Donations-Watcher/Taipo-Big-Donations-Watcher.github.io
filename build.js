@@ -462,10 +462,25 @@ async function build() {
     // Fetch and generate SEO pages
     console.log('\nFetching SEO page configurations...');
     const seoData = await fetchSeoPages();
+    let seoConfigs = [];
+    
     if (seoData) {
-      const seoConfigs = seoData.rows
+      seoConfigs = seoData.rows
         .map(parseSeoPageConfig)
         .filter(Boolean);
+    }
+    
+    // Manual override for "Over 1M" page
+    seoConfigs.push({
+        slug: 'donations-over-1m',
+        titleEn: 'Donations Over HK$1 Million - Tai Po Fire Relief',
+        titleZh: '超過100萬港元之捐款 - 大埔火災救援',
+        descriptionEn: 'List of major donations for Tai Po fire relief exceeding HK$1 Million.',
+        descriptionZh: '大埔宏福苑火災救援：超過100萬港元之大額承諾捐款名單。',
+        filterConfig: { minAmount: 1000000, sort: 'value-desc' }
+    });
+
+    if (seoConfigs.length > 0) {
       generateSeoPages(template, donations, seoConfigs, buildTime);
     }
     

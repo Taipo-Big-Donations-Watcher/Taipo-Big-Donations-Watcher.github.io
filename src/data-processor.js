@@ -353,6 +353,16 @@ function applyFilter(donations, filterConfig) {
   if (filterConfig.group) {
     result = result.filter(d => d.group === filterConfig.group);
   }
+
+  // Filter by min amount
+  if (filterConfig.minAmount !== undefined) {
+    result = result.filter(d => d.amountRaw !== null && d.amountRaw >= filterConfig.minAmount);
+  }
+
+  // Filter by max amount
+  if (filterConfig.maxAmount !== undefined) {
+    result = result.filter(d => d.amountRaw !== null && d.amountRaw <= filterConfig.maxAmount);
+  }
   
   // Sort
   if (filterConfig.sort) {
