@@ -17,6 +17,16 @@
             --card-bg: #ffffff;
             --muted-text: #636e72;
             --highlight-bg: #f1f2f6;
+            
+            /* Badge Colors */
+            --badge-bg: #e5e5e5;
+            --badge-text: #000000;
+            
+            /* Type Colors (Pastel with Black Text) */
+            --color-corp: #c7ecee; 
+            --color-indv: #fab1a0; 
+            --color-org: #81ecec; 
+            --text-contrast: #000000;
         }
 
         * {
@@ -158,8 +168,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px; /* Ensure table doesn't squish on mobile */
+            min-width: 900px;
+            table-layout: fixed; /* Prevent jumping */
         }
+
+        /* Column Widths */
+        .col-entity { width: 25%; }
+        .col-capital { width: 15%; }
+        .col-industry { width: 15%; }
+        .col-type { width: 12%; }
+        .col-amount { width: 17%; }
+        .col-date { width: 16%; }
 
         th {
             background-color: #f1f2f6;
@@ -172,6 +191,9 @@
             user-select: none;
             position: sticky;
             top: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         th:hover {
@@ -183,6 +205,8 @@
             font-size: 0.8em;
             margin-left: 5px;
             opacity: 0.3;
+            display: inline-block;
+            width: 10px;
         }
 
         th.sorted-asc::after {
@@ -199,6 +223,7 @@
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
+            word-wrap: break-word;
         }
 
         tr:hover {
@@ -233,7 +258,7 @@
         }
 
         .amount {
-            font-family: "SF Mono", Monaco, monospace;
+            font-family: inherit; /* Match body font */
             font-weight: 700;
             color: var(--heading-color);
         }
@@ -243,10 +268,16 @@
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.85em;
-            background: #f1f2f6;
-            color: var(--text-color);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             white-space: nowrap;
+            margin-bottom: 2px;
         }
+
+        /* Type Colors - keeping pastel but black text */
+        .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
+        .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
+        .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -280,6 +311,17 @@
             
             .stats {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            /* Horizontal scroll hint */
+            .table-container::after {
+                content: '→';
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                color: #ccc;
+                pointer-events: none;
+                display: none; /* Only show if overflowing */
             }
         }
     </style>
@@ -327,6 +369,14 @@
 
     <div class="table-container">
         <table id="donation-table">
+            <colgroup>
+                <col class="col-entity">
+                <col class="col-capital">
+                <col class="col-industry">
+                <col class="col-type">
+                <col class="col-amount">
+                <col class="col-date">
+            </colgroup>
             <thead>
                 <tr>
                     <th data-sort="entity">Donor</th>
@@ -349,7 +399,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. Corrections welcome.</p>
-        <p>Last Updated: <span id="build-time">2025-12-01T06:23:29.756Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-01T14:04:55.598Z</span></p>
     </footer>
 
     <!-- Data Injection -->
@@ -377,6 +427,7 @@
     "entityDisplay": "Bitget",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$12,000,000"
   },
@@ -402,6 +453,7 @@
     "entityDisplay": "Bright Hill 恆峰國際集團",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$12,000,000"
   },
@@ -427,6 +479,7 @@
     "entityDisplay": "AB Foundation",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -448,10 +501,11 @@
     "primarySource": "https://x.com/wublockchain12/status/1993992809523892692",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月27日 下午06:38:00",
+    "date": "27/11/2025",
     "entityDisplay": "Avenir Group",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -473,10 +527,11 @@
     "primarySource": "https://x.com/binancezh/status/1994050872045666614",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月27日 上午10:29:00",
+    "date": "27/11/2025",
     "entityDisplay": "Binance 幣安",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -498,10 +553,11 @@
     "primarySource": "https://x.com/cryptocom/status/1994333292011622653",
     "secondarySource": "https://www.panewslab.com/zh-hant/articles/5ce59b1f-ada5-47cf-9243-c8e899dd5277",
     "verificationLink": "",
-    "date": "2025年11月28日 下午05:11:00",
+    "date": "28/11/2025",
     "entityDisplay": "Crypto.com",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -523,10 +579,11 @@
     "primarySource": "https://x.com/Gate_zh/status/1994059251019600373",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月27日 上午11:02:00",
+    "date": "27/11/2025",
     "entityDisplay": "Gate",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -548,10 +605,11 @@
     "primarySource": "https://x.com/trondaoCN/status/1994250463600930903",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月28日 上午11:42:00",
+    "date": "28/11/2025",
     "entityDisplay": "HTX / TRON",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -573,10 +631,11 @@
     "primarySource": "https://x.com/okx/status/1994083843821982178",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "https://x.com/star_okx/status/1994354368825401569",
-    "date": "2025年11月28日 上午12:40:00",
+    "date": "28/11/2025",
     "entityDisplay": "OKX",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -598,10 +657,11 @@
     "primarySource": "https://mp.weixin.qq.com/s/5vmZzoYWmhEqfApvPtivsA",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月27日 下午01:59:00",
+    "date": "27/11/2025",
     "entityDisplay": "Yunfeng Financial Group 雲峰金融",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -623,10 +683,11 @@
     "primarySource": "https://group.hashkey.com/en/newsroom/hashkey-makes-emergency-donation-of-10-million-hkd-to-support-tai-po-fire-rescue-efforts",
     "secondarySource": "https://time-weekly.com/wap-article/325642",
     "verificationLink": "",
-    "date": "2025年11月29日 上午12:00:00",
+    "date": "29/11/2025",
     "entityDisplay": "HashKey",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$10,000,000"
   },
@@ -648,10 +709,11 @@
     "primarySource": "https://x.com/BingXOfficial/status/1994283044631662930",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月28日 下午01:51:00",
+    "date": "28/11/2025",
     "entityDisplay": "BingX",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$5,000,000"
   },
@@ -673,10 +735,11 @@
     "primarySource": "https://x.com/MEXCZH/status/1994273783264498134",
     "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
     "verificationLink": "",
-    "date": "2025年11月28日 下午01:14:00",
+    "date": "28/11/2025",
     "entityDisplay": "MEXC",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$5,000,000"
   },
@@ -702,6 +765,7 @@
     "entityDisplay": "KN Group",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$3,000,000"
   },
@@ -727,6 +791,7 @@
     "entityDisplay": "Matrixport",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$3,000,000"
   },
@@ -752,6 +817,7 @@
     "entityDisplay": "OSL",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$3,000,000"
   },
@@ -777,6 +843,7 @@
     "entityDisplay": "ViaBTC",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$3,000,000"
   },
@@ -802,6 +869,7 @@
     "entityDisplay": "DL Holdings 德林控股",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$2,000,000"
   },
@@ -827,6 +895,7 @@
     "entityDisplay": "Ju.com",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$2,000,000"
   },
@@ -852,6 +921,7 @@
     "entityDisplay": "KuCoin",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$2,000,000"
   },
@@ -877,6 +947,7 @@
     "entityDisplay": "Sheldon（BitMart 創始人）、孔劍平Jack Kong（Nano Labs 創始人）、Jessica Young（ME Group CEO）",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Individual",
     "amountDisplay": "$1,000,000"
   },
@@ -902,6 +973,7 @@
     "entityDisplay": "BiFinance",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$1,000,000"
   },
@@ -927,6 +999,7 @@
     "entityDisplay": "Cobo",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$1,000,000"
   },
@@ -952,6 +1025,7 @@
     "entityDisplay": "Nano Labs / ME Group",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$1,000,000"
   },
@@ -977,6 +1051,7 @@
     "entityDisplay": "New Huo Technology 新火科技",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$1,000,000"
   },
@@ -1002,6 +1077,7 @@
     "entityDisplay": "RD Technologies 圓幣科技",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$1,000,000"
   },
@@ -1027,6 +1103,7 @@
     "entityDisplay": "MicroBit Capital",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$780,000"
   },
@@ -1052,6 +1129,7 @@
     "entityDisplay": "UXUY HK",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$305,000"
   },
@@ -1077,6 +1155,7 @@
     "entityDisplay": "SlowMist",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$200,000"
   }
@@ -1084,7 +1163,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-01T06:23:29.756Z"}
+        {"lang": "en", "buildTime": "2025-12-01T14:04:55.598Z"}
     </script>
 
     <script>
@@ -1096,6 +1175,35 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // Flags Mapping
+            const FLAGS = {
+                'Hong Kong': '🇭🇰', '香港': '🇭🇰',
+                'China': '🇨🇳', '中國': '🇨🇳',
+                'USA': '🇺🇸', '美國': '🇺🇸',
+                'UK': '🇬🇧', '英國': '🇬🇧',
+                'Japan': '🇯🇵', '日本': '🇯🇵',
+                'South Korea': '🇰🇷', '韓國': '🇰🇷',
+                'Macau': '🇲🇴', '澳門': '🇲🇴',
+                'Taiwan': '🇹🇼', '台灣': '🇹🇼',
+                'Malaysia': '🇲🇾', '馬來西亞': '🇲🇾',
+                'Singapore': '🇸🇬', '新加坡': '🇸🇬',
+                'Canada': '🇨🇦', '加拿大': '🇨🇦',
+                'France': '🇫🇷', '法國': '🇫🇷',
+                'Netherlands': '🇳🇱', '荷蘭': '🇳🇱',
+                'Switzerland': '🇨🇭', '瑞士': '🇨🇭',
+                'International': '🌐', '國際': '🌐'
+            };
+            
+            // Fallback Emoji Mapping (if missing from build)
+            const INDUSTRY_ICONS = {
+                'Finance': '💰', '金融': '💰',
+                'Technology': '💻', '科技': '💻',
+                'Real Estate': '🏢', '房地產': '🏢',
+                'Entertainment': '🎬', '娛樂': '🎬',
+                'Food & Beverage': '🍔', '食品飲料': '🍔',
+                'Retail': '🏪', '零售': '🏪'
+            };
+
             // DOM Elements
             const tableBody = document.getElementById('table-body');
             const searchInput = document.getElementById('search-input');
@@ -1157,26 +1265,86 @@
                 );
             }
 
+            function getIcon(type, value) {
+                if (!value) return '';
+                if (type === 'capital') {
+                    return FLAGS[value] || '';
+                }
+                if (type === 'industry') {
+                    // Try to get icon from donation object logic first (passed in data)
+                    // But we need to check map for dropdown population
+                    return INDUSTRY_ICONS[value] || '';
+                }
+                return '';
+            }
+
             function initFilters() {
-                // Helper to populate select
-                const populate = (select, field, displayField) => {
-                    const values = new Set();
+                // Helper to count frequencies
+                const getCounts = (field, displayField) => {
+                    const counts = {};
                     allDonations.forEach(d => {
                         const val = d[displayField] || d[field];
-                        if (val) values.add(val);
+                        if (val) {
+                            counts[val] = (counts[val] || 0) + 1;
+                        }
                     });
-                    
-                    Array.from(values).sort().forEach(val => {
-                        const option = document.createElement('option');
-                        option.value = val;
-                        option.textContent = val;
-                        select.appendChild(option);
-                    });
+                    return counts;
                 };
+
+                // Populate Capital (HK -> CN -> Freq)
+                const capitalCounts = getCounts('capital', 'capitalDisplay');
+                const capitals = Object.keys(capitalCounts).sort((a, b) => {
+                    // Priority: HK, then China
+                    const isHK_A = a.includes('Hong Kong') || a.includes('香港');
+                    const isHK_B = b.includes('Hong Kong') || b.includes('香港');
+                    if (isHK_A && !isHK_B) return -1;
+                    if (!isHK_A && isHK_B) return 1;
+                    
+                    const isCN_A = a.includes('China') || a.includes('中國');
+                    const isCN_B = b.includes('China') || b.includes('中國');
+                    if (isCN_A && !isCN_B) return -1;
+                    if (!isCN_A && isCN_B) return 1;
+                    
+                    // Then by frequency
+                    return capitalCounts[b] - capitalCounts[a];
+                });
                 
-                populate(filterCapital, 'capital', 'capitalDisplay');
-                populate(filterIndustry, 'industry', 'industryDisplay');
-                populate(filterType, 'type', 'typeDisplay');
+                capitals.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${FLAGS[val] || ''} ${val} (${capitalCounts[val]})`;
+                    filterCapital.appendChild(option);
+                });
+
+                // Populate Industry (Freq)
+                const industryCounts = getCounts('industry', 'industryDisplay');
+                const industries = Object.keys(industryCounts).sort((a, b) => {
+                    return industryCounts[b] - industryCounts[a];
+                });
+                
+                // We need a way to look up icon for dropdown even if not in current row context
+                // Since icons are attached to data, we can find one example
+                const findIcon = (val) => {
+                    const ex = allDonations.find(d => (d.industryDisplay === val || d.industry === val));
+                    return ex ? (ex.industryIcon || INDUSTRY_ICONS[val] || '') : '';
+                };
+
+                industries.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    const icon = findIcon(val);
+                    option.textContent = `${icon} ${val} (${industryCounts[val]})`;
+                    filterIndustry.appendChild(option);
+                });
+
+                // Populate Type
+                const typeCounts = getCounts('type', 'typeDisplay');
+                Object.keys(typeCounts).sort().forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${val} (${typeCounts[val]})`;
+                    filterType.appendChild(option);
+                });
             }
 
             function handleSearch() {
@@ -1279,11 +1447,8 @@
                 
                 noResults.style.display = 'none';
                 
-                // Performance optimization: only render first 100 rows if too many
-                const displayLimit = 100;
-                const itemsToShow = currentDonations.slice(0, displayLimit);
-                
-                itemsToShow.forEach(d => {
+                // Show ALL rows
+                currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
                     let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
@@ -1298,24 +1463,23 @@
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">Source</a>`;
                     }
                     
+                    // Flags & Icons
+                    const capitalVal = d.capitalDisplay || d.capital || '';
+                    const capitalFlag = FLAGS[capitalVal] || '';
+                    
+                    const industryVal = d.industryDisplay || d.industry || '';
+                    const industryIcon = d.industryIcon || INDUSTRY_ICONS[industryVal] || '';
+                    
                     tr.innerHTML = `
                         <td>${entityHtml}</td>
-                        <td><span class="tag">${d.capitalDisplay || d.capital || '-'}</span></td>
-                        <td><span class="tag">${d.industryDisplay || d.industry || '-'}</span></td>
-                        <td><span class="tag">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td><span class="tag" data-val="${capitalVal}">${capitalFlag} ${capitalVal || '-'}</span></td>
+                        <td><span class="tag" >${industryIcon} ${industryVal || '-'}</span></td>
+                        <td><span class="tag" data-type="${d.typeDisplay || d.type}">${d.typeDisplay || d.type || '-'}</span></td>
                         <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
                         <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
                     tableBody.appendChild(tr);
                 });
-                
-                if (currentDonations.length > displayLimit) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td colspan="6" style="text-align:center; padding: 20px; color: #666">
-                        ... and ${currentDonations.length - displayLimit} more records
-                    </td>`;
-                    tableBody.appendChild(tr);
-                }
             }
 
             function updateUrl() {

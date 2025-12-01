@@ -17,6 +17,16 @@
             --card-bg: #ffffff;
             --muted-text: #636e72;
             --highlight-bg: #f1f2f6;
+            
+            /* Badge Colors */
+            --badge-bg: #e5e5e5;
+            --badge-text: #000000;
+            
+            /* Type Colors (Pastel with Black Text) */
+            --color-corp: #c7ecee; 
+            --color-indv: #fab1a0; 
+            --color-org: #81ecec; 
+            --text-contrast: #000000;
         }
 
         * {
@@ -158,8 +168,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px; /* Ensure table doesn't squish on mobile */
+            min-width: 900px;
+            table-layout: fixed; /* Prevent jumping */
         }
+
+        /* Column Widths */
+        .col-entity { width: 25%; }
+        .col-capital { width: 15%; }
+        .col-industry { width: 15%; }
+        .col-type { width: 12%; }
+        .col-amount { width: 17%; }
+        .col-date { width: 16%; }
 
         th {
             background-color: #f1f2f6;
@@ -172,6 +191,9 @@
             user-select: none;
             position: sticky;
             top: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         th:hover {
@@ -183,6 +205,8 @@
             font-size: 0.8em;
             margin-left: 5px;
             opacity: 0.3;
+            display: inline-block;
+            width: 10px;
         }
 
         th.sorted-asc::after {
@@ -199,6 +223,7 @@
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
+            word-wrap: break-word;
         }
 
         tr:hover {
@@ -233,7 +258,7 @@
         }
 
         .amount {
-            font-family: "SF Mono", Monaco, monospace;
+            font-family: inherit; /* Match body font */
             font-weight: 700;
             color: var(--heading-color);
         }
@@ -243,10 +268,16 @@
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.85em;
-            background: #f1f2f6;
-            color: var(--text-color);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             white-space: nowrap;
+            margin-bottom: 2px;
         }
+
+        /* Type Colors - keeping pastel but black text */
+        .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
+        .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
+        .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -280,6 +311,17 @@
             
             .stats {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            /* Horizontal scroll hint */
+            .table-container::after {
+                content: '→';
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                color: #ccc;
+                pointer-events: none;
+                display: none; /* Only show if overflowing */
             }
         }
     </style>
@@ -327,6 +369,14 @@
 
     <div class="table-container">
         <table id="donation-table">
+            <colgroup>
+                <col class="col-entity">
+                <col class="col-capital">
+                <col class="col-industry">
+                <col class="col-type">
+                <col class="col-amount">
+                <col class="col-date">
+            </colgroup>
             <thead>
                 <tr>
                     <th data-sort="entity">捐款者</th>
@@ -349,7 +399,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
-        <p>最後更新: <span id="build-time">2025-12-01T06:23:29.756Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-01T14:04:55.598Z</span></p>
     </footer>
 
     <!-- Data Injection -->
@@ -377,6 +427,7 @@
     "entityDisplay": "溫氏股份（300498）",
     "capitalDisplay": "中國",
     "industryDisplay": "農牧業",
+    "industryIcon": "🌾",
     "typeDisplay": "企業",
     "amountDisplay": "$40,000,000"
   },
@@ -402,6 +453,7 @@
     "entityDisplay": "京東集團（9618）/佳寶",
     "capitalDisplay": "中國",
     "industryDisplay": "電商",
+    "industryIcon": "🛍️",
     "typeDisplay": "企業",
     "amountDisplay": "$33,000,000"
   },
@@ -423,10 +475,11 @@
     "primarySource": "https://weibo.com/7679523207/QfKPboTEt",
     "secondarySource": "https://cj.sina.cn/article/norm_detail?url=https%3A%2F%2Ffinance.sina.com.cn%2Ftob%2F2025-11-27%2Fdoc-infyvhsh0227224.shtml&from=redirect&autocallup=no&isfromsina=no",
     "verificationLink": "",
-    "date": "2025年11月27日 上午11:01:00",
+    "date": "27/11/2025",
     "entityDisplay": "安踏（2020）",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
   },
@@ -452,6 +505,7 @@
     "entityDisplay": "波司登集團 （3998）",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
   },
@@ -473,10 +527,11 @@
     "primarySource": "",
     "secondarySource": "https://www.hkcd.com.hk/hkcdweb/content/2025/11/29/content_8727874.html",
     "verificationLink": "",
-    "date": "2025年11月29日 上午12:00:00",
+    "date": "29/11/2025",
     "entityDisplay": "加多寶集團",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
   },
@@ -502,6 +557,7 @@
     "entityDisplay": "騰訊公益慈善基金會",
     "capitalDisplay": "中國",
     "industryDisplay": "慈善",
+    "industryIcon": "❤️",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
   },
@@ -527,6 +583,7 @@
     "entityDisplay": "中國宏橋（1378）",
     "capitalDisplay": "中國",
     "industryDisplay": "鋁業",
+    "industryIcon": "🔩",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
   },
@@ -552,6 +609,7 @@
     "entityDisplay": "中海外/中建",
     "capitalDisplay": "中國",
     "industryDisplay": "建築",
+    "industryIcon": "🏗️",
     "typeDisplay": "企業",
     "amountDisplay": "$22,080,000"
   },
@@ -577,6 +635,7 @@
     "entityDisplay": "遼寧方大集團",
     "capitalDisplay": "中國",
     "industryDisplay": "綜合企業",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$22,000,000"
   },
@@ -602,6 +661,7 @@
     "entityDisplay": "阿里巴巴",
     "capitalDisplay": "中國",
     "industryDisplay": "電商",
+    "industryIcon": "🛍️",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -627,6 +687,7 @@
     "entityDisplay": "粵海集團",
     "capitalDisplay": "中國",
     "industryDisplay": "綜合企業",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -652,6 +713,7 @@
     "entityDisplay": "中遠海運",
     "capitalDisplay": "中國",
     "industryDisplay": "航運",
+    "industryIcon": "🚢",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -677,6 +739,7 @@
     "entityDisplay": "蜜雪冰城（2097）",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -702,6 +765,7 @@
     "entityDisplay": "李寧",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -727,6 +791,7 @@
     "entityDisplay": "特步",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -752,6 +817,7 @@
     "entityDisplay": "順豐",
     "capitalDisplay": "中國",
     "industryDisplay": "物流",
+    "industryIcon": "📦",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -777,6 +843,7 @@
     "entityDisplay": "招商局",
     "capitalDisplay": "中國",
     "industryDisplay": "綜合企業",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -802,6 +869,7 @@
     "entityDisplay": "中銀香港（2388）",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -823,10 +891,11 @@
     "primarySource": "",
     "secondarySource": "https://hk.finance.yahoo.com/news/%E7%B4%AB%E9%87%91-02899-hk-%E6%8D%90%E8%B4%882-000%E8%90%AC%E5%85%83%E6%94%AF%E6%8F%B4%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD%E7%81%BD%E5%BE%8C%E5%BB%BA%E8%A8%AD-085603735.html",
     "verificationLink": "",
-    "date": "2025年11月30日 上午12:00:00",
+    "date": "30/11/2025",
     "entityDisplay": "紫金礦業（2899）",
     "capitalDisplay": "中國",
     "industryDisplay": "礦業",
+    "industryIcon": "⛏️",
     "typeDisplay": "企業",
     "amountDisplay": "$20,000,000"
   },
@@ -852,6 +921,7 @@
     "entityDisplay": "361集團（1361）",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$15,000,000"
   },
@@ -877,6 +947,7 @@
     "entityDisplay": "震雄投資（0057）",
     "capitalDisplay": "中國",
     "industryDisplay": "機械製造",
+    "industryIcon": "🤖",
     "typeDisplay": "企業",
     "amountDisplay": "$15,000,000"
   },
@@ -902,6 +973,7 @@
     "entityDisplay": "紫荊文化集團",
     "capitalDisplay": "中國",
     "industryDisplay": "傳媒",
+    "industryIcon": "📰",
     "typeDisplay": "企業",
     "amountDisplay": "$12,000,000"
   },
@@ -927,6 +999,7 @@
     "entityDisplay": "瑞幸咖啡",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$11,000,000"
   },
@@ -948,10 +1021,11 @@
     "primarySource": "https://www.facebook.com/hkairlines/posts/%E9%A6%99%E6%B8%AF%E8%88%AA%E7%A9%BA%E6%8D%90%E6%AC%BE%E4%B8%80%E5%8D%83%E8%90%AC%E6%B8%AF%E5%85%83%E6%94%AF%E6%8F%B4%E5%A4%A7%E5%9F%94%E7%81%AB%E7%81%BD%E6%95%91%E6%8F%B4%E5%B7%A5%E4%BD%9C%E9%A6%99%E6%B8%AF%E8%88%AA%E7%A9%BA%E5%8F%8A%E4%B8%BB%E8%A6%81%E8%82%A1%E6%9D%B1%E6%96%B9%E5%A4%A7%E9%9B%86%E5%9C%98%E5%B0%8D%E5%A4%A7%E5%9F%94%E7%81%AB%E7%81%BD%E4%BA%8B%E6%95%85%E6%B7%B1%E8%A1%A8%E5%93%80%E7%97%9B%E5%9C%A8%E6%AD%A4%E8%89%B1%E9%9B%A3%E6%99%82%E5%88%BB%E6%88%91%E5%80%91%E8%88%87%E5%85%A8%E6%B8%AF%E5%B8%82%E6%B0%91%E5%90%8C%E5%BF%83%E5%85%B1%E6%84%9F%E8%AC%B9%E5%90%91%E4%B8%8D%E5%B9%B8%E9%80%9D%E8%80%85%E8%87%B4%E4%BB%A5%E6%B7%B1%E5%88%87%E5%93%80%E6%82%BC%E5%90%91%E9%81%87%E9%9B%A3%E8%80%85%E5%AE%B6%E5%B1%AC/1286355830187601/",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月28日 上午10:40:00",
+    "date": "28/11/2025",
     "entityDisplay": "香港航空",
     "capitalDisplay": "中國",
     "industryDisplay": "航空",
+    "industryIcon": "✈️",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -977,6 +1051,7 @@
     "entityDisplay": "建設銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1002,6 +1077,7 @@
     "entityDisplay": "五礦集團",
     "capitalDisplay": "中國",
     "industryDisplay": "礦業",
+    "industryIcon": "⛏️",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1027,6 +1103,7 @@
     "entityDisplay": "招商銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1052,6 +1129,7 @@
     "entityDisplay": "鍋圈（2517）",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1077,6 +1155,7 @@
     "entityDisplay": "國泰海通",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1102,6 +1181,7 @@
     "entityDisplay": "越秀集團",
     "capitalDisplay": "中國",
     "industryDisplay": "房地產",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1127,6 +1207,7 @@
     "entityDisplay": "太平洋保險",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1152,6 +1233,7 @@
     "entityDisplay": "中生製藥",
     "capitalDisplay": "中國",
     "industryDisplay": "醫藥",
+    "industryIcon": "💊",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1177,6 +1259,7 @@
     "entityDisplay": "北控集團",
     "capitalDisplay": "中國",
     "industryDisplay": "綜合企業",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1202,6 +1285,7 @@
     "entityDisplay": "海天味業",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1227,6 +1311,7 @@
     "entityDisplay": "光大集團",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1252,6 +1337,7 @@
     "entityDisplay": "字節跳動",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1277,6 +1363,7 @@
     "entityDisplay": "螞蟻集團",
     "capitalDisplay": "中國",
     "industryDisplay": "金融科技",
+    "industryIcon": "💳",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1298,10 +1385,11 @@
     "primarySource": "http://www.sasac.gov.cn/n2588025/n2588124/c34986259/content.html",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "香港中旅集團",
     "capitalDisplay": "中國",
     "industryDisplay": "旅遊",
+    "industryIcon": "🧳",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1327,6 +1415,7 @@
     "entityDisplay": "騰訊（700）",
     "capitalDisplay": "中國",
     "industryDisplay": "慈善",
+    "industryIcon": "❤️",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1352,6 +1441,7 @@
     "entityDisplay": "攜程（Trip.com）",
     "capitalDisplay": "中國",
     "industryDisplay": "旅遊",
+    "industryIcon": "🧳",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1377,6 +1467,7 @@
     "entityDisplay": "網易",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1402,6 +1493,7 @@
     "entityDisplay": "滴滴",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1427,6 +1519,7 @@
     "entityDisplay": "度小滿",
     "capitalDisplay": "中國",
     "industryDisplay": "金融科技",
+    "industryIcon": "💳",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1452,6 +1545,7 @@
     "entityDisplay": "美的集團（0300）",
     "capitalDisplay": "中國",
     "industryDisplay": "家電",
+    "industryIcon": "🏠",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1477,6 +1571,7 @@
     "entityDisplay": "奇瑞汽車",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1502,6 +1597,7 @@
     "entityDisplay": "愷英",
     "capitalDisplay": "中國",
     "industryDisplay": "遊戲",
+    "industryIcon": "🎮",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1527,6 +1623,7 @@
     "entityDisplay": "百度",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1552,6 +1649,7 @@
     "entityDisplay": "陽光保險集團",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1577,6 +1675,7 @@
     "entityDisplay": "海爾智家",
     "capitalDisplay": "中國",
     "industryDisplay": "家電",
+    "industryIcon": "🏠",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1602,6 +1701,7 @@
     "entityDisplay": "比亞迪",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1627,6 +1727,7 @@
     "entityDisplay": "老鋪黃金股份",
     "capitalDisplay": "中國",
     "industryDisplay": "珠寶零售",
+    "industryIcon": "💍",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1652,6 +1753,7 @@
     "entityDisplay": "吉利控股集團",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1677,6 +1779,7 @@
     "entityDisplay": "香港小米基金會/小米（1810）",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1702,6 +1805,7 @@
     "entityDisplay": "信義集團",
     "capitalDisplay": "中國",
     "industryDisplay": "建材",
+    "industryIcon": "🧱",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1727,6 +1831,7 @@
     "entityDisplay": "拼多多",
     "capitalDisplay": "中國",
     "industryDisplay": "電商",
+    "industryIcon": "🛍️",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1752,6 +1857,7 @@
     "entityDisplay": "聯想香港",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1777,6 +1883,7 @@
     "entityDisplay": "中國平安（2318）",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1802,6 +1909,7 @@
     "entityDisplay": "萬通保險與雲鋒金融（0376）",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1827,6 +1935,7 @@
     "entityDisplay": "富途證券",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1852,6 +1961,7 @@
     "entityDisplay": "農夫山泉",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1877,6 +1987,7 @@
     "entityDisplay": "遠東發展（0035）",
     "capitalDisplay": "中國",
     "industryDisplay": "房地產",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1902,6 +2013,7 @@
     "entityDisplay": "藍月亮（6993）",
     "capitalDisplay": "中國",
     "industryDisplay": "消費品",
+    "industryIcon": "🛒",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1927,6 +2039,7 @@
     "entityDisplay": "J&T極兔速遞",
     "capitalDisplay": "中國",
     "industryDisplay": "物流",
+    "industryIcon": "📦",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1952,6 +2065,7 @@
     "entityDisplay": "農業銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -1977,6 +2091,7 @@
     "entityDisplay": "高瓴投資/高瓴公益基金會",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2002,6 +2117,7 @@
     "entityDisplay": "億京發展",
     "capitalDisplay": "中國",
     "industryDisplay": "房地產",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2027,6 +2143,7 @@
     "entityDisplay": "OPPO",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2052,6 +2169,7 @@
     "entityDisplay": "立訊精密（香港）",
     "capitalDisplay": "中國",
     "industryDisplay": "電子製造",
+    "industryIcon": "🔌",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2077,6 +2195,7 @@
     "entityDisplay": "華泰證券 + 南方基金",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2102,6 +2221,7 @@
     "entityDisplay": "百威亞太（1876）",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2127,6 +2247,7 @@
     "entityDisplay": "中國工商銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2152,6 +2273,7 @@
     "entityDisplay": "泡泡瑪特（9992）",
     "capitalDisplay": "中國",
     "industryDisplay": "消費品",
+    "industryIcon": "🛒",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2177,6 +2299,7 @@
     "entityDisplay": "興業銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2202,6 +2325,7 @@
     "entityDisplay": "上海銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2227,6 +2351,7 @@
     "entityDisplay": "雅迪",
     "capitalDisplay": "中國",
     "industryDisplay": "電動車",
+    "industryIcon": "🔋",
     "typeDisplay": "企業",
     "amountDisplay": "$10,000,000"
   },
@@ -2252,6 +2377,7 @@
     "entityDisplay": "恒安國際（1044）",
     "capitalDisplay": "中國",
     "industryDisplay": "消費品",
+    "industryIcon": "🛒",
     "typeDisplay": "企業",
     "amountDisplay": "$6,000,000"
   },
@@ -2277,6 +2403,7 @@
     "entityDisplay": "天虹國際（2678）",
     "capitalDisplay": "中國",
     "industryDisplay": "紡織",
+    "industryIcon": "🧶",
     "typeDisplay": "企業",
     "amountDisplay": "$6,000,000"
   },
@@ -2302,6 +2429,7 @@
     "entityDisplay": "國家電網海外投資",
     "capitalDisplay": "中國",
     "industryDisplay": "能源",
+    "industryIcon": "⚡",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2327,6 +2455,7 @@
     "entityDisplay": "民生銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2348,10 +2477,11 @@
     "primarySource": "",
     "secondarySource": "https://m.thecover.cn/news_details.html?eid=G9AQPf6GoE%2BH90qSdq8Jkw==&timestamp=1764440706523",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "茶百道",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2377,6 +2507,7 @@
     "entityDisplay": "賽力斯集團",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2402,6 +2533,7 @@
     "entityDisplay": "ZA Bank/眾安國際",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2427,6 +2559,7 @@
     "entityDisplay": "小鵬汽車（9868）",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2452,6 +2585,7 @@
     "entityDisplay": "富貴鳥",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2473,10 +2607,11 @@
     "primarySource": "https://www.shacombank.com.hk/tch/about/press/images/press_20251128_support.pdf",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "上海商業銀行",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2502,6 +2637,7 @@
     "entityDisplay": "連連數字（2598）",
     "capitalDisplay": "中國",
     "industryDisplay": "金融科技",
+    "industryIcon": "💳",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2527,6 +2663,7 @@
     "entityDisplay": "和諧汽車",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車",
+    "industryIcon": "🚗",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2552,6 +2689,7 @@
     "entityDisplay": "中國利郎集團",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2577,6 +2715,7 @@
     "entityDisplay": "小紅書",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2602,6 +2741,7 @@
     "entityDisplay": "美團（3690）/Keeta",
     "capitalDisplay": "中國",
     "industryDisplay": "外送平台",
+    "industryIcon": "🛵",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2627,6 +2767,7 @@
     "entityDisplay": "優品360（2360）",
     "capitalDisplay": "中國",
     "industryDisplay": "零售",
+    "industryIcon": "🏪",
     "typeDisplay": "企業",
     "amountDisplay": "$5,000,000"
   },
@@ -2652,6 +2793,7 @@
     "entityDisplay": "百勝中國",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$3,300,000"
   },
@@ -2677,6 +2819,7 @@
     "entityDisplay": "匯添富基金",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2698,10 +2841,11 @@
     "primarySource": "https://www.sensetime.com/hk/news-detail/51170246?categoryId=41172",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "商湯科技（0020）",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2723,10 +2867,11 @@
     "primarySource": "",
     "secondarySource": "https://www.finet.hk/newscenter/news_content/692917712308298770c9a415",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "途虎養車（9690）",
     "capitalDisplay": "中國",
     "industryDisplay": "汽車服務",
+    "industryIcon": "🔧",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2752,6 +2897,7 @@
     "entityDisplay": "玖龍紙業（2689）",
     "capitalDisplay": "中國",
     "industryDisplay": "造紙",
+    "industryIcon": "📄",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2773,10 +2919,11 @@
     "primarySource": "",
     "secondarySource": "https://hk.finance.yahoo.com/news/%E5%8D%97%E9%A0%86-00411-%E6%8D%90%E6%AC%BE200%E8%90%AC%E6%B8%AF%E5%85%83%E6%94%AF%E6%8F%B4%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD%E5%8F%97%E7%81%BD%E4%BA%BA%E5%A3%AB-130046164.html",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "南旋集團（1982）",
     "capitalDisplay": "中國",
     "industryDisplay": "紡織",
+    "industryIcon": "🧶",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2802,6 +2949,7 @@
     "entityDisplay": "小菜園（0999）",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$3,000,000"
   },
@@ -2827,6 +2975,7 @@
     "entityDisplay": "南順（0411）",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2852,6 +3001,7 @@
     "entityDisplay": "比優集團（9893）",
     "capitalDisplay": "中國",
     "industryDisplay": "零售",
+    "industryIcon": "🏪",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2877,6 +3027,7 @@
     "entityDisplay": "同程旅行（0780）",
     "capitalDisplay": "中國",
     "industryDisplay": "旅遊",
+    "industryIcon": "🧳",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2898,10 +3049,11 @@
     "primarySource": "",
     "secondarySource": "https://hk.finance.yahoo.com/news/%E9%9B%B2%E5%B7%A5%E5%A0%B4-02512-hk-%E6%8D%90%E6%AC%BE200%E8%90%AC%E5%85%83%E6%94%AF%E6%8F%B4%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BD%8F%E6%88%B6-071639967.html",
     "verificationLink": "",
-    "date": "2025年11月30日 上午12:00:00",
+    "date": "30/11/2025",
     "entityDisplay": "雲工場（2512）",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2923,10 +3075,11 @@
     "primarySource": "",
     "secondarySource": "https://www.aastocks.com/tc/stocks/analysis/stock-aafn-con/01100/AAFN/NOW.1487087/hk-stock-news",
     "verificationLink": "",
-    "date": "2025年11月28日 上午12:00:00",
+    "date": "28/11/2025",
     "entityDisplay": "飛達帽業（1100）/顏寶鈴",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2952,6 +3105,7 @@
     "entityDisplay": "老鳳祥",
     "capitalDisplay": "中國",
     "industryDisplay": "珠寶零售",
+    "industryIcon": "💍",
     "typeDisplay": "企業",
     "amountDisplay": "$2,000,000"
   },
@@ -2977,6 +3131,7 @@
     "entityDisplay": "優必選（9880）",
     "capitalDisplay": "中國",
     "industryDisplay": "科技",
+    "industryIcon": "💻",
     "typeDisplay": "企業",
     "amountDisplay": "$1,500,000"
   },
@@ -3002,6 +3157,7 @@
     "entityDisplay": "中國燃氣（0384）",
     "capitalDisplay": "中國",
     "industryDisplay": "能源",
+    "industryIcon": "⚡",
     "typeDisplay": "企業",
     "amountDisplay": "$1,220,000"
   },
@@ -3027,6 +3183,7 @@
     "entityDisplay": "河北遠洋",
     "capitalDisplay": "中國",
     "industryDisplay": "綜合企業",
+    "industryIcon": "🏢",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3052,6 +3209,7 @@
     "entityDisplay": "金川集團(香港)資源",
     "capitalDisplay": "中國",
     "industryDisplay": "礦業",
+    "industryIcon": "⛏️",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3077,6 +3235,7 @@
     "entityDisplay": "鷹普精密（1286）/陸瑞博",
     "capitalDisplay": "中國",
     "industryDisplay": "精密製造",
+    "industryIcon": "⚙️",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3102,6 +3261,7 @@
     "entityDisplay": "量化派 （2685）",
     "capitalDisplay": "中國",
     "industryDisplay": "金融科技",
+    "industryIcon": "💳",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3127,6 +3287,7 @@
     "entityDisplay": "都市麗人（2298）/鄭耀南及吳小麗",
     "capitalDisplay": "中國",
     "industryDisplay": "服裝",
+    "industryIcon": "👕",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3152,6 +3313,7 @@
     "entityDisplay": "交個朋友控股",
     "capitalDisplay": "中國",
     "industryDisplay": "電商",
+    "industryIcon": "🛍️",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3177,6 +3339,7 @@
     "entityDisplay": "水滴公司",
     "capitalDisplay": "中國",
     "industryDisplay": "金融",
+    "industryIcon": "💰",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3202,6 +3365,7 @@
     "entityDisplay": "海偉股份",
     "capitalDisplay": "中國",
     "industryDisplay": "製造業",
+    "industryIcon": "🏭",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3227,6 +3391,7 @@
     "entityDisplay": "德勤中國",
     "capitalDisplay": "中國",
     "industryDisplay": "專業服務",
+    "industryIcon": "💼",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3252,6 +3417,7 @@
     "entityDisplay": "四方精創",
     "capitalDisplay": "中國",
     "industryDisplay": "金融科技",
+    "industryIcon": "💳",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3277,6 +3443,7 @@
     "entityDisplay": "永安旅遊",
     "capitalDisplay": "中國",
     "industryDisplay": "旅遊",
+    "industryIcon": "🧳",
     "typeDisplay": "企業",
     "amountDisplay": "$1,000,000"
   },
@@ -3302,6 +3469,7 @@
     "entityDisplay": "中國移動香港",
     "capitalDisplay": "中國",
     "industryDisplay": "電訊",
+    "industryIcon": "📡",
     "typeDisplay": "企業",
     "amountDisplay": "未知"
   },
@@ -3327,6 +3495,7 @@
     "entityDisplay": "麥當勞香港",
     "capitalDisplay": "中國",
     "industryDisplay": "食品飲料",
+    "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "未知"
   }
@@ -3334,7 +3503,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-01T06:23:29.756Z"}
+        {"lang": "zh", "buildTime": "2025-12-01T14:04:55.598Z"}
     </script>
 
     <script>
@@ -3346,6 +3515,35 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // Flags Mapping
+            const FLAGS = {
+                'Hong Kong': '🇭🇰', '香港': '🇭🇰',
+                'China': '🇨🇳', '中國': '🇨🇳',
+                'USA': '🇺🇸', '美國': '🇺🇸',
+                'UK': '🇬🇧', '英國': '🇬🇧',
+                'Japan': '🇯🇵', '日本': '🇯🇵',
+                'South Korea': '🇰🇷', '韓國': '🇰🇷',
+                'Macau': '🇲🇴', '澳門': '🇲🇴',
+                'Taiwan': '🇹🇼', '台灣': '🇹🇼',
+                'Malaysia': '🇲🇾', '馬來西亞': '🇲🇾',
+                'Singapore': '🇸🇬', '新加坡': '🇸🇬',
+                'Canada': '🇨🇦', '加拿大': '🇨🇦',
+                'France': '🇫🇷', '法國': '🇫🇷',
+                'Netherlands': '🇳🇱', '荷蘭': '🇳🇱',
+                'Switzerland': '🇨🇭', '瑞士': '🇨🇭',
+                'International': '🌐', '國際': '🌐'
+            };
+            
+            // Fallback Emoji Mapping (if missing from build)
+            const INDUSTRY_ICONS = {
+                'Finance': '💰', '金融': '💰',
+                'Technology': '💻', '科技': '💻',
+                'Real Estate': '🏢', '房地產': '🏢',
+                'Entertainment': '🎬', '娛樂': '🎬',
+                'Food & Beverage': '🍔', '食品飲料': '🍔',
+                'Retail': '🏪', '零售': '🏪'
+            };
+
             // DOM Elements
             const tableBody = document.getElementById('table-body');
             const searchInput = document.getElementById('search-input');
@@ -3407,26 +3605,86 @@
                 );
             }
 
+            function getIcon(type, value) {
+                if (!value) return '';
+                if (type === 'capital') {
+                    return FLAGS[value] || '';
+                }
+                if (type === 'industry') {
+                    // Try to get icon from donation object logic first (passed in data)
+                    // But we need to check map for dropdown population
+                    return INDUSTRY_ICONS[value] || '';
+                }
+                return '';
+            }
+
             function initFilters() {
-                // Helper to populate select
-                const populate = (select, field, displayField) => {
-                    const values = new Set();
+                // Helper to count frequencies
+                const getCounts = (field, displayField) => {
+                    const counts = {};
                     allDonations.forEach(d => {
                         const val = d[displayField] || d[field];
-                        if (val) values.add(val);
+                        if (val) {
+                            counts[val] = (counts[val] || 0) + 1;
+                        }
                     });
-                    
-                    Array.from(values).sort().forEach(val => {
-                        const option = document.createElement('option');
-                        option.value = val;
-                        option.textContent = val;
-                        select.appendChild(option);
-                    });
+                    return counts;
                 };
+
+                // Populate Capital (HK -> CN -> Freq)
+                const capitalCounts = getCounts('capital', 'capitalDisplay');
+                const capitals = Object.keys(capitalCounts).sort((a, b) => {
+                    // Priority: HK, then China
+                    const isHK_A = a.includes('Hong Kong') || a.includes('香港');
+                    const isHK_B = b.includes('Hong Kong') || b.includes('香港');
+                    if (isHK_A && !isHK_B) return -1;
+                    if (!isHK_A && isHK_B) return 1;
+                    
+                    const isCN_A = a.includes('China') || a.includes('中國');
+                    const isCN_B = b.includes('China') || b.includes('中國');
+                    if (isCN_A && !isCN_B) return -1;
+                    if (!isCN_A && isCN_B) return 1;
+                    
+                    // Then by frequency
+                    return capitalCounts[b] - capitalCounts[a];
+                });
                 
-                populate(filterCapital, 'capital', 'capitalDisplay');
-                populate(filterIndustry, 'industry', 'industryDisplay');
-                populate(filterType, 'type', 'typeDisplay');
+                capitals.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${FLAGS[val] || ''} ${val} (${capitalCounts[val]})`;
+                    filterCapital.appendChild(option);
+                });
+
+                // Populate Industry (Freq)
+                const industryCounts = getCounts('industry', 'industryDisplay');
+                const industries = Object.keys(industryCounts).sort((a, b) => {
+                    return industryCounts[b] - industryCounts[a];
+                });
+                
+                // We need a way to look up icon for dropdown even if not in current row context
+                // Since icons are attached to data, we can find one example
+                const findIcon = (val) => {
+                    const ex = allDonations.find(d => (d.industryDisplay === val || d.industry === val));
+                    return ex ? (ex.industryIcon || INDUSTRY_ICONS[val] || '') : '';
+                };
+
+                industries.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    const icon = findIcon(val);
+                    option.textContent = `${icon} ${val} (${industryCounts[val]})`;
+                    filterIndustry.appendChild(option);
+                });
+
+                // Populate Type
+                const typeCounts = getCounts('type', 'typeDisplay');
+                Object.keys(typeCounts).sort().forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${val} (${typeCounts[val]})`;
+                    filterType.appendChild(option);
+                });
             }
 
             function handleSearch() {
@@ -3529,11 +3787,8 @@
                 
                 noResults.style.display = 'none';
                 
-                // Performance optimization: only render first 100 rows if too many
-                const displayLimit = 100;
-                const itemsToShow = currentDonations.slice(0, displayLimit);
-                
-                itemsToShow.forEach(d => {
+                // Show ALL rows
+                currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
                     let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
@@ -3548,24 +3803,23 @@
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">來源</a>`;
                     }
                     
+                    // Flags & Icons
+                    const capitalVal = d.capitalDisplay || d.capital || '';
+                    const capitalFlag = FLAGS[capitalVal] || '';
+                    
+                    const industryVal = d.industryDisplay || d.industry || '';
+                    const industryIcon = d.industryIcon || INDUSTRY_ICONS[industryVal] || '';
+                    
                     tr.innerHTML = `
                         <td>${entityHtml}</td>
-                        <td><span class="tag">${d.capitalDisplay || d.capital || '-'}</span></td>
-                        <td><span class="tag">${d.industryDisplay || d.industry || '-'}</span></td>
-                        <td><span class="tag">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td><span class="tag" data-val="${capitalVal}">${capitalFlag} ${capitalVal || '-'}</span></td>
+                        <td><span class="tag" >${industryIcon} ${industryVal || '-'}</span></td>
+                        <td><span class="tag" data-type="${d.typeDisplay || d.type}">${d.typeDisplay || d.type || '-'}</span></td>
                         <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
                         <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
                     tableBody.appendChild(tr);
                 });
-                
-                if (currentDonations.length > displayLimit) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td colspan="6" style="text-align:center; padding: 20px; color: #666">
-                        ... and ${currentDonations.length - displayLimit} more records
-                    </td>`;
-                    tableBody.appendChild(tr);
-                }
             }
 
             function updateUrl() {

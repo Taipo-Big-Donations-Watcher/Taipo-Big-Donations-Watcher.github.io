@@ -17,6 +17,16 @@
             --card-bg: #ffffff;
             --muted-text: #636e72;
             --highlight-bg: #f1f2f6;
+            
+            /* Badge Colors */
+            --badge-bg: #e5e5e5;
+            --badge-text: #000000;
+            
+            /* Type Colors (Pastel with Black Text) */
+            --color-corp: #c7ecee; 
+            --color-indv: #fab1a0; 
+            --color-org: #81ecec; 
+            --text-contrast: #000000;
         }
 
         * {
@@ -158,8 +168,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px; /* Ensure table doesn't squish on mobile */
+            min-width: 900px;
+            table-layout: fixed; /* Prevent jumping */
         }
+
+        /* Column Widths */
+        .col-entity { width: 25%; }
+        .col-capital { width: 15%; }
+        .col-industry { width: 15%; }
+        .col-type { width: 12%; }
+        .col-amount { width: 17%; }
+        .col-date { width: 16%; }
 
         th {
             background-color: #f1f2f6;
@@ -172,6 +191,9 @@
             user-select: none;
             position: sticky;
             top: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         th:hover {
@@ -183,6 +205,8 @@
             font-size: 0.8em;
             margin-left: 5px;
             opacity: 0.3;
+            display: inline-block;
+            width: 10px;
         }
 
         th.sorted-asc::after {
@@ -199,6 +223,7 @@
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
+            word-wrap: break-word;
         }
 
         tr:hover {
@@ -233,7 +258,7 @@
         }
 
         .amount {
-            font-family: "SF Mono", Monaco, monospace;
+            font-family: inherit; /* Match body font */
             font-weight: 700;
             color: var(--heading-color);
         }
@@ -243,10 +268,16 @@
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.85em;
-            background: #f1f2f6;
-            color: var(--text-color);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             white-space: nowrap;
+            margin-bottom: 2px;
         }
+
+        /* Type Colors - keeping pastel but black text */
+        .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
+        .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
+        .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -280,6 +311,17 @@
             
             .stats {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            /* Horizontal scroll hint */
+            .table-container::after {
+                content: '→';
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                color: #ccc;
+                pointer-events: none;
+                display: none; /* Only show if overflowing */
             }
         }
     </style>
@@ -327,6 +369,14 @@
 
     <div class="table-container">
         <table id="donation-table">
+            <colgroup>
+                <col class="col-entity">
+                <col class="col-capital">
+                <col class="col-industry">
+                <col class="col-type">
+                <col class="col-amount">
+                <col class="col-date">
+            </colgroup>
             <thead>
                 <tr>
                     <th data-sort="entity">Donor</th>
@@ -349,7 +399,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. Corrections welcome.</p>
-        <p>Last Updated: <span id="build-time">2025-12-01T06:23:29.756Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-01T14:04:55.598Z</span></p>
     </footer>
 
     <!-- Data Injection -->
@@ -373,10 +423,11 @@
     "primarySource": "https://www.news.gov.hk/chi/2025/11/20251127/20251127_191621_256.html",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "大埔宏福苑援助基金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Government",
+    "industryIcon": "🏛️",
     "typeDisplay": "Government",
     "amountDisplay": "$300,000,000"
   },
@@ -398,10 +449,11 @@
     "primarySource": "https://www.hkjc.com/english/pressrelease/mcs01_showhtml.asp?filename=20251127_182250_E_NEWS.htm",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "馬會",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Gaming",
+    "industryIcon": "🎰",
     "typeDisplay": "Organization",
     "amountDisplay": "$100,000,000"
   },
@@ -423,10 +475,11 @@
     "primarySource": "https://www.lksf.org/li-ka-shing-foundation-announces-an-immediate-hk30-million-emergency-relief-fund-to-support-fire-affected-communities-in-tai-po-wang-fuk-court-housing-complex/?lang=hk",
     "secondarySource": "https://time-weekly.com/wap-article/325642",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "李嘉誠基金會",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$80,000,000"
   },
@@ -448,10 +501,11 @@
     "primarySource": "https://www.commchest.org/tc/news/press-release/detail/1105",
     "secondarySource": "",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "公益金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$50,000,000"
   },
@@ -477,6 +531,7 @@
     "entityDisplay": "溫氏股份（300498）",
     "capitalDisplay": "China",
     "industryDisplay": "Agriculture",
+    "industryIcon": "🌾",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$40,000,000"
   },
@@ -502,6 +557,7 @@
     "entityDisplay": "京東集團（9618）/佳寶",
     "capitalDisplay": "China",
     "industryDisplay": "E-commerce",
+    "industryIcon": "🛍️",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$33,000,000"
   },
@@ -523,10 +579,11 @@
     "primarySource": "https://weibo.com/7679523207/QfKPboTEt",
     "secondarySource": "https://cj.sina.cn/article/norm_detail?url=https%3A%2F%2Ffinance.sina.com.cn%2Ftob%2F2025-11-27%2Fdoc-infyvhsh0227224.shtml&from=redirect&autocallup=no&isfromsina=no",
     "verificationLink": "",
-    "date": "2025年11月27日 上午11:01:00",
+    "date": "27/11/2025",
     "entityDisplay": "安踏（2020）",
     "capitalDisplay": "China",
     "industryDisplay": "Apparel",
+    "industryIcon": "👕",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -552,6 +609,7 @@
     "entityDisplay": "波司登集團 （3998）",
     "capitalDisplay": "China",
     "industryDisplay": "Apparel",
+    "industryIcon": "👕",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -573,10 +631,11 @@
     "primarySource": "",
     "secondarySource": "https://www.hkcd.com.hk/hkcdweb/content/2025/11/29/content_8727874.html",
     "verificationLink": "",
-    "date": "2025年11月29日 上午12:00:00",
+    "date": "29/11/2025",
     "entityDisplay": "加多寶集團",
     "capitalDisplay": "China",
     "industryDisplay": "Food & Beverage",
+    "industryIcon": "🍔",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -598,10 +657,11 @@
     "primarySource": "https://weibo.com/5691000683/QfLA487UZ",
     "secondarySource": "https://time-weekly.com/wap-article/325642",
     "verificationLink": "",
-    "date": "2025年11月27日 下午12:57:00",
+    "date": "27/11/2025",
     "entityDisplay": "馬雲基金",
     "capitalDisplay": "China",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$30,000,000"
   },
@@ -627,6 +687,7 @@
     "entityDisplay": "恒基兆業/李兆基基金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Real Estate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -648,10 +709,11 @@
     "primarySource": "https://www.about.hsbc.com.hk/zh-hk/news-and-media/hsbc-and-hang-seng-bank-pledge-hkd-30-million-for-wang-fuk-court-post-fire-relief-efforts",
     "secondarySource": "https://news.tvb.com/tc/local/6928131ce43529412934061e/港澳-大埔宏福苑大火-社會各界捐款賑災｜列表一覽",
     "verificationLink": "",
-    "date": "2025年11月27日 上午12:00:00",
+    "date": "27/11/2025",
     "entityDisplay": "滙豐和恒生銀行",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Finance",
+    "industryIcon": "💰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -677,6 +739,7 @@
     "entityDisplay": "澳門政府",
     "capitalDisplay": "Macau",
     "industryDisplay": "Government",
+    "industryIcon": "🏛️",
     "typeDisplay": "Organization",
     "amountDisplay": "$30,000,000"
   },
@@ -702,6 +765,7 @@
     "entityDisplay": "李文達與蔡美靈慈善基金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$30,000,000"
   },
@@ -727,6 +791,7 @@
     "entityDisplay": "九龍倉",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Real Estate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -752,6 +817,7 @@
     "entityDisplay": "嘉里集團",
     "capitalDisplay": "Malaysia",
     "industryDisplay": "Conglomerate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -777,6 +843,7 @@
     "entityDisplay": "騰訊公益慈善基金會",
     "capitalDisplay": "China",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -802,6 +869,7 @@
     "entityDisplay": "霍英東基金會",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$30,000,000"
   },
@@ -827,6 +895,7 @@
     "entityDisplay": "中國宏橋（1378）",
     "capitalDisplay": "China",
     "industryDisplay": "Aluminum",
+    "industryIcon": "🔩",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$30,000,000"
   },
@@ -852,6 +921,7 @@
     "entityDisplay": "中海外/中建",
     "capitalDisplay": "China",
     "industryDisplay": "Construction",
+    "industryIcon": "🏗️",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$22,080,000"
   },
@@ -877,6 +947,7 @@
     "entityDisplay": "遼寧方大集團",
     "capitalDisplay": "China",
     "industryDisplay": "Conglomerate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$22,000,000"
   },
@@ -902,6 +973,7 @@
     "entityDisplay": "阿里巴巴",
     "capitalDisplay": "China",
     "industryDisplay": "E-commerce",
+    "industryIcon": "🛍️",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -927,6 +999,7 @@
     "entityDisplay": "粵海集團",
     "capitalDisplay": "China",
     "industryDisplay": "Conglomerate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -952,6 +1025,7 @@
     "entityDisplay": "中遠海運",
     "capitalDisplay": "China",
     "industryDisplay": "Shipping",
+    "industryIcon": "🚢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -977,6 +1051,7 @@
     "entityDisplay": "蜜雪冰城（2097）",
     "capitalDisplay": "China",
     "industryDisplay": "Food & Beverage",
+    "industryIcon": "🍔",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1002,6 +1077,7 @@
     "entityDisplay": "李寧",
     "capitalDisplay": "China",
     "industryDisplay": "Apparel",
+    "industryIcon": "👕",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1027,6 +1103,7 @@
     "entityDisplay": "周大福",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Jewelry",
+    "industryIcon": "💍",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1052,6 +1129,7 @@
     "entityDisplay": "特步",
     "capitalDisplay": "China",
     "industryDisplay": "Apparel",
+    "industryIcon": "👕",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1077,6 +1155,7 @@
     "entityDisplay": "順豐",
     "capitalDisplay": "China",
     "industryDisplay": "Logistics",
+    "industryIcon": "📦",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1102,6 +1181,7 @@
     "entityDisplay": "MAMA AWARDS",
     "capitalDisplay": "South Korea",
     "industryDisplay": "Entertainment",
+    "industryIcon": "🎬",
     "typeDisplay": "Organization",
     "amountDisplay": "$20,000,000"
   },
@@ -1127,6 +1207,7 @@
     "entityDisplay": "新鴻基地產（0016）",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Real Estate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1152,6 +1233,7 @@
     "entityDisplay": "信和集團及黃廷方慈善基金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Real Estate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1177,6 +1259,7 @@
     "entityDisplay": "招商局",
     "capitalDisplay": "China",
     "industryDisplay": "Conglomerate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1202,6 +1285,7 @@
     "entityDisplay": "邵氏基金會",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$20,000,000"
   },
@@ -1227,6 +1311,7 @@
     "entityDisplay": "保誠保險",
     "capitalDisplay": "UK",
     "industryDisplay": "Finance",
+    "industryIcon": "💰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1252,6 +1337,7 @@
     "entityDisplay": "中銀香港（2388）",
     "capitalDisplay": "China",
     "industryDisplay": "Finance",
+    "industryIcon": "💰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1277,6 +1363,7 @@
     "entityDisplay": "友邦香港",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Finance",
+    "industryIcon": "💰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1302,6 +1389,7 @@
     "entityDisplay": "華潤慈善基金",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$20,000,000"
   },
@@ -1327,6 +1415,7 @@
     "entityDisplay": "宏利",
     "capitalDisplay": "Canada",
     "industryDisplay": "Finance",
+    "industryIcon": "💰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1348,10 +1437,11 @@
     "primarySource": "",
     "secondarySource": "https://hk.finance.yahoo.com/news/%E7%B4%AB%E9%87%91-02899-hk-%E6%8D%90%E8%B4%882-000%E8%90%AC%E5%85%83%E6%94%AF%E6%8F%B4%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD%E7%81%BD%E5%BE%8C%E5%BB%BA%E8%A8%AD-085603735.html",
     "verificationLink": "",
-    "date": "2025年11月30日 上午12:00:00",
+    "date": "30/11/2025",
     "entityDisplay": "紫金礦業（2899）",
     "capitalDisplay": "China",
     "industryDisplay": "Mining",
+    "industryIcon": "⛏️",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$20,000,000"
   },
@@ -1377,6 +1467,7 @@
     "entityDisplay": "361集團（1361）",
     "capitalDisplay": "China",
     "industryDisplay": "Apparel",
+    "industryIcon": "👕",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$15,000,000"
   },
@@ -1402,6 +1493,7 @@
     "entityDisplay": "DFI零售集團",
     "capitalDisplay": "UK",
     "industryDisplay": "Retail",
+    "industryIcon": "🏪",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$15,000,000"
   },
@@ -1427,6 +1519,7 @@
     "entityDisplay": "震雄投資（0057）",
     "capitalDisplay": "China",
     "industryDisplay": "Machinery",
+    "industryIcon": "🤖",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$15,000,000"
   },
@@ -1452,6 +1545,7 @@
     "entityDisplay": "Bitget",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$12,000,000"
   },
@@ -1477,6 +1571,7 @@
     "entityDisplay": "Bright Hill 恆峰國際集團",
     "capitalDisplay": "International",
     "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$12,000,000"
   },
@@ -1502,6 +1597,7 @@
     "entityDisplay": "紫荊文化集團",
     "capitalDisplay": "China",
     "industryDisplay": "Media",
+    "industryIcon": "📰",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$12,000,000"
   },
@@ -1527,6 +1623,7 @@
     "entityDisplay": "韓紅愛心慈善基金",
     "capitalDisplay": "South Korea",
     "industryDisplay": "Charity",
+    "industryIcon": "❤️",
     "typeDisplay": "Organization",
     "amountDisplay": "$11,000,000"
   },
@@ -1552,6 +1649,7 @@
     "entityDisplay": "恒隆集團",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Real Estate",
+    "industryIcon": "🏢",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$11,000,000"
   },
@@ -1577,6 +1675,7 @@
     "entityDisplay": "瑞幸咖啡",
     "capitalDisplay": "China",
     "industryDisplay": "Food & Beverage",
+    "industryIcon": "🍔",
     "typeDisplay": "Enterprise",
     "amountDisplay": "$11,000,000"
   },
@@ -1602,6 +1701,7 @@
     "entityDisplay": "中華總商會",
     "capitalDisplay": "Hong Kong",
     "industryDisplay": "Chamber of Commerce",
+    "industryIcon": "🤝",
     "typeDisplay": "Association",
     "amountDisplay": "$11,000,000"
   }
@@ -1609,7 +1709,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-01T06:23:29.756Z"}
+        {"lang": "en", "buildTime": "2025-12-01T14:04:55.598Z"}
     </script>
 
     <script>
@@ -1621,6 +1721,35 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // Flags Mapping
+            const FLAGS = {
+                'Hong Kong': '🇭🇰', '香港': '🇭🇰',
+                'China': '🇨🇳', '中國': '🇨🇳',
+                'USA': '🇺🇸', '美國': '🇺🇸',
+                'UK': '🇬🇧', '英國': '🇬🇧',
+                'Japan': '🇯🇵', '日本': '🇯🇵',
+                'South Korea': '🇰🇷', '韓國': '🇰🇷',
+                'Macau': '🇲🇴', '澳門': '🇲🇴',
+                'Taiwan': '🇹🇼', '台灣': '🇹🇼',
+                'Malaysia': '🇲🇾', '馬來西亞': '🇲🇾',
+                'Singapore': '🇸🇬', '新加坡': '🇸🇬',
+                'Canada': '🇨🇦', '加拿大': '🇨🇦',
+                'France': '🇫🇷', '法國': '🇫🇷',
+                'Netherlands': '🇳🇱', '荷蘭': '🇳🇱',
+                'Switzerland': '🇨🇭', '瑞士': '🇨🇭',
+                'International': '🌐', '國際': '🌐'
+            };
+            
+            // Fallback Emoji Mapping (if missing from build)
+            const INDUSTRY_ICONS = {
+                'Finance': '💰', '金融': '💰',
+                'Technology': '💻', '科技': '💻',
+                'Real Estate': '🏢', '房地產': '🏢',
+                'Entertainment': '🎬', '娛樂': '🎬',
+                'Food & Beverage': '🍔', '食品飲料': '🍔',
+                'Retail': '🏪', '零售': '🏪'
+            };
+
             // DOM Elements
             const tableBody = document.getElementById('table-body');
             const searchInput = document.getElementById('search-input');
@@ -1682,26 +1811,86 @@
                 );
             }
 
+            function getIcon(type, value) {
+                if (!value) return '';
+                if (type === 'capital') {
+                    return FLAGS[value] || '';
+                }
+                if (type === 'industry') {
+                    // Try to get icon from donation object logic first (passed in data)
+                    // But we need to check map for dropdown population
+                    return INDUSTRY_ICONS[value] || '';
+                }
+                return '';
+            }
+
             function initFilters() {
-                // Helper to populate select
-                const populate = (select, field, displayField) => {
-                    const values = new Set();
+                // Helper to count frequencies
+                const getCounts = (field, displayField) => {
+                    const counts = {};
                     allDonations.forEach(d => {
                         const val = d[displayField] || d[field];
-                        if (val) values.add(val);
+                        if (val) {
+                            counts[val] = (counts[val] || 0) + 1;
+                        }
                     });
-                    
-                    Array.from(values).sort().forEach(val => {
-                        const option = document.createElement('option');
-                        option.value = val;
-                        option.textContent = val;
-                        select.appendChild(option);
-                    });
+                    return counts;
                 };
+
+                // Populate Capital (HK -> CN -> Freq)
+                const capitalCounts = getCounts('capital', 'capitalDisplay');
+                const capitals = Object.keys(capitalCounts).sort((a, b) => {
+                    // Priority: HK, then China
+                    const isHK_A = a.includes('Hong Kong') || a.includes('香港');
+                    const isHK_B = b.includes('Hong Kong') || b.includes('香港');
+                    if (isHK_A && !isHK_B) return -1;
+                    if (!isHK_A && isHK_B) return 1;
+                    
+                    const isCN_A = a.includes('China') || a.includes('中國');
+                    const isCN_B = b.includes('China') || b.includes('中國');
+                    if (isCN_A && !isCN_B) return -1;
+                    if (!isCN_A && isCN_B) return 1;
+                    
+                    // Then by frequency
+                    return capitalCounts[b] - capitalCounts[a];
+                });
                 
-                populate(filterCapital, 'capital', 'capitalDisplay');
-                populate(filterIndustry, 'industry', 'industryDisplay');
-                populate(filterType, 'type', 'typeDisplay');
+                capitals.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${FLAGS[val] || ''} ${val} (${capitalCounts[val]})`;
+                    filterCapital.appendChild(option);
+                });
+
+                // Populate Industry (Freq)
+                const industryCounts = getCounts('industry', 'industryDisplay');
+                const industries = Object.keys(industryCounts).sort((a, b) => {
+                    return industryCounts[b] - industryCounts[a];
+                });
+                
+                // We need a way to look up icon for dropdown even if not in current row context
+                // Since icons are attached to data, we can find one example
+                const findIcon = (val) => {
+                    const ex = allDonations.find(d => (d.industryDisplay === val || d.industry === val));
+                    return ex ? (ex.industryIcon || INDUSTRY_ICONS[val] || '') : '';
+                };
+
+                industries.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    const icon = findIcon(val);
+                    option.textContent = `${icon} ${val} (${industryCounts[val]})`;
+                    filterIndustry.appendChild(option);
+                });
+
+                // Populate Type
+                const typeCounts = getCounts('type', 'typeDisplay');
+                Object.keys(typeCounts).sort().forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${val} (${typeCounts[val]})`;
+                    filterType.appendChild(option);
+                });
             }
 
             function handleSearch() {
@@ -1804,11 +1993,8 @@
                 
                 noResults.style.display = 'none';
                 
-                // Performance optimization: only render first 100 rows if too many
-                const displayLimit = 100;
-                const itemsToShow = currentDonations.slice(0, displayLimit);
-                
-                itemsToShow.forEach(d => {
+                // Show ALL rows
+                currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
                     let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
@@ -1823,24 +2009,23 @@
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">Source</a>`;
                     }
                     
+                    // Flags & Icons
+                    const capitalVal = d.capitalDisplay || d.capital || '';
+                    const capitalFlag = FLAGS[capitalVal] || '';
+                    
+                    const industryVal = d.industryDisplay || d.industry || '';
+                    const industryIcon = d.industryIcon || INDUSTRY_ICONS[industryVal] || '';
+                    
                     tr.innerHTML = `
                         <td>${entityHtml}</td>
-                        <td><span class="tag">${d.capitalDisplay || d.capital || '-'}</span></td>
-                        <td><span class="tag">${d.industryDisplay || d.industry || '-'}</span></td>
-                        <td><span class="tag">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td><span class="tag" data-val="${capitalVal}">${capitalFlag} ${capitalVal || '-'}</span></td>
+                        <td><span class="tag" >${industryIcon} ${industryVal || '-'}</span></td>
+                        <td><span class="tag" data-type="${d.typeDisplay || d.type}">${d.typeDisplay || d.type || '-'}</span></td>
                         <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
                         <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
                     tableBody.appendChild(tr);
                 });
-                
-                if (currentDonations.length > displayLimit) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td colspan="6" style="text-align:center; padding: 20px; color: #666">
-                        ... and ${currentDonations.length - displayLimit} more records
-                    </td>`;
-                    tableBody.appendChild(tr);
-                }
             }
 
             function updateUrl() {

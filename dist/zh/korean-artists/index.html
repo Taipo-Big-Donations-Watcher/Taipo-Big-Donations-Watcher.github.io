@@ -17,6 +17,16 @@
             --card-bg: #ffffff;
             --muted-text: #636e72;
             --highlight-bg: #f1f2f6;
+            
+            /* Badge Colors */
+            --badge-bg: #e5e5e5;
+            --badge-text: #000000;
+            
+            /* Type Colors (Pastel with Black Text) */
+            --color-corp: #c7ecee; 
+            --color-indv: #fab1a0; 
+            --color-org: #81ecec; 
+            --text-contrast: #000000;
         }
 
         * {
@@ -158,8 +168,17 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 800px; /* Ensure table doesn't squish on mobile */
+            min-width: 900px;
+            table-layout: fixed; /* Prevent jumping */
         }
+
+        /* Column Widths */
+        .col-entity { width: 25%; }
+        .col-capital { width: 15%; }
+        .col-industry { width: 15%; }
+        .col-type { width: 12%; }
+        .col-amount { width: 17%; }
+        .col-date { width: 16%; }
 
         th {
             background-color: #f1f2f6;
@@ -172,6 +191,9 @@
             user-select: none;
             position: sticky;
             top: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         th:hover {
@@ -183,6 +205,8 @@
             font-size: 0.8em;
             margin-left: 5px;
             opacity: 0.3;
+            display: inline-block;
+            width: 10px;
         }
 
         th.sorted-asc::after {
@@ -199,6 +223,7 @@
             padding: 15px;
             border-bottom: 1px solid var(--border-color);
             vertical-align: top;
+            word-wrap: break-word;
         }
 
         tr:hover {
@@ -233,7 +258,7 @@
         }
 
         .amount {
-            font-family: "SF Mono", Monaco, monospace;
+            font-family: inherit; /* Match body font */
             font-weight: 700;
             color: var(--heading-color);
         }
@@ -243,10 +268,16 @@
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 0.85em;
-            background: #f1f2f6;
-            color: var(--text-color);
+            background: var(--badge-bg);
+            color: var(--badge-text);
             white-space: nowrap;
+            margin-bottom: 2px;
         }
+
+        /* Type Colors - keeping pastel but black text */
+        .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
+        .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
+        .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -280,6 +311,17 @@
             
             .stats {
                 grid-template-columns: 1fr 1fr;
+            }
+            
+            /* Horizontal scroll hint */
+            .table-container::after {
+                content: '→';
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                color: #ccc;
+                pointer-events: none;
+                display: none; /* Only show if overflowing */
             }
         }
     </style>
@@ -327,6 +369,14 @@
 
     <div class="table-container">
         <table id="donation-table">
+            <colgroup>
+                <col class="col-entity">
+                <col class="col-capital">
+                <col class="col-industry">
+                <col class="col-type">
+                <col class="col-amount">
+                <col class="col-date">
+            </colgroup>
             <thead>
                 <tr>
                     <th data-sort="entity">捐款者</th>
@@ -349,7 +399,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
-        <p>最後更新: <span id="build-time">2025-12-01T06:23:29.756Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-01T14:04:55.598Z</span></p>
     </footer>
 
     <!-- Data Injection -->
@@ -377,6 +427,7 @@
     "entityDisplay": "Super Junior",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$1,000,000"
   },
@@ -402,6 +453,7 @@
     "entityDisplay": "I-DLE",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$1,000,000"
   },
@@ -423,10 +475,11 @@
     "primarySource": "",
     "secondarySource": "https://www.hk01.com/%E5%8D%B3%E6%99%82%E5%9C%8B%E9%9A%9B/60298933/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E7%81%AB%E7%81%BD-gd%E6%AC%8A%E5%BF%97%E9%BE%8D%E5%90%91%E9%A6%99%E6%B8%AF%E6%94%BF%E5%BA%9C%E6%8F%B4%E5%8A%A9%E5%9F%BA%E9%87%91%E6%8D%90%E6%AC%BE100%E8%90%AC%E5%85%83",
     "verificationLink": "",
-    "date": "2025年11月29日 上午12:00:00",
+    "date": "29/11/2025",
     "entityDisplay": "G-DRAGON/GD",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$1,000,000"
   },
@@ -452,6 +505,7 @@
     "entityDisplay": "aespa",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$500,000"
   },
@@ -477,6 +531,7 @@
     "entityDisplay": "NCT WISH",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$500,000"
   },
@@ -502,6 +557,7 @@
     "entityDisplay": "EXO-CBX",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$500,000"
   },
@@ -527,6 +583,7 @@
     "entityDisplay": "RIIZE",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$250,000"
   },
@@ -552,6 +609,7 @@
     "entityDisplay": "WayV",
     "capitalDisplay": "韓國",
     "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
     "typeDisplay": "藝人",
     "amountDisplay": "$250,000"
   }
@@ -559,7 +617,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-01T06:23:29.756Z"}
+        {"lang": "zh", "buildTime": "2025-12-01T14:04:55.598Z"}
     </script>
 
     <script>
@@ -571,6 +629,35 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // Flags Mapping
+            const FLAGS = {
+                'Hong Kong': '🇭🇰', '香港': '🇭🇰',
+                'China': '🇨🇳', '中國': '🇨🇳',
+                'USA': '🇺🇸', '美國': '🇺🇸',
+                'UK': '🇬🇧', '英國': '🇬🇧',
+                'Japan': '🇯🇵', '日本': '🇯🇵',
+                'South Korea': '🇰🇷', '韓國': '🇰🇷',
+                'Macau': '🇲🇴', '澳門': '🇲🇴',
+                'Taiwan': '🇹🇼', '台灣': '🇹🇼',
+                'Malaysia': '🇲🇾', '馬來西亞': '🇲🇾',
+                'Singapore': '🇸🇬', '新加坡': '🇸🇬',
+                'Canada': '🇨🇦', '加拿大': '🇨🇦',
+                'France': '🇫🇷', '法國': '🇫🇷',
+                'Netherlands': '🇳🇱', '荷蘭': '🇳🇱',
+                'Switzerland': '🇨🇭', '瑞士': '🇨🇭',
+                'International': '🌐', '國際': '🌐'
+            };
+            
+            // Fallback Emoji Mapping (if missing from build)
+            const INDUSTRY_ICONS = {
+                'Finance': '💰', '金融': '💰',
+                'Technology': '💻', '科技': '💻',
+                'Real Estate': '🏢', '房地產': '🏢',
+                'Entertainment': '🎬', '娛樂': '🎬',
+                'Food & Beverage': '🍔', '食品飲料': '🍔',
+                'Retail': '🏪', '零售': '🏪'
+            };
+
             // DOM Elements
             const tableBody = document.getElementById('table-body');
             const searchInput = document.getElementById('search-input');
@@ -632,26 +719,86 @@
                 );
             }
 
+            function getIcon(type, value) {
+                if (!value) return '';
+                if (type === 'capital') {
+                    return FLAGS[value] || '';
+                }
+                if (type === 'industry') {
+                    // Try to get icon from donation object logic first (passed in data)
+                    // But we need to check map for dropdown population
+                    return INDUSTRY_ICONS[value] || '';
+                }
+                return '';
+            }
+
             function initFilters() {
-                // Helper to populate select
-                const populate = (select, field, displayField) => {
-                    const values = new Set();
+                // Helper to count frequencies
+                const getCounts = (field, displayField) => {
+                    const counts = {};
                     allDonations.forEach(d => {
                         const val = d[displayField] || d[field];
-                        if (val) values.add(val);
+                        if (val) {
+                            counts[val] = (counts[val] || 0) + 1;
+                        }
                     });
-                    
-                    Array.from(values).sort().forEach(val => {
-                        const option = document.createElement('option');
-                        option.value = val;
-                        option.textContent = val;
-                        select.appendChild(option);
-                    });
+                    return counts;
                 };
+
+                // Populate Capital (HK -> CN -> Freq)
+                const capitalCounts = getCounts('capital', 'capitalDisplay');
+                const capitals = Object.keys(capitalCounts).sort((a, b) => {
+                    // Priority: HK, then China
+                    const isHK_A = a.includes('Hong Kong') || a.includes('香港');
+                    const isHK_B = b.includes('Hong Kong') || b.includes('香港');
+                    if (isHK_A && !isHK_B) return -1;
+                    if (!isHK_A && isHK_B) return 1;
+                    
+                    const isCN_A = a.includes('China') || a.includes('中國');
+                    const isCN_B = b.includes('China') || b.includes('中國');
+                    if (isCN_A && !isCN_B) return -1;
+                    if (!isCN_A && isCN_B) return 1;
+                    
+                    // Then by frequency
+                    return capitalCounts[b] - capitalCounts[a];
+                });
                 
-                populate(filterCapital, 'capital', 'capitalDisplay');
-                populate(filterIndustry, 'industry', 'industryDisplay');
-                populate(filterType, 'type', 'typeDisplay');
+                capitals.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${FLAGS[val] || ''} ${val} (${capitalCounts[val]})`;
+                    filterCapital.appendChild(option);
+                });
+
+                // Populate Industry (Freq)
+                const industryCounts = getCounts('industry', 'industryDisplay');
+                const industries = Object.keys(industryCounts).sort((a, b) => {
+                    return industryCounts[b] - industryCounts[a];
+                });
+                
+                // We need a way to look up icon for dropdown even if not in current row context
+                // Since icons are attached to data, we can find one example
+                const findIcon = (val) => {
+                    const ex = allDonations.find(d => (d.industryDisplay === val || d.industry === val));
+                    return ex ? (ex.industryIcon || INDUSTRY_ICONS[val] || '') : '';
+                };
+
+                industries.forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    const icon = findIcon(val);
+                    option.textContent = `${icon} ${val} (${industryCounts[val]})`;
+                    filterIndustry.appendChild(option);
+                });
+
+                // Populate Type
+                const typeCounts = getCounts('type', 'typeDisplay');
+                Object.keys(typeCounts).sort().forEach(val => {
+                    const option = document.createElement('option');
+                    option.value = val;
+                    option.textContent = `${val} (${typeCounts[val]})`;
+                    filterType.appendChild(option);
+                });
             }
 
             function handleSearch() {
@@ -754,11 +901,8 @@
                 
                 noResults.style.display = 'none';
                 
-                // Performance optimization: only render first 100 rows if too many
-                const displayLimit = 100;
-                const itemsToShow = currentDonations.slice(0, displayLimit);
-                
-                itemsToShow.forEach(d => {
+                // Show ALL rows
+                currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
                     let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
@@ -773,24 +917,23 @@
                         entityHtml += `<a href="${d.primarySource}" target="_blank" class="source-link">來源</a>`;
                     }
                     
+                    // Flags & Icons
+                    const capitalVal = d.capitalDisplay || d.capital || '';
+                    const capitalFlag = FLAGS[capitalVal] || '';
+                    
+                    const industryVal = d.industryDisplay || d.industry || '';
+                    const industryIcon = d.industryIcon || INDUSTRY_ICONS[industryVal] || '';
+                    
                     tr.innerHTML = `
                         <td>${entityHtml}</td>
-                        <td><span class="tag">${d.capitalDisplay || d.capital || '-'}</span></td>
-                        <td><span class="tag">${d.industryDisplay || d.industry || '-'}</span></td>
-                        <td><span class="tag">${d.typeDisplay || d.type || '-'}</span></td>
+                        <td><span class="tag" data-val="${capitalVal}">${capitalFlag} ${capitalVal || '-'}</span></td>
+                        <td><span class="tag" >${industryIcon} ${industryVal || '-'}</span></td>
+                        <td><span class="tag" data-type="${d.typeDisplay || d.type}">${d.typeDisplay || d.type || '-'}</span></td>
                         <td class="amount">${d.amountDisplay || d.amount || '-'}</td>
                         <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
                     tableBody.appendChild(tr);
                 });
-                
-                if (currentDonations.length > displayLimit) {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td colspan="6" style="text-align:center; padding: 20px; color: #666">
-                        ... and ${currentDonations.length - displayLimit} more records
-                    </td>`;
-                    tableBody.appendChild(tr);
-                }
             }
 
             function updateUrl() {

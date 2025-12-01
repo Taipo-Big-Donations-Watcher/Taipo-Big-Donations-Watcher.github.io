@@ -5,7 +5,7 @@
  * Supports bilingual output (English and Chinese).
  */
 
-const { translateCategory } = require('./i18n/categories');
+const { translateCategory, getCategoryIcon } = require('./i18n/categories');
 
 /**
  * Default column name to index mapping
@@ -184,6 +184,7 @@ function translateDonation(donation, lang) {
     // Translated categories
     capitalDisplay: translateCategory('capital', donation.capital, lang),
     industryDisplay: translateCategory('industry', donation.industry, lang),
+    industryIcon: getCategoryIcon('industry', donation.industry),
     typeDisplay: translateCategory('type', donation.type, lang),
     // Translated amount
     amountDisplay: formatAmount(donation.amountRaw, lang),
