@@ -349,7 +349,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。如有錯誤，歡迎指正。</p>
-        <p>最後更新: <span id="build-time">2025-12-01T06:21:22.082Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-01T06:23:29.756Z</span></p>
     </footer>
 
     <!-- Data Injection -->
@@ -734,7 +734,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-01T06:21:22.082Z"}
+        {"lang": "zh", "buildTime": "2025-12-01T06:23:29.756Z"}
     </script>
 
     <script>
@@ -760,14 +760,16 @@
                 
                 if (dataElement && dataElement.textContent.trim()) {
                     allDonations = JSON.parse(dataElement.textContent);
+                    // Initialize currentDonations with all data
+                    currentDonations = [...allDonations];
+                    
                     const meta = JSON.parse(metaElement.textContent);
                     lang = meta.lang || 'en';
                     
                     // Initial Setup
                     initStats();
                     initFilters();
-                    readUrlParams();
-                    renderTable();
+                    readUrlParams(); // This will filter/sort and render
                     
                     // Event Listeners
                     searchInput.addEventListener('input', handleSearch);
@@ -985,14 +987,8 @@
                 if (params.has('industry')) filterIndustry.value = params.get('industry');
                 if (params.has('type')) filterType.value = params.get('type');
                 
-                // Trigger initial filter if params exist
-                if (params.toString()) {
-                    filterData();
-                } else {
-                    // Just initial sort
-                    sortData();
-                    renderTable();
-                }
+                // Always filter data to ensure consistent state
+                filterData();
             }
         });
     </script>

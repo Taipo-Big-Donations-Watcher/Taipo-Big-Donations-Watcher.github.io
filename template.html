@@ -384,14 +384,16 @@
                 
                 if (dataElement && dataElement.textContent.trim()) {
                     allDonations = JSON.parse(dataElement.textContent);
+                    // Initialize currentDonations with all data
+                    currentDonations = [...allDonations];
+                    
                     const meta = JSON.parse(metaElement.textContent);
                     lang = meta.lang || 'en';
                     
                     // Initial Setup
                     initStats();
                     initFilters();
-                    readUrlParams();
-                    renderTable();
+                    readUrlParams(); // This will filter/sort and render
                     
                     // Event Listeners
                     searchInput.addEventListener('input', handleSearch);
@@ -609,14 +611,8 @@
                 if (params.has('industry')) filterIndustry.value = params.get('industry');
                 if (params.has('type')) filterType.value = params.get('type');
                 
-                // Trigger initial filter if params exist
-                if (params.toString()) {
-                    filterData();
-                } else {
-                    // Just initial sort
-                    sortData();
-                    renderTable();
-                }
+                // Always filter data to ensure consistent state
+                filterData();
             }
         });
     </script>
