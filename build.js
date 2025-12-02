@@ -195,11 +195,16 @@ function generateAboutPages(template, donations, stats, buildTime) {
           <li><strong>Memorial:</strong> Memorializing the lives lost and highlighting the irreplaceable loss.</li>
         </ul>
         
-        <h3>Data Source</h3>
-        <p>All data is sourced from public announcements and news reports. The database is hosted on Google Sheets and syncs every 6 hours.</p>
+        <h3>Data Source & Disclaimer</h3>
+        <p>All data is sourced from public announcements and news reports. The database is hosted on Google Sheets and syncs every 6 hours. The source data is collected semi-manually, so there's bound to be something missing or incorrect.</p>
+        <p><strong>Note on potential duplicates:</strong> Some donations may overlap due to the nature of how organizations collect and pass around funds. For example, China Red Cross collects money from various entities (which are listed here individually), and there's also an entry for China Red Cross transferring the collected money to Hong Kong Red Cross. I don't have a perfect solution to avoid these types of duplication yet—if you have suggestions, please let me know!</p>
         
         <h3>Contact & Corrections</h3>
-        <p>If you find any errors or missing information, please <a href="${SHEETS_URL}" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
+        <p>If you notice something missing, incorrect, or duplicated—or if you want to provide a source or additional information—please reach out:</p>
+        <ul>
+          <li><strong>Telegram:</strong> <a href="https://t.me/ayip002" target="_blank">@ayip002</a></li>
+          <li><strong>Google Sheets:</strong> <a href="${SHEETS_URL}" target="_blank">Leave a comment directly on the data</a></li>
+        </ul>
         
         <h3>About Me</h3>
         <p>I'm Angus, a small business owner and co-founder of <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a>, a content creation and commercial production company based in Hong Kong.</p>
@@ -221,14 +226,19 @@ function generateAboutPages(template, donations, stats, buildTime) {
           <li><strong>悼念反思：</strong> 紀錄逝者，強調生命無價。</li>
         </ul>
         
-        <h3>數據來源</h3>
-        <p>所有數據均源自公開的新聞報導及官方聲明。數據庫存放於 Google Sheets，每 6 小時自動同步。</p>
+        <h3>數據來源及免責聲明</h3>
+        <p>所有數據均源自公開的新聞報導及官方聲明。數據庫存放於 Google Sheets，每 6 小時自動同步。由於數據是半人手收集，難免會有遺漏或錯誤。</p>
+        <p><strong>關於可能的重複項目：</strong> 由於各機構收集及轉交善款的方式，部分捐款可能會重複計算。例如，中國紅十字會從不同機構收集善款（這些機構會分別列出），而中國紅十字會將善款轉交香港紅十字會時又會有另一個條目。我暫時未有完美的方法避免這類重複——如果你有建議，歡迎聯絡我！</p>
         
         <h3>聯絡與更正</h3>
-        <p>如發現數據有誤，歡迎在 <a href="${SHEETS_URL}" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+        <p>如果你發現有遺漏、錯誤或重複的資料，或者想提供來源或補充資訊，請透過以下方式聯絡我：</p>
+        <ul>
+          <li><strong>Telegram：</strong> <a href="https://t.me/ayip002" target="_blank">@ayip002</a></li>
+          <li><strong>Google Sheets：</strong> <a href="${SHEETS_URL}" target="_blank">直接在數據表上留言</a></li>
+        </ul>
         
         <h3>關於我</h3>
-        <p>我是 Angus，一位小型企業老闆， <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及廣告製作公司。</p>
+        <p>我是 Angus，一位小型企業老闆，<a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及廣告製作公司。</p>
       </div>
     `;
     
