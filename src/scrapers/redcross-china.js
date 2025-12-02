@@ -162,7 +162,7 @@ function parseDonationFromTitle(title, url) {
   } else if (entity.includes('女士') || entity.includes('先生')) {
     type = '個人';
   } else if (entity.includes('基金') || entity.includes('基金会')) {
-    type = '基金';
+    type = '機構'; // Foundations are organizations, not companies
   }
   
   return createDonationRecord({
@@ -178,7 +178,7 @@ function parseDonationFromTitle(title, url) {
     receiver: '中國紅十字會',
     primarySource: url,
     secondarySource: '',
-    verificationLink: '',
+    verificationLink: url, // Use article link as verification
     dateOfAnnouncement: '',
   });
 }

@@ -209,18 +209,24 @@ async function closeBrowser() {
  * @param {Object} options - Options
  * @param {number} options.waitTime - Time to wait for JS to render (ms), default 3000
  * @param {string} options.waitForSelector - Wait for this selector to appear
+ * @param {boolean} options.mobile - Use mobile user agent and viewport
  * @returns {Promise<string>} - Rendered HTML
  */
 async function fetchRenderedHtml(url, options = {}) {
-  const { waitTime = 3000, waitForSelector = null } = options;
+  const { waitTime = 3000, waitForSelector = null, mobile = false } = options;
   
   const browser = await getBrowser();
   const page = await browser.newPage();
   
   try {
-    // Set a realistic viewport and user agent
-    await page.setViewport({ width: 1280, height: 800 });
-    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    // Set viewport and user agent based on mobile option
+    if (mobile) {
+      await page.setViewport({ width: 390, height: 844 });
+      await page.setUserAgent('Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1');
+    } else {
+      await page.setViewport({ width: 1280, height: 800 });
+      await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    }
     
     // Navigate to the page
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });

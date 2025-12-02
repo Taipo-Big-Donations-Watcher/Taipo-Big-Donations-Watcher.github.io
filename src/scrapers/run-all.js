@@ -15,12 +15,14 @@ const poleungkuk = require('./poleungkuk');
 const stheadline = require('./stheadline');
 const redcrossChina = require('./redcross-china');
 const whaleagent = require('./whaleagent');
+const weibo = require('./weibo');
 
 const ALL_SCRAPERS = [
   { name: 'Po Leung Kuk', module: poleungkuk },
   { name: 'Sing Tao Headlines', module: stheadline },
   { name: 'China Red Cross', module: redcrossChina },
   { name: 'WhaleAgent', module: whaleagent },
+  { name: 'Weibo', module: weibo },
 ];
 
 /**
