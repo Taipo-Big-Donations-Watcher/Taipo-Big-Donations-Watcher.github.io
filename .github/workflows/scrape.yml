@@ -1,0 +1,52 @@
+name: Scrape Donation Sources
+
+on:
+  # Run once per day at 6 AM HKT (10 PM UTC previous day)
+  schedule:
+    - cron: '0 22 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create credentials from secrets
+        env:
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+        run: |
+          # Write service account JSON to a file
+          echo "$GOOGLE_SERVICE_ACCOUNT" > service-account.json
+          
+          # Create .env.local referencing the JSON file
+          echo "GOOGLE_SHEET_ID=\"$GOOGLE_SHEET_ID\"" > .env.local
+          echo "GOOGLE_SERVICE_ACCOUNT_FILE=service-account.json" >> .env.local
+          
+          echo "Credentials created successfully"
+
+      - name: Run scrapers
+        run: npm run scrape
+
+      - name: Summary
+        run: |
+          echo "## Scrape Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Scraped donation sources and updated 自動更新列表 tab." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Check the [Google Sheet](https://docs.google.com/spreadsheets/d/${{ secrets.GOOGLE_SHEET_ID }}) for results." >> $GITHUB_STEP_SUMMARY
+

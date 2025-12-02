@@ -7,6 +7,12 @@
     "build": "node build.js",
     "fetch": "node fetch-sheets.js",
     "generate-columns": "node generate-column-suggestions.js",
+    "scrape": "node src/scrapers/run-all.js",
+    "scrape:clear": "node src/scrapers/run-all.js --clear",
+    "scrape:poleungkuk": "node src/scrapers/poleungkuk.js",
+    "scrape:stheadline": "node src/scrapers/stheadline.js",
+    "scrape:redcross": "node src/scrapers/redcross-china.js",
+    "scrape:whaleagent": "node src/scrapers/whaleagent.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +28,8 @@
   },
   "homepage": "https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io#readme",
   "dependencies": {
-    "googleapis": "^166.0.0"
+    "cheerio": "^1.1.2",
+    "googleapis": "^166.0.0",
+    "opencc-js": "^1.0.5"
   }
 }
