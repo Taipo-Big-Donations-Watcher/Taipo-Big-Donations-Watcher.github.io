@@ -202,7 +202,7 @@ function generateAboutPages(template, donations, stats, buildTime) {
         <p>If you find any errors or missing information, please <a href="${SHEETS_URL}" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
         
         <h3>About Me</h3>
-        <p>I'm Angus Yip, a small business owner and co-founder of <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a>, a content creation and commercial production company based in Hong Kong.</p>
+        <p>I'm Angus, a small business owner and co-founder of <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a>, a content creation and commercial production company based in Hong Kong.</p>
       </div>
     `;
     
@@ -228,7 +228,7 @@ function generateAboutPages(template, donations, stats, buildTime) {
         <p>如發現數據有誤，歡迎在 <a href="${SHEETS_URL}" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
         
         <h3>關於我</h3>
-        <p>我是葉智杰 (Angus Yip)，一位小型企業東主，同時是 <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及商業製作公司。</p>
+        <p>我是 Angus，一位小型企業老闆， <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及廣告製作公司。</p>
       </div>
     `;
     
