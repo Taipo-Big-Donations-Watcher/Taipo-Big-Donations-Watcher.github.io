@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>關於 - 大埔火災捐款追蹤</title>
-    <meta name="description" content="追蹤 {count} 筆捐款，總額 {amount} 港幣，用於大埔宏福苑火災救援。">
+    <meta name="description" content="關於大埔火災捐款追蹤器項目">
     <link rel="icon" type="image/png" href="../../favicon.png">
     <link rel="alternate" hreflang="en" href="https://taipo-big-donations-watcher.github.io/en/">
     <link rel="alternate" hreflang="zh-Hant" href="https://taipo-big-donations-watcher.github.io/zh/">
@@ -24,9 +24,10 @@
             --badge-text: #000000;
             
             /* Type Colors (Pastel with Black Text) */
-            --color-corp: #c7ecee; 
-            --color-indv: #fab1a0; 
-            --color-org: #81ecec; 
+            --color-corp: #eecbc7; 
+            --color-indv: #a0f4fa; 
+            --color-org: #aee7a7;
+            --color-celeb: #e6a7e7; 
             --text-contrast: #000000;
         }
 
@@ -425,6 +426,7 @@
         .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
         .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
         .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
+        .tag[data-type="Celebrity"], .tag[data-type="藝人"] { background: var(--color-celeb); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -485,12 +487,34 @@
         }
     </style>
 <style>
-      .stats, .controls, .table-container, #no-results { display: none !important; }
-      .intro { max-width: 800px; margin: 0 auto 40px; }
-      .intro h2 { margin-top: 0; }
-      .intro h3 { margin-top: 25px; margin-bottom: 10px; color: var(--accent-color); }
-      .intro ul { padding-left: 20px; margin-bottom: 20px; }
-      .intro li { margin-bottom: 8px; }
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto 40px;
+        line-height: 1.8;
+      }
+      .about-content h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--heading-color);
+      }
+      .about-content h3 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+      }
+      .about-content p {
+        margin-bottom: 15px;
+      }
+      .about-content ul {
+        padding-left: 25px;
+        margin-bottom: 20px;
+      }
+      .about-content li {
+        margin-bottom: 10px;
+      }
+      .about-content a {
+        color: var(--accent-color);
+      }
     </style></head>
 <body>
     <header>
@@ -501,7 +525,7 @@
                     <span class="badge-label">GitHub</span>
                     <span class="badge-value">Source</span>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank" class="badge">
+                <a href="https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit" target="_blank" class="badge">
                     <span class="badge-label">Raw Data</span>
                     <span class="badge-value green">Google Sheets</span>
                 </a>
@@ -518,10 +542,18 @@
         </nav>
     </header>
     
+    <div class="intro">
+        <p class="intro-subtitle">2025年11月26日，香港新界大埔區宏福苑發生大火。目前已造成至少151人死亡、79人受傷，一名消防員殉職。各界機構、企業及個人紛紛承諾捐款支援火災救援工作。本網站致力追蹤所有超過港幣10萬元的公開捐款。</p>
+        <hr>
+        <h2 class="summary-text" id="dynamic-summary">截至 2025年12月2日，<strong>297</strong>位捐款者 已承諾捐出 <strong>$2,702,278,500</strong> 支援火災救援。</h2>
+    </div>
+
     
-      <div class="intro">
+      <div class="about-content">
         <h2>關於本項目</h2>
         <p><strong>大埔火災捐款追蹤器</strong>是一個民間發起的項目，旨在追蹤及整合各界就 2025 年 11 月 26 日大埔宏福苑火災的承諾捐款。</p>
+        
+        <p>我開始這個項目，是因為我留意到各大新聞媒體報導的捐款名單經常互相矛盾——有些機構出現在某份名單上，卻不在另一份名單中，而且沒有一個集中可靠的來源整合所有資訊。這個追蹤器希望填補這個空白。</p>
         
         <h3>目的</h3>
         <ul>
@@ -535,79 +567,18 @@
         <p>所有數據均源自公開的新聞報導及官方聲明。數據庫存放於 Google Sheets，每 6 小時自動同步。</p>
         
         <h3>聯絡與更正</h3>
-        <p>如發現數據有誤，歡迎在 <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+        <p>如發現數據有誤，歡迎在 <a href="https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+        
+        <h3>關於我</h3>
+        <p>我是葉智杰 (Angus Yip)，一位小型企業東主，同時是 <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及商業製作公司。</p>
       </div>
     
-
-    <div class="controls">
-        <div class="search-bar">
-            <input type="text" id="search-input" class="search-input" placeholder="搜尋捐款者...">
-        </div>
-        <div class="filters-grid">
-            <div class="filter-group">
-                <select id="filter-capital" class="filter-select">
-                    <option value="">所有來源地</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-industry" class="filter-select">
-                    <option value="">所有行業</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-type" class="filter-select">
-                    <option value="">所有類型</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-donation-type" class="filter-select">
-                    <option value="">所有捐款</option>
-                    <option value="cash">💵 現金</option>
-                    <option value="goods">📦 物資</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <input type="number" id="filter-min-amount" class="filter-input" placeholder="最低金額" min="0">
-            </div>
-            <div class="filter-group">
-                <input type="number" id="filter-max-amount" class="filter-input" placeholder="最高金額" min="0">
-            </div>
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table id="donation-table">
-            <colgroup>
-                <col class="col-entity">
-                <col class="col-capital">
-                <col class="col-industry">
-                <col class="col-type">
-                <col class="col-amount">
-                <col class="col-date">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th class="no-sort">捐款者</th>
-                    <th data-sort="capital">資本來源</th>
-                    <th data-sort="industry">行業</th>
-                    <th data-sort="type">類型</th>
-                    <th data-sort="amountRaw" id="amount-header">金額 (港幣)</th>
-                    <th data-sort="date">日期</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                <!-- Rows will be populated by JS -->
-            </tbody>
-        </table>
-    </div>
     
-    <div id="no-results" style="text-align:center; padding: 40px; display: none; color: #666;">
-        沒有找到相關捐款記錄。
-    </div>
+    
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-02T05:37:28.963Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-02T15:02:03.028Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -617,7 +588,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-02T05:37:28.963Z"}
+        {"lang": "zh", "buildTime": "2025-12-02T15:02:03.028Z"}
     </script>
 
     <script>

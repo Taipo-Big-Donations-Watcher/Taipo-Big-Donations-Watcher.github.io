@@ -156,18 +156,36 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
 /**
  * Generate About pages for each language
  */
-function generateAboutPages(template, buildTime) {
+function generateAboutPages(template, donations, stats, buildTime) {
   console.log('Generating about pages...');
   
   for (const lang of LANGUAGES) {
     const i18n = loadI18n(lang);
     const otherLang = lang === 'en' ? 'zh' : 'en';
     
+    // Calculate default summary (no filters)
+    const count = donations.length;
+    const totalAmount = stats.totalAmount;
+    const amountStr = '$' + totalAmount.toLocaleString('en-HK');
+    const today = new Date().toLocaleDateString(
+      lang === 'zh' ? 'zh-HK' : 'en-US',
+      { year: 'numeric', month: 'long', day: 'numeric' }
+    );
+    
+    let staticSummary;
+    if (lang === 'zh') {
+      staticSummary = `截至 ${today}，<strong>${count}</strong>位捐款者 已承諾捐出 <strong>${amountStr}</strong> 支援火災救援。`;
+    } else {
+      staticSummary = `As of ${today}, <strong>${count}</strong> entities have pledged to donate <strong>${amountStr}</strong> for the fire relief efforts.`;
+    }
+    
     // About Content (Bilingual)
     const contentEn = `
-      <div class="intro">
+      <div class="about-content">
         <h2>About This Project</h2>
         <p>The <strong>Tai Po Fire Donations Watcher</strong> is a community-driven initiative to track and consolidate pledged donations regarding the Tai Po Wang Fuk Court fire on November 26, 2025.</p>
+        
+        <p>I started this project because I noticed various news outlets reporting on major donors, but the information often conflicted—some entities appeared on one list but not another, and there was no central, reliable source to consolidate everything. This tracker aims to fill that gap.</p>
         
         <h3>Purpose</h3>
         <ul>
@@ -182,13 +200,18 @@ function generateAboutPages(template, buildTime) {
         
         <h3>Contact & Corrections</h3>
         <p>If you find any errors or missing information, please <a href="${SHEETS_URL}" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
+        
+        <h3>About Me</h3>
+        <p>I'm Angus Yip, a small business owner and co-founder of <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a>, a content creation and commercial production company based in Hong Kong.</p>
       </div>
     `;
     
     const contentZh = `
-      <div class="intro">
+      <div class="about-content">
         <h2>關於本項目</h2>
         <p><strong>大埔火災捐款追蹤器</strong>是一個民間發起的項目，旨在追蹤及整合各界就 2025 年 11 月 26 日大埔宏福苑火災的承諾捐款。</p>
+        
+        <p>我開始這個項目，是因為我留意到各大新聞媒體報導的捐款名單經常互相矛盾——有些機構出現在某份名單上，卻不在另一份名單中，而且沒有一個集中可靠的來源整合所有資訊。這個追蹤器希望填補這個空白。</p>
         
         <h3>目的</h3>
         <ul>
@@ -203,14 +226,13 @@ function generateAboutPages(template, buildTime) {
         
         <h3>聯絡與更正</h3>
         <p>如發現數據有誤，歡迎在 <a href="${SHEETS_URL}" target="_blank">Google Sheets</a> 上留言或透過頁腳連結聯絡我們。</p>
+        
+        <h3>關於我</h3>
+        <p>我是葉智杰 (Angus Yip)，一位小型企業東主，同時是 <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a> 的聯合創辦人，這是一家位於香港的內容創作及商業製作公司。</p>
       </div>
     `;
     
-    const content = lang === 'zh' ? contentZh : contentEn;
-    
-    // Reuse template but replace the main content area
-    // We need to strip the table and controls from the template or hide them
-    // Since our template is rigid, let's just use a simple replacement trick
+    const aboutContent = lang === 'zh' ? contentZh : contentEn;
     
     const pageVars = {
       base_url: SITE_URL,
@@ -219,32 +241,62 @@ function generateAboutPages(template, buildTime) {
       build_time: buildTime,
       switch_language_url: `../../${otherLang}/about/index.html`,
       footer_disclaimer: i18n.footer_disclaimer_pre + ' ' + i18n.footer_corrections,
-      page_description: i18n.page_description,
+      page_description: lang === 'zh' ? '關於大埔火災捐款追蹤器項目' : 'About the Tai Po Fire Donations Watcher project',
       site_title: (lang === 'zh' ? '關於 - ' : 'About - ') + i18n.site_title,
     };
     
     let html = applyI18n(template, i18n, pageVars);
     
-    // Replace the main dynamic content area with static about content
-    // We'll look for specific markers in the template or just replace the whole body content structure
-    // A better way given the template structure is to hide controls/stats and inject content
-    
-    // Let's use a regex to inject our content into the .intro div and hide the rest
+    // Inject static summary into the h2#dynamic-summary
     html = html.replace(
-      /<div class="intro">[\s\S]*?<\/div>/,
-      content
+      /<h2 class="summary-text" id="dynamic-summary"><\/h2>/,
+      `<h2 class="summary-text" id="dynamic-summary">${staticSummary}</h2>`
     );
     
-    // Hide stats, controls, and table using inline CSS injection
-    const hideCss = `<style>
-      .stats, .controls, .table-container, #no-results { display: none !important; }
-      .intro { max-width: 800px; margin: 0 auto 40px; }
-      .intro h2 { margin-top: 0; }
-      .intro h3 { margin-top: 25px; margin-bottom: 10px; color: var(--accent-color); }
-      .intro ul { padding-left: 20px; margin-bottom: 20px; }
-      .intro li { margin-bottom: 8px; }
+    // Replace controls and table-container with about content
+    html = html.replace(
+      /<div class="controls">[\s\S]*?<\/div>\s*<div class="table-container">[\s\S]*?<\/table>\s*<\/div>/,
+      aboutContent
+    );
+    
+    // Hide no-results div
+    html = html.replace(
+      /<div id="no-results"[^>]*>[\s\S]*?<\/div>/,
+      ''
+    );
+    
+    // Add about page styles
+    const aboutCss = `<style>
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto 40px;
+        line-height: 1.8;
+      }
+      .about-content h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--heading-color);
+      }
+      .about-content h3 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+      }
+      .about-content p {
+        margin-bottom: 15px;
+      }
+      .about-content ul {
+        padding-left: 25px;
+        margin-bottom: 20px;
+      }
+      .about-content li {
+        margin-bottom: 10px;
+      }
+      .about-content a {
+        color: var(--accent-color);
+      }
     </style>`;
-    html = html.replace('</head>', hideCss + '</head>');
+    html = html.replace('</head>', aboutCss + '</head>');
     
     // Output
     const outputDir = path.join(DIST_DIR, lang, 'about');
@@ -446,7 +498,7 @@ async function build() {
     }
     
     // Generate About pages
-    generateAboutPages(template, buildTime);
+    generateAboutPages(template, donations, stats, buildTime);
     
     // Generate root redirect
     generateRootRedirect(DEFAULT_LANG);

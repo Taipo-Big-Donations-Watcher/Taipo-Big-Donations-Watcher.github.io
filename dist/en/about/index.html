@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Tai Po Fire Donations Watcher</title>
-    <meta name="description" content="Tracking {count} donations totaling HKD {amount} for the Tai Po Wang Fuk Court fire relief.">
+    <meta name="description" content="About the Tai Po Fire Donations Watcher project">
     <link rel="icon" type="image/png" href="../../favicon.png">
     <link rel="alternate" hreflang="en" href="https://taipo-big-donations-watcher.github.io/en/">
     <link rel="alternate" hreflang="zh-Hant" href="https://taipo-big-donations-watcher.github.io/zh/">
@@ -24,9 +24,10 @@
             --badge-text: #000000;
             
             /* Type Colors (Pastel with Black Text) */
-            --color-corp: #c7ecee; 
-            --color-indv: #fab1a0; 
-            --color-org: #81ecec; 
+            --color-corp: #eecbc7; 
+            --color-indv: #a0f4fa; 
+            --color-org: #aee7a7;
+            --color-celeb: #e6a7e7; 
             --text-contrast: #000000;
         }
 
@@ -425,6 +426,7 @@
         .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
         .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
         .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
+        .tag[data-type="Celebrity"], .tag[data-type="藝人"] { background: var(--color-celeb); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -485,12 +487,34 @@
         }
     </style>
 <style>
-      .stats, .controls, .table-container, #no-results { display: none !important; }
-      .intro { max-width: 800px; margin: 0 auto 40px; }
-      .intro h2 { margin-top: 0; }
-      .intro h3 { margin-top: 25px; margin-bottom: 10px; color: var(--accent-color); }
-      .intro ul { padding-left: 20px; margin-bottom: 20px; }
-      .intro li { margin-bottom: 8px; }
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto 40px;
+        line-height: 1.8;
+      }
+      .about-content h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--heading-color);
+      }
+      .about-content h3 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+        color: var(--accent-color);
+      }
+      .about-content p {
+        margin-bottom: 15px;
+      }
+      .about-content ul {
+        padding-left: 25px;
+        margin-bottom: 20px;
+      }
+      .about-content li {
+        margin-bottom: 10px;
+      }
+      .about-content a {
+        color: var(--accent-color);
+      }
     </style></head>
 <body>
     <header>
@@ -501,7 +525,7 @@
                     <span class="badge-label">GitHub</span>
                     <span class="badge-value">Source</span>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank" class="badge">
+                <a href="https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit" target="_blank" class="badge">
                     <span class="badge-label">Raw Data</span>
                     <span class="badge-value green">Google Sheets</span>
                 </a>
@@ -518,10 +542,18 @@
         </nav>
     </header>
     
+    <div class="intro">
+        <p class="intro-subtitle">On 26 November 2025, a large fire broke out at the Wang Fuk Court apartment complex in Tai Po District, New Territories, Hong Kong. There have been at least 151 deaths with 79 injured. One firefighter was killed. In response, organizations, companies, and individuals have pledged to donate for the fire relief efforts. This website attempts to track all public donations larger than HK$100,000.</p>
+        <hr>
+        <h2 class="summary-text" id="dynamic-summary">As of December 2, 2025, <strong>297</strong> entities have pledged to donate <strong>$2,702,278,500</strong> for the fire relief efforts.</h2>
+    </div>
+
     
-      <div class="intro">
+      <div class="about-content">
         <h2>About This Project</h2>
         <p>The <strong>Tai Po Fire Donations Watcher</strong> is a community-driven initiative to track and consolidate pledged donations regarding the Tai Po Wang Fuk Court fire on November 26, 2025.</p>
+        
+        <p>I started this project because I noticed various news outlets reporting on major donors, but the information often conflicted—some entities appeared on one list but not another, and there was no central, reliable source to consolidate everything. This tracker aims to fill that gap.</p>
         
         <h3>Purpose</h3>
         <ul>
@@ -535,79 +567,18 @@
         <p>All data is sourced from public announcements and news reports. The database is hosted on Google Sheets and syncs every 6 hours.</p>
         
         <h3>Contact & Corrections</h3>
-        <p>If you find any errors or missing information, please <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
+        <p>If you find any errors or missing information, please <a href="https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit" target="_blank">comment on the Google Sheet</a> or contact us via the links in the footer.</p>
+        
+        <h3>About Me</h3>
+        <p>I'm Angus Yip, a small business owner and co-founder of <a href="https://www.mediastudio.hk" target="_blank">Media Studio Hong Kong</a>, a content creation and commercial production company based in Hong Kong.</p>
       </div>
     
-
-    <div class="controls">
-        <div class="search-bar">
-            <input type="text" id="search-input" class="search-input" placeholder="Search entities...">
-        </div>
-        <div class="filters-grid">
-            <div class="filter-group">
-                <select id="filter-capital" class="filter-select">
-                    <option value="">All Origins</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-industry" class="filter-select">
-                    <option value="">All Industries</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-type" class="filter-select">
-                    <option value="">All Types</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <select id="filter-donation-type" class="filter-select">
-                    <option value="">All Donations</option>
-                    <option value="cash">💵 Cash Only</option>
-                    <option value="goods">📦 Goods Only</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <input type="number" id="filter-min-amount" class="filter-input" placeholder="Min Amount" min="0">
-            </div>
-            <div class="filter-group">
-                <input type="number" id="filter-max-amount" class="filter-input" placeholder="Max Amount" min="0">
-            </div>
-        </div>
-    </div>
-
-    <div class="table-container">
-        <table id="donation-table">
-            <colgroup>
-                <col class="col-entity">
-                <col class="col-capital">
-                <col class="col-industry">
-                <col class="col-type">
-                <col class="col-amount">
-                <col class="col-date">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th class="no-sort">Donor</th>
-                    <th data-sort="capital">Origin</th>
-                    <th data-sort="industry">Industry</th>
-                    <th data-sort="type">Type</th>
-                    <th data-sort="amountRaw" id="amount-header">Amount (HKD)</th>
-                    <th data-sort="date">Date</th>
-                </tr>
-            </thead>
-            <tbody id="table-body">
-                <!-- Rows will be populated by JS -->
-            </tbody>
-        </table>
-    </div>
     
-    <div id="no-results" style="text-align:center; padding: 40px; display: none; color: #666;">
-        No matching donations found.
-    </div>
+    
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-02T05:37:28.963Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-02T15:02:03.028Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -617,7 +588,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-02T05:37:28.963Z"}
+        {"lang": "en", "buildTime": "2025-12-02T15:02:03.028Z"}
     </script>
 
     <script>

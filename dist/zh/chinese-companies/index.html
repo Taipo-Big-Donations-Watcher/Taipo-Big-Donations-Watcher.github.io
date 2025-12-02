@@ -24,9 +24,10 @@
             --badge-text: #000000;
             
             /* Type Colors (Pastel with Black Text) */
-            --color-corp: #c7ecee; 
-            --color-indv: #fab1a0; 
-            --color-org: #81ecec; 
+            --color-corp: #eecbc7; 
+            --color-indv: #a0f4fa; 
+            --color-org: #aee7a7;
+            --color-celeb: #e6a7e7; 
             --text-contrast: #000000;
         }
 
@@ -425,6 +426,7 @@
         .tag[data-type="Enterprise"], .tag[data-type="企業"] { background: var(--color-corp); color: var(--text-contrast); }
         .tag[data-type="Individual"], .tag[data-type="個人"] { background: var(--color-indv); color: var(--text-contrast); }
         .tag[data-type="Organization"], .tag[data-type="機構"] { background: var(--color-org); color: var(--text-contrast); }
+        .tag[data-type="Celebrity"], .tag[data-type="藝人"] { background: var(--color-celeb); color: var(--text-contrast); }
 
         /* Footer */
         footer {
@@ -494,7 +496,7 @@
                     <span class="badge-label">GitHub</span>
                     <span class="badge-value">Source</span>
                 </a>
-                <a href="https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing" target="_blank" class="badge">
+                <a href="https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit" target="_blank" class="badge">
                     <span class="badge-label">Raw Data</span>
                     <span class="badge-value green">Google Sheets</span>
                 </a>
@@ -585,7 +587,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-02T05:37:28.963Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-02T15:02:03.028Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1189,6 +1191,32 @@
     "industryIcon": "🍔",
     "typeDisplay": "企業",
     "amountDisplay": "$11,000,000"
+  },
+  {
+    "entity": "中國儒意控股有限公司（0136）",
+    "entityEn": "",
+    "group": "中資企業",
+    "capital": "中國",
+    "industry": "娛樂",
+    "type": "企業",
+    "amount": "$10,000,000",
+    "amountRaw": 10000000,
+    "cashAmount": "$10,000,000",
+    "cashAmountRaw": 10000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "香港紅十字會",
+    "primarySource": "https://www.facebook.com/share/p/1Gk72saWJc/",
+    "secondarySource": "",
+    "verificationLink": "https://www.facebook.com/share/p/1Gk72saWJc/",
+    "date": "1/12/2025",
+    "entityDisplay": "中國儒意控股有限公司（0136）",
+    "capitalDisplay": "中國",
+    "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
+    "typeDisplay": "企業",
+    "amountDisplay": "$10,000,000"
   },
   {
     "entity": "香港航空",
@@ -1880,10 +1908,10 @@
     "goodsAmount": "$0",
     "goodsAmountRaw": 0,
     "note": "",
-    "through": "",
-    "primarySource": "",
+    "through": "香港紅十字會",
+    "primarySource": "https://www.facebook.com/share/p/1GMSui13o2/",
     "secondarySource": "https://time-weekly.com/wap-article/325642",
-    "verificationLink": "",
+    "verificationLink": "https://www.facebook.com/share/p/1GMSui13o2/",
     "date": "",
     "entityDisplay": "比亞迪",
     "capitalDisplay": "中國",
@@ -3690,7 +3718,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-02T05:37:28.963Z"}
+        {"lang": "zh", "buildTime": "2025-12-02T15:02:03.028Z"}
     </script>
 
     <script>
