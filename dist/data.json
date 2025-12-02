@@ -1,5 +1,5 @@
 {
-  "buildTime": "2025-12-02T21:09:11.216Z",
+  "buildTime": "2025-12-02T23:39:07.342Z",
   "stats": {
     "totalCount": 328,
     "totalAmount": 2827628500,
@@ -1148,7 +1148,7 @@
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
       "note": "",
-      "through": "",
+      "through": "大埔宏福苑援助基金",
       "primarySource": "https://weibo.com/3843559454/QfWjK0zGG",
       "secondarySource": "",
       "verificationLink": "",
@@ -4551,7 +4551,7 @@
       "through": "公益金及時雨大埔火災援助基金",
       "primarySource": "https://www.commchest.org/tc/news/press-release/detail/1107",
       "secondarySource": "",
-      "verificationLink": "",
+      "verificationLink": "https://www.commchest.org/tc/news/press-release/detail/1107",
       "date": "28/11/2025"
     },
     {

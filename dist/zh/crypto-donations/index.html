@@ -547,6 +547,13 @@
                 </select>
             </div>
             <div class="filter-group">
+                <select id="filter-verification" class="filter-select">
+                    <option value="">所有狀態</option>
+                    <option value="verified">✓ 已核實</option>
+                    <option value="unverified">⏳ 未核實</option>
+                </select>
+            </div>
+            <div class="filter-group">
                 <input type="number" id="filter-min-amount" class="filter-input" placeholder="最低金額" min="0">
             </div>
             <div class="filter-group">
@@ -587,7 +594,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-02T21:09:11.216Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-02T23:39:07.342Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1430,7 +1437,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-02T21:09:11.216Z"}
+        {"lang": "zh", "buildTime": "2025-12-02T23:39:07.342Z"}
     </script>
 
     <script>
@@ -1559,6 +1566,7 @@
             const filterIndustry = document.getElementById('filter-industry');
             const filterType = document.getElementById('filter-type');
             const filterDonationType = document.getElementById('filter-donation-type');
+            const filterVerification = document.getElementById('filter-verification');
             const filterMinAmount = document.getElementById('filter-min-amount');
             const filterMaxAmount = document.getElementById('filter-max-amount');
             const amountHeader = document.getElementById('amount-header');
@@ -1601,6 +1609,7 @@
                     filterIndustry.addEventListener('change', handleFilter);
                     filterType.addEventListener('change', handleFilter);
                     filterDonationType.addEventListener('change', handleFilter);
+                    filterVerification.addEventListener('change', handleFilter);
                     filterMinAmount.addEventListener('input', handleFilter);
                     filterMaxAmount.addEventListener('input', handleFilter);
                     
@@ -1622,28 +1631,67 @@
             
             function updateDynamicSummary() {
                 const donationType = filterDonationType.value;
+                const verificationFilter = filterVerification.value;
                 
-                // Calculate totals from current filtered data based on donation type
-                let totalAmount = 0;
-                currentDonations.forEach(d => {
-                    let amt = 0;
-                    if (donationType === 'cash') {
-                        amt = d.cashAmountRaw || 0;
-                    } else if (donationType === 'goods') {
-                        amt = d.goodsAmountRaw || 0;
-                    } else {
-                        amt = d.amountRaw || 0;
-                    }
-                    totalAmount += amt;
-                });
-                
-                const count = currentDonations.length;
-                const amountStr = '$' + totalAmount.toLocaleString();
-                
-                // Get filter values
+                // Get filter values (excluding verification)
                 const capitalFilter = filterCapital.value;
                 const industryFilter = filterIndustry.value;
                 const typeFilter = filterType.value;
+                const minAmount = filterMinAmount.value ? parseFloat(filterMinAmount.value) : null;
+                const maxAmount = filterMaxAmount.value ? parseFloat(filterMaxAmount.value) : null;
+                const query = searchInput.value.toLowerCase();
+                
+                // Helper to get amount based on donation type
+                const getAmount = (d) => {
+                    if (donationType === 'cash') return d.cashAmountRaw || 0;
+                    if (donationType === 'goods') return d.goodsAmountRaw || 0;
+                    return d.amountRaw || 0;
+                };
+                
+                // Helper to check if donation is verified
+                const isVerified = (d) => d.verificationLink && d.verificationLink.trim() !== '';
+                
+                // Filter donations WITHOUT verification filter (for total in first sentence)
+                const baseFilteredDonations = allDonations.filter(d => {
+                    // Search
+                    if (query) {
+                        const text = [d.entity, d.entityDisplay, d.entityEn, d.industryDisplay, d.capitalDisplay].join(' ').toLowerCase();
+                        if (!text.includes(query)) return false;
+                    }
+                    // Filters
+                    if (capitalFilter && (d.capitalDisplay || d.capital) !== capitalFilter) return false;
+                    if (industryFilter && (d.industryDisplay || d.industry) !== industryFilter) return false;
+                    if (typeFilter && (d.typeDisplay || d.type) !== typeFilter) return false;
+                    // Donation Type
+                    let amountToCheck = getAmount(d);
+                    if (donationType === 'cash' && (d.cashAmountRaw === null || d.cashAmountRaw === 0)) return false;
+                    if (donationType === 'goods' && (d.goodsAmountRaw === null || d.goodsAmountRaw === 0)) return false;
+                    // Min/Max
+                    if (minAmount !== null && (amountToCheck === null || amountToCheck < minAmount)) return false;
+                    if (maxAmount !== null && (amountToCheck === null || amountToCheck > maxAmount)) return false;
+                    return true;
+                });
+                
+                // Calculate total amount (regardless of verification)
+                let totalAmount = 0;
+                let totalCount = baseFilteredDonations.length;
+                baseFilteredDonations.forEach(d => { totalAmount += getAmount(d); });
+                
+                // Calculate verified and unverified amounts
+                let verifiedAmount = 0;
+                let unverifiedAmount = 0;
+                baseFilteredDonations.forEach(d => {
+                    const amt = getAmount(d);
+                    if (isVerified(d)) {
+                        verifiedAmount += amt;
+                    } else {
+                        unverifiedAmount += amt;
+                    }
+                });
+                
+                const amountStr = '$' + totalAmount.toLocaleString();
+                const verifiedAmountStr = '$' + verifiedAmount.toLocaleString();
+                const unverifiedAmountStr = '$' + unverifiedAmount.toLocaleString();
                 
                 // Build entity word based on type
                 let entityWord, classifier;
@@ -1698,17 +1746,29 @@
                     { year: 'numeric', month: 'long', day: 'numeric' }
                 );
                 
-                // Construct sentence
+                // Construct first sentence (total, regardless of verification filter)
                 let summary;
                 if (lang === 'zh') {
-                    // Chinese: 截至 [日期]，[數量][classifier][來源][類型] [行業] 已承諾捐出 [金額][捐款類型] 支援火災救援。
-                    // e.g., "截至 2025年12月2日，10位香港藝人 已承諾捐出..." or "截至 2025年12月2日，5間中國企業 已承諾捐出..."
                     const entityPhrase = originAdj ? `${originAdj}${entityWord}` : entityWord;
-                    summary = `截至 ${today}，<strong>${count}</strong>${classifier}${entityPhrase}${industrySuffix ? ' (' + industrySuffix + ')' : ''} 已承諾捐出 <strong>${amountStr}</strong>${donationTypeSuffix} 支援火災救援。`;
+                    summary = `截至 ${today}，<strong>${totalCount}</strong>${classifier}${entityPhrase}${industrySuffix ? ' (' + industrySuffix + ')' : ''} 已承諾捐出 <strong>${amountStr}</strong>${donationTypeSuffix} 支援火災救援。`;
                 } else {
-                    // English: As of [date], [count] [origin] [entity type] [in industry] have pledged to donate [amount] [in cash/goods] for the fire relief efforts.
                     const entityPhrase = originAdj ? `${originAdj} ${entityWord}` : entityWord;
-                    summary = `As of ${today}, <strong>${count}</strong> ${entityPhrase}${industrySuffix ? ' ' + industrySuffix : ''} have pledged to donate <strong>${amountStr}</strong>${donationTypeSuffix} for the fire relief efforts.`;
+                    summary = `As of ${today}, <strong>${totalCount}</strong> ${entityPhrase}${industrySuffix ? ' ' + industrySuffix : ''} have pledged to donate <strong>${amountStr}</strong>${donationTypeSuffix} for the fire relief efforts.`;
+                }
+                
+                // Add second sentence for verification status
+                if (verificationFilter === 'verified') {
+                    if (lang === 'zh') {
+                        summary += ` 其中，只有 <strong>${verifiedAmountStr}</strong> 已核實到帳。`;
+                    } else {
+                        summary += ` Of which, only <strong>${verifiedAmountStr}</strong> has been verified.`;
+                    }
+                } else if (verificationFilter === 'unverified') {
+                    if (lang === 'zh') {
+                        summary += ` 其中，<strong>${unverifiedAmountStr}</strong> 仍未核實到帳。`;
+                    } else {
+                        summary += ` Of which, <strong>${unverifiedAmountStr}</strong> is still unaccounted for.`;
+                    }
                 }
                 
                 dynamicSummary.innerHTML = summary;
@@ -1948,6 +2008,7 @@
                 const industry = filterIndustry.value;
                 const type = filterType.value;
                 const donationType = filterDonationType.value;
+                const verification = filterVerification.value;
                 const minAmount = filterMinAmount.value ? parseFloat(filterMinAmount.value) : null;
                 const maxAmount = filterMaxAmount.value ? parseFloat(filterMaxAmount.value) : null;
                 
@@ -1968,6 +2029,13 @@
                     if (capital && (d.capitalDisplay || d.capital) !== capital) return false;
                     if (industry && (d.industryDisplay || d.industry) !== industry) return false;
                     if (type && (d.typeDisplay || d.type) !== type) return false;
+                    
+                    // Verification Filter
+                    if (verification === 'verified') {
+                        if (!d.verificationLink || d.verificationLink.trim() === '') return false;
+                    } else if (verification === 'unverified') {
+                        if (d.verificationLink && d.verificationLink.trim() !== '') return false;
+                    }
                     
                     // Donation Type Logic
                     let amountToCheck;
@@ -2113,6 +2181,7 @@
                 if (filterIndustry.value) params.set('industry', filterIndustry.value);
                 if (filterType.value) params.set('type', filterType.value);
                 if (filterDonationType.value) params.set('donationType', filterDonationType.value);
+                if (filterVerification.value) params.set('verification', filterVerification.value);
                 if (filterMinAmount.value) params.set('min', filterMinAmount.value);
                 if (filterMaxAmount.value) params.set('max', filterMaxAmount.value);
                 
@@ -2128,6 +2197,7 @@
                 if (params.has('industry')) filterIndustry.value = params.get('industry');
                 if (params.has('type')) filterType.value = params.get('type');
                 if (params.has('donationType')) filterDonationType.value = params.get('donationType');
+                if (params.has('verification')) filterVerification.value = params.get('verification');
                 if (params.has('min')) filterMinAmount.value = params.get('min');
                 if (params.has('max')) filterMaxAmount.value = params.get('max');
                 
