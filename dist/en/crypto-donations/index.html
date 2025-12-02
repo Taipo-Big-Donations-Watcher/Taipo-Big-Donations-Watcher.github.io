@@ -587,7 +587,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-02T15:02:03.028Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-02T19:43:13.876Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1115,6 +1115,32 @@
     "amountDisplay": "$2,000,000"
   },
   {
+    "entity": "Amber Group",
+    "entityEn": "",
+    "group": "",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$2,000,000",
+    "amountRaw": 2000000,
+    "cashAmount": "$2,000,000",
+    "cashAmountRaw": 2000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.ambergroup.io/zh/news/detail/zh-amber-group-donates-hk-2-million-to-support-fund-for-wang-fuk-court-in-tai-po",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "Dec 1, 2025",
+    "entityDisplay": "Amber Group",
+    "capitalDisplay": "International",
+    "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
+    "typeDisplay": "Enterprise",
+    "amountDisplay": "$2,000,000"
+  },
+  {
     "entity": "Sheldon（BitMart 創始人）、孔劍平Jack Kong（Nano Labs 創始人）、Jessica Young（ME Group CEO）",
     "entityEn": "",
     "group": "幣圈名人",
@@ -1271,6 +1297,58 @@
     "amountDisplay": "$1,000,000"
   },
   {
+    "entity": "Boyaa Interactive 博雅互動",
+    "entityEn": "",
+    "group": "",
+    "capital": "中國",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.tradingview.com/news/reuters.com%2C2025%3Anewsml_FWN3X70NG%3A0-boyaa-interactive-international-donates-hk-1-million-to-support-post-disaster-reconstruction-in-tai-po-hong-kong",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "Dec 2, 2025",
+    "entityDisplay": "Boyaa Interactive 博雅互動",
+    "capitalDisplay": "China",
+    "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
+    "typeDisplay": "Enterprise",
+    "amountDisplay": "$1,000,000"
+  },
+  {
+    "entity": "Vantage Foundation",
+    "entityEn": "",
+    "group": "",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$1,000,000",
+    "amountRaw": 1000000,
+    "cashAmount": "$1,000,000",
+    "cashAmountRaw": 1000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "https://www.prnewswire.com/news-releases/vantage-foundation-donates-hk1-million-to-support-residents-affected-by-hong-kong-fire-302628453.html",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "Nov 30, 2025",
+    "entityDisplay": "Vantage Foundation",
+    "capitalDisplay": "International",
+    "industryDisplay": "Cryptocurrency",
+    "industryIcon": "🪙",
+    "typeDisplay": "Enterprise",
+    "amountDisplay": "$1,000,000"
+  },
+  {
     "entity": "MicroBit Capital",
     "entityEn": "",
     "group": "幣圈企業",
@@ -1300,7 +1378,7 @@
     "entity": "UXUY HK",
     "entityEn": "",
     "group": "幣圈企業",
-    "capital": "國際",
+    "capital": "香港",
     "industry": "加密貨幣",
     "type": "企業",
     "amount": "$305,000",
@@ -1316,7 +1394,7 @@
     "verificationLink": "",
     "date": "",
     "entityDisplay": "UXUY HK",
-    "capitalDisplay": "International",
+    "capitalDisplay": "Hong Kong",
     "industryDisplay": "Cryptocurrency",
     "industryIcon": "🪙",
     "typeDisplay": "Enterprise",
@@ -1352,7 +1430,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-02T15:02:03.028Z"}
+        {"lang": "en", "buildTime": "2025-12-02T19:43:13.876Z"}
     </script>
 
     <script>
@@ -1441,7 +1519,9 @@
                 }
             };
             
-            // Type to Entity Word
+            // Type to Entity Word with classifier info for Chinese
+            // classifier: 位 for people (捐款者, 藝人), 個 for organizations/groups (社團, 機構, 企業)
+            // suffix: 團體 for 個人 and 政府
             const TYPE_ENTITY = {
                 en: {
                     'Enterprise': 'companies', '企業': 'companies',
@@ -1454,14 +1534,21 @@
                     '_default': 'entities'
                 },
                 zh: {
-                    'Enterprise': '企業', '企業': '企業',
-                    'Organization': '機構', '機構': '機構',
-                    'Individual': '個人', '個人': '個人',
-                    'Celebrity': '藝人', '藝人': '藝人',
-                    'Association': '社團', '社團': '社團',
-                    'Government': '政府機構', '政府': '政府機構',
-                    'Foundation': '基金', '基金': '基金',
-                    '_default': '捐款者'
+                    'Enterprise': { word: '企業', classifier: '間' },
+                    '企業': { word: '企業', classifier: '間' },
+                    'Organization': { word: '機構', classifier: '個' },
+                    '機構': { word: '機構', classifier: '個' },
+                    'Individual': { word: '個人團體', classifier: '個' },
+                    '個人': { word: '個人團體', classifier: '個' },
+                    'Celebrity': { word: '藝人', classifier: '位' },
+                    '藝人': { word: '藝人', classifier: '位' },
+                    'Association': { word: '社團', classifier: '個' },
+                    '社團': { word: '社團', classifier: '個' },
+                    'Government': { word: '政府團體', classifier: '個' },
+                    '政府': { word: '政府團體', classifier: '個' },
+                    'Foundation': { word: '基金', classifier: '個' },
+                    '基金': { word: '基金', classifier: '個' },
+                    '_default': { word: '捐款者', classifier: '位' }
                 }
             };
 
@@ -1559,9 +1646,17 @@
                 const typeFilter = filterType.value;
                 
                 // Build entity word based on type
-                let entityWord = TYPE_ENTITY[lang]['_default'];
-                if (typeFilter) {
-                    entityWord = TYPE_ENTITY[lang][typeFilter] || entityWord;
+                let entityWord, classifier;
+                if (lang === 'zh') {
+                    const entityInfo = typeFilter 
+                        ? (TYPE_ENTITY.zh[typeFilter] || TYPE_ENTITY.zh['_default'])
+                        : TYPE_ENTITY.zh['_default'];
+                    entityWord = entityInfo.word;
+                    classifier = entityInfo.classifier;
+                } else {
+                    entityWord = typeFilter 
+                        ? (TYPE_ENTITY.en[typeFilter] || TYPE_ENTITY.en['_default'])
+                        : TYPE_ENTITY.en['_default'];
                 }
                 
                 // Build origin adjective
@@ -1606,9 +1701,10 @@
                 // Construct sentence
                 let summary;
                 if (lang === 'zh') {
-                    // Chinese: 截至 [日期]，[數量]位[來源][類型] [行業] 已承諾捐出 [金額][捐款類型] 支援火災救援。
+                    // Chinese: 截至 [日期]，[數量][classifier][來源][類型] [行業] 已承諾捐出 [金額][捐款類型] 支援火災救援。
+                    // e.g., "截至 2025年12月2日，10位香港藝人 已承諾捐出..." or "截至 2025年12月2日，5間中國企業 已承諾捐出..."
                     const entityPhrase = originAdj ? `${originAdj}${entityWord}` : entityWord;
-                    summary = `截至 ${today}，<strong>${count}</strong>位${entityPhrase}${industrySuffix ? ' (' + industrySuffix + ')' : ''} 已承諾捐出 <strong>${amountStr}</strong>${donationTypeSuffix} 支援火災救援。`;
+                    summary = `截至 ${today}，<strong>${count}</strong>${classifier}${entityPhrase}${industrySuffix ? ' (' + industrySuffix + ')' : ''} 已承諾捐出 <strong>${amountStr}</strong>${donationTypeSuffix} 支援火災救援。`;
                 } else {
                     // English: As of [date], [count] [origin] [entity type] [in industry] have pledged to donate [amount] [in cash/goods] for the fire relief efforts.
                     const entityPhrase = originAdj ? `${originAdj} ${entityWord}` : entityWord;

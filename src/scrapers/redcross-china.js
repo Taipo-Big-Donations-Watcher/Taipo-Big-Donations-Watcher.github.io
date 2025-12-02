@@ -165,6 +165,14 @@ function parseDonationFromTitle(title, url) {
     type = '機構'; // Foundations are organizations, not companies
   }
   
+  // Only add note for non-HKD donations with original amount in original currency
+  let note = '';
+  if (!isHKD) {
+    // Format as Chinese style: e.g. "100萬人民幣"
+    const amountInWan = amount / 10000;
+    note = `${amountInWan}萬人民幣`;
+  }
+  
   return createDonationRecord({
     entity: entity,
     group: '',
@@ -174,7 +182,7 @@ function parseDonationFromTitle(title, url) {
     capital: '中國',
     industry: '',
     type: type,
-    note: `via ${SOURCE_NAME}, original: ${amount.toLocaleString()} ${isHKD ? 'HKD' : 'RMB'}`,
+    note: note,
     receiver: '中國紅十字會',
     primarySource: url,
     secondarySource: '',

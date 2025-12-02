@@ -1,36 +1,36 @@
 {
-  "buildTime": "2025-12-02T15:02:03.028Z",
+  "buildTime": "2025-12-02T19:43:13.876Z",
   "stats": {
-    "totalCount": 297,
-    "totalAmount": 2702278500,
-    "totalCash": 2595558500,
+    "totalCount": 328,
+    "totalAmount": 2827628500,
+    "totalCash": 2720908500,
     "totalGoods": 106720000,
-    "withKnownAmount": 282
+    "withKnownAmount": 313
   },
   "byCapital": {
     "香港": {
-      "count": 100,
-      "amount": 1041100000
+      "count": 106,
+      "amount": 1059405000
     },
     "美國": {
-      "count": 2,
-      "amount": 8000000
+      "count": 3,
+      "amount": 9000000
     },
     "中國": {
-      "count": 132,
-      "amount": 1266986500
+      "count": 151,
+      "amount": 1349836500
     },
     "日本": {
       "count": 2,
       "amount": 747000
     },
     "澳門": {
-      "count": 2,
-      "amount": 33000000
+      "count": 3,
+      "amount": 33500000
     },
     "馬來西亞": {
-      "count": 2,
-      "amount": 40000000
+      "count": 3,
+      "amount": 45000000
     },
     "韓國": {
       "count": 14,
@@ -45,16 +45,20 @@
       "amount": 30000000
     },
     "國際": {
-      "count": 29,
-      "amount": 149285000
+      "count": 30,
+      "amount": 151980000
     },
     "新加坡": {
-      "count": 1,
-      "amount": 10000000
+      "count": 2,
+      "amount": 20000000
     },
     "瑞士": {
       "count": 1,
       "amount": 10000000
+    },
+    "台灣": {
+      "count": 2,
+      "amount": 6000000
     },
     "法國": {
       "count": 1,
@@ -63,24 +67,20 @@
     "荷蘭": {
       "count": 1,
       "amount": 1000000
-    },
-    "台灣": {
-      "count": 1,
-      "amount": 1000000
     }
   },
   "byIndustry": {
     "食品飲料": {
-      "count": 18,
-      "amount": 123300000
+      "count": 19,
+      "amount": 125500000
     },
     "金融": {
-      "count": 34,
-      "amount": 354000000
+      "count": 41,
+      "amount": 388100000
     },
     "房地產": {
-      "count": 14,
-      "amount": 165500000
+      "count": 16,
+      "amount": 171500000
     },
     "醫療": {
       "count": 1,
@@ -91,8 +91,8 @@
       "amount": 0
     },
     "零售": {
-      "count": 17,
-      "amount": 106000000
+      "count": 18,
+      "amount": 118000000
     },
     "投資": {
       "count": 4,
@@ -107,12 +107,12 @@
       "amount": 100000000
     },
     "慈善": {
-      "count": 25,
-      "amount": 391096500
+      "count": 28,
+      "amount": 393796500
     },
     "農牧業": {
-      "count": 1,
-      "amount": 40000000
+      "count": 2,
+      "amount": 41100000
     },
     "電商": {
       "count": 5,
@@ -139,20 +139,20 @@
       "amount": 56000000
     },
     "娛樂": {
-      "count": 51,
-      "amount": 93097000
+      "count": 55,
+      "amount": 102947000
     },
     "原材料": {
       "count": 4,
       "amount": 34000000
     },
     "製造業": {
-      "count": 5,
-      "amount": 37000000
+      "count": 9,
+      "amount": 75300000
     },
     "加密貨幣": {
-      "count": 29,
-      "amount": 149285000
+      "count": 32,
+      "amount": 153285000
     },
     "傳媒": {
       "count": 1,
@@ -162,9 +162,13 @@
       "count": 5,
       "amount": 24500000
     },
+    "宗教": {
+      "count": 1,
+      "amount": 11000000
+    },
     "能源": {
-      "count": 3,
-      "amount": 16720000
+      "count": 7,
+      "amount": 20820000
     },
     "航空": {
       "count": 1,
@@ -183,8 +187,8 @@
       "amount": 94500000
     },
     "金融科技": {
-      "count": 5,
-      "amount": 27000000
+      "count": 4,
+      "amount": 26000000
     },
     "旅遊": {
       "count": 6,
@@ -214,6 +218,10 @@
       "count": 4,
       "amount": 4000000
     },
+    "教育": {
+      "count": 1,
+      "amount": 1000000
+    },
     "商業網絡": {
       "count": 2,
       "amount": 200000
@@ -221,8 +229,8 @@
   },
   "byType": {
     "企業": {
-      "count": 210,
-      "amount": 1789545000
+      "count": 234,
+      "amount": 1897445000
     },
     "個人": {
       "count": 7,
@@ -233,16 +241,16 @@
       "amount": 330000000
     },
     "機構": {
-      "count": 23,
-      "amount": 463096500
+      "count": 28,
+      "amount": 477896500
     },
     "社團": {
       "count": 13,
       "amount": 65100000
     },
     "藝人": {
-      "count": 42,
-      "amount": 35537000
+      "count": 44,
+      "amount": 38187000
     }
   },
   "donations": [
@@ -827,7 +835,7 @@
       "date": ""
     },
     {
-      "entity": "九龍倉",
+      "entity": "九龍倉/九倉",
       "entityEn": "",
       "group": "港資企業",
       "capital": "香港",
@@ -1147,7 +1155,7 @@
       "date": ""
     },
     {
-      "entity": "新鴻基地產（0016）",
+      "entity": "新鴻基地產/新地（0016）",
       "entityEn": "",
       "group": "香港公司",
       "capital": "香港",
@@ -1347,6 +1355,26 @@
       "date": "30/11/2025"
     },
     {
+      "entity": "中國紅十字會携手社會各界",
+      "entityEn": "",
+      "group": "中國機構",
+      "capital": "中國",
+      "industry": "慈善",
+      "type": "機構",
+      "amount": "$17,096,500",
+      "amountRaw": 17096500,
+      "cashAmount": "$17,096,500",
+      "cashAmountRaw": 17096500,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "1553萬元人民幣",
+      "through": "香港紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-11/112072.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-11/112072.html",
+      "date": "28/11/2025"
+    },
+    {
       "entity": "361集團（1361）",
       "entityEn": "",
       "group": "中資企業",
@@ -1365,26 +1393,6 @@
       "secondarySource": "https://time-weekly.com/wap-article/325642",
       "verificationLink": "",
       "date": ""
-    },
-    {
-      "entity": "中國儒意控股有限公司（0136）",
-      "entityEn": "",
-      "group": "中資企業",
-      "capital": "中國",
-      "industry": "娛樂",
-      "type": "企業",
-      "amount": "$10,000,000",
-      "amountRaw": 10000000,
-      "cashAmount": "$10,000,000",
-      "cashAmountRaw": 10000000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "香港紅十字會",
-      "primarySource": "https://www.facebook.com/share/p/1Gk72saWJc/",
-      "secondarySource": "",
-      "verificationLink": "https://www.facebook.com/share/p/1Gk72saWJc/",
-      "date": "1/12/2025"
     },
     {
       "entity": "DFI零售集團",
@@ -1487,6 +1495,26 @@
       "date": ""
     },
     {
+      "entity": "格力電器",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "零售",
+      "type": "企業",
+      "amount": "$12,000,000",
+      "amountRaw": 12000000,
+      "cashAmount": "$12,000,000",
+      "cashAmountRaw": 12000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
       "entity": "韓紅愛心慈善基金",
       "entityEn": "",
       "group": "韓國機構",
@@ -1567,6 +1595,26 @@
       "date": ""
     },
     {
+      "entity": "杭州靈隱寺",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "宗教",
+      "type": "機構",
+      "amount": "$11,000,000",
+      "amountRaw": 11000000,
+      "cashAmount": "$11,000,000",
+      "cashAmountRaw": 11000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112152.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112152.html",
+      "date": ""
+    },
+    {
       "entity": "置地公司基金會",
       "entityEn": "",
       "group": "香港機構",
@@ -1605,6 +1653,26 @@
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
+    },
+    {
+      "entity": "中國儒意控股有限公司（0136）",
+      "entityEn": "",
+      "group": "中資企業",
+      "capital": "中國",
+      "industry": "娛樂",
+      "type": "企業",
+      "amount": "$10,000,000",
+      "amountRaw": 10000000,
+      "cashAmount": "$10,000,000",
+      "cashAmountRaw": 10000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "香港紅十字會",
+      "primarySource": "https://www.facebook.com/share/p/1Gk72saWJc/",
+      "secondarySource": "",
+      "verificationLink": "https://www.facebook.com/share/p/1Gk72saWJc/",
+      "date": "1/12/2025"
     },
     {
       "entity": "香港航空",
@@ -3167,6 +3235,46 @@
       "date": ""
     },
     {
+      "entity": "耀才",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$10,000,000",
+      "amountRaw": 10000000,
+      "cashAmount": "$10,000,000",
+      "cashAmountRaw": 10000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "華僑銀行",
+      "entityEn": "",
+      "group": "",
+      "capital": "新加坡",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$10,000,000",
+      "amountRaw": 10000000,
+      "cashAmount": "$10,000,000",
+      "cashAmountRaw": 10000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
       "entity": "黄晓明明天爱心基金",
       "entityEn": "",
       "group": "中國社團",
@@ -3767,6 +3875,86 @@
       "date": ""
     },
     {
+      "entity": "鷹君集團",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "房地產",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "網龍",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "娛樂",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "富邦",
+      "entityEn": "",
+      "group": "",
+      "capital": "台灣",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "大眾銀行（香港）",
+      "entityEn": "",
+      "group": "",
+      "capital": "馬來西亞",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
       "entity": "大灣區青年公益",
       "entityEn": "",
       "group": "香港機構",
@@ -3967,7 +4155,7 @@
       "date": ""
     },
     {
-      "entity": "玖龍紙業（2689）",
+      "entity": "玖紙/玖龍紙業（2689）",
       "entityEn": "",
       "group": "中資企業",
       "capital": "中國",
@@ -4167,6 +4355,26 @@
       "date": ""
     },
     {
+      "entity": "梁安琪慈善基金、保良局副主席何猷亨先生及何猷君先生及奚夢瑤小姐一家",
+      "entityEn": "",
+      "group": "澳門商人",
+      "capital": "澳門",
+      "industry": "慈善",
+      "type": "個人",
+      "amount": "$3,000,000",
+      "amountRaw": 3000000,
+      "cashAmount": "$3,000,000",
+      "cashAmountRaw": 3000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "date": ""
+    },
+    {
       "entity": "HYBE娛樂",
       "entityEn": "",
       "group": "韓國公司",
@@ -4181,7 +4389,7 @@
       "goodsAmountRaw": 0,
       "note": "50M KRW",
       "through": "希望橋全國救災協會",
-      "primarySource": "https://www.redcross.org.cn/html/2025-11/112072.html",
+      "primarySource": "",
       "secondarySource": "https://weibo.com/2337348632/QfTZQbTdm?refer_flag=1001030103_",
       "verificationLink": "",
       "date": ""
@@ -4203,28 +4411,28 @@
       "through": "香港紅十字會",
       "primarySource": "https://www.redcross.org.cn/html/2025-11/111987.html",
       "secondarySource": "https://time-weekly.com/wap-article/325642",
-      "verificationLink": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-11/111987.html",
       "date": "27/11/2025"
     },
     {
-      "entity": "中國紅十字會携手社會各界",
+      "entity": "杭州潤星娛樂有限公司",
       "entityEn": "",
-      "group": "中國機構",
+      "group": "",
       "capital": "中國",
-      "industry": "慈善",
-      "type": "機構",
-      "amount": "$17,096,500",
-      "amountRaw": 17096500,
-      "cashAmount": "$17,096,500",
-      "cashAmountRaw": 17096500,
+      "industry": "娛樂",
+      "type": "企業",
+      "amount": "$2,200,000",
+      "amountRaw": 2200000,
+      "cashAmount": "$2,200,000",
+      "cashAmountRaw": 2200000,
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
-      "note": "1553萬元人民幣",
-      "through": "香港紅十字會",
-      "primarySource": "https://www.redcross.org.cn/html/2025-11/112072.html",
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112154.html",
       "secondarySource": "",
-      "verificationLink": "",
-      "date": "28/11/2025"
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112154.html",
+      "date": ""
     },
     {
       "entity": "南順（0411）",
@@ -4527,6 +4735,66 @@
       "date": ""
     },
     {
+      "entity": "東吳證券",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$2,000,000",
+      "amountRaw": 2000000,
+      "cashAmount": "$2,000,000",
+      "cashAmountRaw": 2000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "Amber Group",
+      "entityEn": "",
+      "group": "",
+      "capital": "國際",
+      "industry": "加密貨幣",
+      "type": "企業",
+      "amount": "$2,000,000",
+      "amountRaw": 2000000,
+      "cashAmount": "$2,000,000",
+      "cashAmountRaw": 2000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "https://www.ambergroup.io/zh/news/detail/zh-amber-group-donates-hk-2-million-to-support-fund-for-wang-fuk-court-in-tai-po",
+      "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+      "verificationLink": "",
+      "date": "Dec 1, 2025"
+    },
+    {
+      "entity": "劉亦菲",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$1,650,000",
+      "amountRaw": 1650000,
+      "cashAmount": "$1,650,000",
+      "cashAmountRaw": 1650000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112103.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112103.html",
+      "date": ""
+    },
+    {
       "entity": "城巴及漢思集團",
       "entityEn": "",
       "group": "港資企業",
@@ -4607,7 +4875,7 @@
       "date": ""
     },
     {
-      "entity": "中國燃氣（0384）",
+      "entity": "中國燃氣/中燃（0384）",
       "entityEn": "",
       "group": "中資企業",
       "capital": "中國",
@@ -4645,6 +4913,26 @@
       "secondarySource": "",
       "verificationLink": "https://weibo.com/7747325954/QfNQn5mQz",
       "date": "28/11/2025"
+    },
+    {
+      "entity": "湖北省長江證券公益慈善基金會",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "金融",
+      "type": "機構",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112153.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112153.html",
+      "date": ""
     },
     {
       "entity": "張繼聰及謝安琪",
@@ -5107,7 +5395,7 @@
       "date": ""
     },
     {
-      "entity": "SM事務所",
+      "entity": "SM娛樂",
       "entityEn": "",
       "group": "韓資企業",
       "capital": "韓國",
@@ -5131,7 +5419,7 @@
       "entityEn": "",
       "group": "中資企業",
       "capital": "中國",
-      "industry": "金融科技",
+      "industry": "金融",
       "type": "企業",
       "amount": "$1,000,000",
       "amountRaw": 1000000,
@@ -5247,66 +5535,6 @@
       "date": "1/12/2025"
     },
     {
-      "entity": "任賢齊",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$500,000",
-      "amountRaw": 500000,
-      "cashAmount": "$500,000",
-      "cashAmountRaw": 500000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.facebook.com/share/p/1BhY7M37xR/",
-      "secondarySource": "",
-      "verificationLink": "https://www.facebook.com/share/p/1BhY7M37xR/",
-      "date": "1/12/2025"
-    },
-    {
-      "entity": "方力申/香港游泳學校/一瀧游泳",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$500,000",
-      "amountRaw": 500000,
-      "cashAmount": "$500,000",
-      "cashAmountRaw": 500000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.facebook.com/share/p/19vzhu9dBt/",
-      "secondarySource": "",
-      "verificationLink": "https://www.facebook.com/share/p/19vzhu9dBt/",
-      "date": "1/12/2025"
-    },
-    {
-      "entity": "周興哲",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$500,000",
-      "amountRaw": 500000,
-      "cashAmount": "$500,000",
-      "cashAmountRaw": 500000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.facebook.com/share/p/1Bq5QwcAg4/",
-      "secondarySource": "",
-      "verificationLink": "https://www.facebook.com/share/p/1Bq5QwcAg4/",
-      "date": "1/12/2025"
-    },
-    {
       "entity": "翼凡（香港）公益基金有限公司/YiFan",
       "entityEn": "",
       "group": "香港機構",
@@ -5327,46 +5555,6 @@
       "date": "30/11/2025"
     },
     {
-      "entity": "鄧麗欣",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$500,000",
-      "amountRaw": 500000,
-      "cashAmount": "$500,000",
-      "cashAmountRaw": 500000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "secondarySource": "",
-      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "date": ""
-    },
-    {
-      "entity": "梁安琪慈善基金、保良局副主席何猷亨先生及何猷君先生及奚夢瑤小姐一家",
-      "entityEn": "",
-      "group": "澳門商人",
-      "capital": "澳門",
-      "industry": "慈善",
-      "type": "個人",
-      "amount": "$3,000,000",
-      "amountRaw": 3000000,
-      "cashAmount": "$3,000,000",
-      "cashAmountRaw": 3000000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "secondarySource": "",
-      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "date": ""
-    },
-    {
       "entity": "楊政龍",
       "entityEn": "",
       "group": "香港商人",
@@ -5384,66 +5572,6 @@
       "primarySource": "",
       "secondarySource": "",
       "verificationLink": "",
-      "date": ""
-    },
-    {
-      "entity": "王祖藍李亞男夫婦",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$500,000",
-      "amountRaw": 500000,
-      "cashAmount": "$500,000",
-      "cashAmountRaw": 500000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "通過藝人之家（中國香港）",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "secondarySource": "",
-      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "date": ""
-    },
-    {
-      "entity": "胡杏兒一家",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$300,000",
-      "amountRaw": 300000,
-      "cashAmount": "$300,000",
-      "cashAmountRaw": 300000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "secondarySource": "",
-      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "date": ""
-    },
-    {
-      "entity": "蘇永康夫婦一家",
-      "entityEn": "",
-      "group": "香港藝人",
-      "capital": "香港",
-      "industry": "娛樂",
-      "type": "藝人",
-      "amount": "$300,000",
-      "amountRaw": 300000,
-      "cashAmount": "$300,000",
-      "cashAmountRaw": 300000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
-      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
-      "secondarySource": "",
-      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
       "date": ""
     },
     {
@@ -5787,6 +5915,146 @@
       "date": ""
     },
     {
+      "entity": "楊秀惠",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "利嘉閣",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "房地產",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "雪佛龍香港",
+      "entityEn": "",
+      "group": "",
+      "capital": "美國",
+      "industry": "能源",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "MathConcept Education",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "教育",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "威勝控股",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "能源",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "Boyaa Interactive 博雅互動",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "加密貨幣",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "https://www.tradingview.com/news/reuters.com%2C2025%3Anewsml_FWN3X70NG%3A0-boyaa-interactive-international-donates-hk-1-million-to-support-post-disaster-reconstruction-in-tai-po-hong-kong",
+      "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+      "verificationLink": "",
+      "date": "Dec 2, 2025"
+    },
+    {
+      "entity": "Vantage Foundation",
+      "entityEn": "",
+      "group": "",
+      "capital": "國際",
+      "industry": "加密貨幣",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "https://www.prnewswire.com/news-releases/vantage-foundation-donates-hk1-million-to-support-residents-affected-by-hong-kong-fire-302628453.html",
+      "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+      "verificationLink": "",
+      "date": "Nov 30, 2025"
+    },
+    {
       "entity": "MicroBit Capital",
       "entityEn": "",
       "group": "幣圈企業",
@@ -5885,6 +6153,106 @@
       "secondarySource": "",
       "verificationLink": "https://weibo.com/7747325954/QfY7AFbmt",
       "date": "28/11/2025"
+    },
+    {
+      "entity": "任賢齊",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.facebook.com/share/p/1BhY7M37xR/",
+      "secondarySource": "",
+      "verificationLink": "https://www.facebook.com/share/p/1BhY7M37xR/",
+      "date": "1/12/2025"
+    },
+    {
+      "entity": "方力申/香港游泳學校/一瀧游泳",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.facebook.com/share/p/19vzhu9dBt/",
+      "secondarySource": "",
+      "verificationLink": "https://www.facebook.com/share/p/19vzhu9dBt/",
+      "date": "1/12/2025"
+    },
+    {
+      "entity": "周興哲",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.facebook.com/share/p/1Bq5QwcAg4/",
+      "secondarySource": "",
+      "verificationLink": "https://www.facebook.com/share/p/1Bq5QwcAg4/",
+      "date": "1/12/2025"
+    },
+    {
+      "entity": "鄧麗欣",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "date": ""
+    },
+    {
+      "entity": "王祖藍李亞男夫婦",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "通過藝人之家（中國香港）",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "date": ""
     },
     {
       "entity": "余文樂",
@@ -5987,6 +6355,26 @@
       "date": "28/11/2025"
     },
     {
+      "entity": "澳門紅十字會",
+      "entityEn": "",
+      "group": "",
+      "capital": "澳門",
+      "industry": "慈善",
+      "type": "機構",
+      "amount": "$500,000",
+      "amountRaw": 500000,
+      "cashAmount": "$500,000",
+      "cashAmountRaw": 500000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "香港紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112116.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112116.html",
+      "date": ""
+    },
+    {
       "entity": "展軒",
       "entityEn": "",
       "group": "中國藝人",
@@ -6010,7 +6398,7 @@
       "entity": "UXUY HK",
       "entityEn": "",
       "group": "幣圈企業",
-      "capital": "國際",
+      "capital": "香港",
       "industry": "加密貨幣",
       "type": "企業",
       "amount": "$305,000",
@@ -6024,6 +6412,46 @@
       "primarySource": "",
       "secondarySource": "https://bbx.com/zh-Hans/article/503333",
       "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "胡杏兒一家",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$300,000",
+      "amountRaw": 300000,
+      "cashAmount": "$300,000",
+      "cashAmountRaw": 300000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "date": ""
+    },
+    {
+      "entity": "蘇永康夫婦一家",
+      "entityEn": "",
+      "group": "香港藝人",
+      "capital": "香港",
+      "industry": "娛樂",
+      "type": "藝人",
+      "amount": "$300,000",
+      "amountRaw": 300000,
+      "cashAmount": "$300,000",
+      "cashAmountRaw": 300000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "保良局扶弱基金 - 支援宏福苑火災居民專項戶口",
+      "primarySource": "https://www.poleungkuk.org.hk/news/taipofiresupport",
+      "secondarySource": "",
+      "verificationLink": "https://www.poleungkuk.org.hk/news/taipofiresupport",
       "date": ""
     },
     {
@@ -6184,6 +6612,206 @@
       "primarySource": "https://www.facebook.com/share/p/1BRPAVpYwB/",
       "secondarySource": "",
       "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "山西省鑫飛公益基金會",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "慈善",
+      "type": "機構",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112101.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112101.html",
+      "date": ""
+    },
+    {
+      "entity": "宿州煤電（集團）有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "能源",
+      "type": "企業",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112100.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112100.html",
+      "date": ""
+    },
+    {
+      "entity": "得力集團有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "製造業",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112099.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112099.html",
+      "date": ""
+    },
+    {
+      "entity": "衞華集團有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "製造業",
+      "type": "企業",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112098.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112098.html",
+      "date": ""
+    },
+    {
+      "entity": "鹽津鋪子食品股份有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "食品飲料",
+      "type": "企業",
+      "amount": "$2,200,000",
+      "amountRaw": 2200000,
+      "cashAmount": "$2,200,000",
+      "cashAmountRaw": 2200000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112097.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112097.html",
+      "date": ""
+    },
+    {
+      "entity": "山東中泰慈善基金會",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "慈善",
+      "type": "機構",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112096.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112096.html",
+      "date": ""
+    },
+    {
+      "entity": "壽光地利農產品物流園有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "農牧業",
+      "type": "企業",
+      "amount": "$1,100,000",
+      "amountRaw": 1100000,
+      "cashAmount": "$1,100,000",
+      "cashAmountRaw": 1100000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112095.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112095.html",
+      "date": ""
+    },
+    {
+      "entity": "奧克斯集團有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "製造業",
+      "type": "企業",
+      "amount": "$30,000,000",
+      "amountRaw": 30000000,
+      "cashAmount": "$30,000,000",
+      "cashAmountRaw": 30000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112094.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112094.html",
+      "date": ""
+    },
+    {
+      "entity": "公牛集團股份有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "製造業",
+      "type": "企業",
+      "amount": "$2,200,000",
+      "amountRaw": 2200000,
+      "cashAmount": "$2,200,000",
+      "cashAmountRaw": 2200000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112093.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112093.html",
+      "date": ""
+    },
+    {
+      "entity": "浙江海上鮮新能源有限公司",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "能源",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "中國紅十字會",
+      "primarySource": "https://www.redcross.org.cn/html/2025-12/112092.html",
+      "secondarySource": "",
+      "verificationLink": "https://www.redcross.org.cn/html/2025-12/112092.html",
       "date": ""
     }
   ]

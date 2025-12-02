@@ -146,6 +146,14 @@ async function scrapeAccount(account) {
       ? amountInfo.amount 
       : Math.round(amountInfo.amount * 1.1);
     
+    // Only add note for non-HKD donations with original amount in original currency
+    let note = '';
+    if (!amountInfo.isHKD) {
+      // Format as Chinese style: e.g. "30萬人民幣"
+      const amountInWan = amountInfo.amount / 10000;
+      note = `${amountInWan}萬人民幣`;
+    }
+    
     const donation = createDonationRecord({
       entity: entity,
       group: '',
@@ -155,7 +163,7 @@ async function scrapeAccount(account) {
       capital: '中國',
       industry: '演藝',
       type: '藝人',
-      note: `via ${account.name}, original: ${amountInfo.amount.toLocaleString()} ${amountInfo.isHKD ? 'HKD' : 'RMB'}`,
+      note: note,
       receiver: account.name,
       primarySource: account.url,
       secondarySource: '',
