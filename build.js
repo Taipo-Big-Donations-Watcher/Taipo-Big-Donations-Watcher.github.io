@@ -30,7 +30,7 @@ const DEFAULT_LANG = 'zh';
 const SITE_URL = 'https://taipo-big-donations-watcher.github.io';
 
 // Google Sheets URL for raw data badge
-const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1dg6LxT5JElZZ5-owLMlD6uIFMsLpTfPU2cYCk5j79TI/edit?usp=sharing';
+const SHEETS_URL = 'https://docs.google.com/spreadsheets/d/1Bi2WDSCOLrxYh2E46ZDfpGMSfWyYWC0slThLGF3Dg-k/edit';
 
 // Track all generated pages for sitemap
 const generatedPages = [];
