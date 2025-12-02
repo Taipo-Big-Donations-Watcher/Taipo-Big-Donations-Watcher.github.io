@@ -41,7 +41,7 @@ This project aims to track and consolidate pledged donations from various sector
 
 2025 年 11 月 26 日，香港新界大埔區宏福苑發生嚴重火災。火勢迅速蔓延，造成災難性後果。
 
-- **傷亡情況**：至少 151 人死亡，79 人受傷，其中包括一名殉職的消防員。
+- **傷亡情況**：至少 156 人死亡，79 人受傷，其中包括一名殉職的消防員。
 - **影響範圍**：大量居民失去家園，財產損失慘重。
 - **社會反應**：各界機構、跨國企業、各國藝人及個人紛紛承諾捐款或提供物資支援。
 
@@ -96,7 +96,7 @@ The primary objectives of this tracker are:
 
 On 26 November 2025, a large fire broke out at the Wang Fuk Court apartment complex in Tai Po District, New Territories, Hong Kong.
 
-- **Casualties**: At least 151 deaths and 79 injuries. One firefighter was killed in the line of duty.
+- **Casualties**: At least 156 deaths and 79 injuries. One firefighter was killed in the line of duty.
 - **Impact**: Widespread destruction of homes and displacement of residents.
 - **Response**: Organizations, companies, and individuals locally and globally have pledged to donate for relief efforts.
 
