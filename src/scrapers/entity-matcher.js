@@ -44,6 +44,7 @@ const STRIP_WORDS = [
   '零售', // For matching "DFI零售集團" with "DFI集團"
   '啟動', '緊急', '宣布', '承諾', '累計', '首批', '追加', // Action words in headlines
   '萬元', '元', '人民幣', '物資', // Amount-related words in headlines
+  '證券', '银行', '銀行', // Financial institution suffixes
 ];
 
 // Separator patterns for splitting names

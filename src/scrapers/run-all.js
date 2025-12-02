@@ -8,7 +8,7 @@
 
 const { fetchExistingDonations, writeAllToAutoUpdateTab } = require('./sheet-writer');
 const { findMatch } = require('./entity-matcher');
-const { recordToRow } = require('./base');
+const { recordToRow, closeBrowser } = require('./base');
 
 // Import all scrapers
 const poleungkuk = require('./poleungkuk');
@@ -124,6 +124,12 @@ async function runAll() {
       });
     }
   }
+  
+  // Close the browser if it was used
+  console.log('\n' + '─'.repeat(50));
+  console.log('Cleaning up...');
+  console.log('─'.repeat(50));
+  await closeBrowser();
   
   // Write all results to sheet at once
   console.log('\n' + '─'.repeat(50));

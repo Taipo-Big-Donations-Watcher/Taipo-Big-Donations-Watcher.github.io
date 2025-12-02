@@ -30,6 +30,7 @@
   "dependencies": {
     "cheerio": "^1.1.2",
     "googleapis": "^166.0.0",
-    "opencc-js": "^1.0.5"
+    "opencc-js": "^1.0.5",
+    "puppeteer": "^24.31.0"
   }
 }

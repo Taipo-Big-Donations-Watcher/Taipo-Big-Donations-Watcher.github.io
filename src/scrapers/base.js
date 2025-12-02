@@ -7,6 +7,7 @@
 const https = require('https');
 const http = require('http');
 const cheerio = require('cheerio');
+const puppeteer = require('puppeteer');
 
 /**
  * Fetch HTML from a URL with custom headers to avoid bot detection
@@ -170,13 +171,90 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// Shared browser instance for efficiency
+let browserInstance = null;
+
+/**
+ * Get or create a shared Puppeteer browser instance
+ * @returns {Promise<puppeteer.Browser>}
+ */
+async function getBrowser() {
+  if (!browserInstance) {
+    browserInstance = await puppeteer.launch({
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+      ],
+    });
+  }
+  return browserInstance;
+}
+
+/**
+ * Close the shared browser instance
+ */
+async function closeBrowser() {
+  if (browserInstance) {
+    await browserInstance.close();
+    browserInstance = null;
+  }
+}
+
+/**
+ * Fetch HTML from a JavaScript-rendered page using Puppeteer
+ * @param {string} url - URL to fetch
+ * @param {Object} options - Options
+ * @param {number} options.waitTime - Time to wait for JS to render (ms), default 3000
+ * @param {string} options.waitForSelector - Wait for this selector to appear
+ * @returns {Promise<string>} - Rendered HTML
+ */
+async function fetchRenderedHtml(url, options = {}) {
+  const { waitTime = 3000, waitForSelector = null } = options;
+  
+  const browser = await getBrowser();
+  const page = await browser.newPage();
+  
+  try {
+    // Set a realistic viewport and user agent
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    
+    // Navigate to the page
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+    
+    // Wait for content to load
+    if (waitForSelector) {
+      try {
+        await page.waitForSelector(waitForSelector, { timeout: 10000 });
+      } catch (e) {
+        // Selector not found, continue anyway
+      }
+    } else {
+      await sleep(waitTime);
+    }
+    
+    // Get the rendered HTML
+    const html = await page.content();
+    return html;
+    
+  } finally {
+    await page.close();
+  }
+}
+
 module.exports = {
   fetchHtml,
+  fetchRenderedHtml,
   parseHtml,
   parseAmount,
   normalizeEntityName,
   createDonationRecord,
   recordToRow,
   sleep,
+  getBrowser,
+  closeBrowser,
 };
 
