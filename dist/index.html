@@ -2,19 +2,19 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/en/">
+  <meta http-equiv="refresh" content="0; url=/zh/">
   <title>Redirecting...</title>
   <script>
     // Detect browser language and redirect
     const lang = navigator.language || navigator.userLanguage;
-    if (lang.startsWith('zh')) {
-      window.location.href = '/zh/';
-    } else {
+    if (lang.startsWith('en')) {
       window.location.href = '/en/';
+    } else {
+      window.location.href = '/zh/';
     }
   </script>
 </head>
 <body>
-  <p>Redirecting to <a href="/en/">/en/</a>...</p>
+  <p>Redirecting to <a href="/zh/">/zh/</a>...</p>
 </body>
 </html>

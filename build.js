@@ -271,15 +271,7 @@ function generateRootRedirect(defaultLang) {
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="0; url=/${defaultLang}/">
   <title>Redirecting...</title>
-  <script>
-    // Detect browser language and redirect
-    const lang = navigator.language || navigator.userLanguage;
-    if (lang.startsWith('en')) {
-      window.location.href = '/en/';
-    } else {
-      window.location.href = '/zh/';
-    }
-  </script>
+  <link rel="canonical" href="${SITE_URL}/${defaultLang}/">
 </head>
 <body>
   <p>Redirecting to <a href="/${defaultLang}/">/${defaultLang}/</a>...</p>
