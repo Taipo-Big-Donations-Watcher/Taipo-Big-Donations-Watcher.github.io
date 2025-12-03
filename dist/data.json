@@ -1,24 +1,24 @@
 {
-  "buildTime": "2025-12-03T10:25:16.759Z",
+  "buildTime": "2025-12-03T16:06:17.344Z",
   "stats": {
-    "totalCount": 356,
-    "totalAmount": 2869741527,
-    "totalCash": 2763021527,
-    "totalGoods": 106720000,
-    "withKnownAmount": 341
+    "totalCount": 361,
+    "totalAmount": 2902634044,
+    "totalCash": 2785614044,
+    "totalGoods": 117020000,
+    "withKnownAmount": 345
   },
   "byCapital": {
     "香港": {
-      "count": 128,
-      "amount": 1089368027
+      "count": 131,
+      "amount": 1100468027
     },
     "美國": {
       "count": 3,
       "amount": 9000000
     },
     "中國": {
-      "count": 152,
-      "amount": 1360836500
+      "count": 153,
+      "amount": 1380026500
     },
     "日本": {
       "count": 2,
@@ -45,8 +45,8 @@
       "amount": 30000000
     },
     "國際": {
-      "count": 30,
-      "amount": 151980000
+      "count": 31,
+      "amount": 154582517
     },
     "新加坡": {
       "count": 2,
@@ -72,11 +72,11 @@
   "byIndustry": {
     "餐飲": {
       "count": 25,
-      "amount": 131900000
+      "amount": 132000000
     },
     "金融": {
-      "count": 41,
-      "amount": 388100000
+      "count": 43,
+      "amount": 394100000
     },
     "房地產": {
       "count": 16,
@@ -91,12 +91,16 @@
       "amount": 0
     },
     "零售": {
-      "count": 20,
-      "amount": 128613027
+      "count": 21,
+      "amount": 138613027
     },
     "投資": {
       "count": 4,
       "amount": 4000000
+    },
+    "綜合企業": {
+      "count": 8,
+      "amount": 113000000
     },
     "政府": {
       "count": 3,
@@ -122,10 +126,6 @@
       "count": 9,
       "amount": 128000000
     },
-    "綜合企業": {
-      "count": 7,
-      "amount": 113000000
-    },
     "建材": {
       "count": 2,
       "amount": 40000000
@@ -144,15 +144,15 @@
     },
     "娛樂": {
       "count": 74,
-      "amount": 118047000
+      "amount": 132237000
     },
     "原材料": {
       "count": 4,
       "amount": 34000000
     },
     "加密貨幣": {
-      "count": 32,
-      "amount": 153285000
+      "count": 33,
+      "amount": 155887517
     },
     "傳媒": {
       "count": 1,
@@ -229,8 +229,8 @@
   },
   "byType": {
     "企業": {
-      "count": 247,
-      "amount": 1929258027
+      "count": 252,
+      "amount": 1947960544
     },
     "個人": {
       "count": 7,
@@ -246,7 +246,7 @@
     },
     "社團": {
       "count": 13,
-      "amount": 65100000
+      "amount": 79290000
     },
     "藝人": {
       "count": 57,
@@ -551,6 +551,26 @@
       "through": "",
       "primarySource": "https://www.facebook.com/Agapegardenhk/posts/1343384387817648?ref=embed_post",
       "secondarySource": "https://hk.news.yahoo.com/%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%EF%BD%9C%E8%AD%9A%E4%BB%94%E5%8F%8A%E9%BA%A5%E7%95%B6%E5%8B%9E%E6%8C%87%E5%AE%9A%E5%BA%97%E6%8F%90%E4%BE%9B%E5%85%8D%E8%B2%BB%E5%A0%82%E9%A3%9F-%E4%BA%88%E6%9C%89%E9%9C%80%E8%A6%81%E5%B1%85%E6%B0%91%E5%8F%8A%E6%95%91%E6%8F%B4%E8%80%85-%E8%86%B3%E5%BF%83%E5%B0%8F%E9%A4%A8%E8%A3%BD%E4%BD%9C%E7%86%B1%E9%A4%90%E9%80%81%E6%9A%96%EF%BD%9Cyahoo-045520952.html",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "屈臣氏集團",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "綜合企業",
+      "type": "企業",
+      "amount": "unclear",
+      "amountRaw": null,
+      "cashAmount": "unclear",
+      "cashAmountRaw": null,
+      "goodsAmount": "unclear",
+      "goodsAmountRaw": null,
+      "note": "屈臣氏集團與旗下品牌一直支持受影響的居民。集團旗下的屈臣氏、百佳、豐澤及屈臣氏蒸餾水立刻捐贈超過三萬件物資予受影響居民，包括蒸餾水、食品、暖包、日用品及電器用品等。同時，我們在大埔區的店舖設立11個「關懷服務站」為居民提供即時協助，免費提供充電、文件打印及掃描服務。我們還設置「心意牆」為受影響居民打氣。屈臣氏藥劑師在社區中心提供免費健康諮詢，並協助安排處方藥物。\n\n我們正與政府部門及慈善夥伴緊密合作，透過豐澤捐贈價值一百萬的家電用品，包括電飯煲、暖風機及熱水壺等。屈臣氏、百佳及屈臣氏蒸餾水亦將額外捐贈逾萬件清潔用品、廚房用品、個人護理用品及冷暖水機。\n\n集團的香港會員計劃「易賞錢」(MoneyBack)，鼓勵會員捐助積分支持受影響居民，「易賞錢」將在二十四小時內將捐款入帳至指定慈善機構。",
+      "through": "",
+      "primarySource": "https://www.aswatson.com/zh/standing-together-as-watsons-continued-support-for-residents-impacted-by-the-fire/",
+      "secondarySource": "",
       "verificationLink": "",
       "date": ""
     },
@@ -1995,6 +2015,26 @@
       "date": ""
     },
     {
+      "entity": "Fortress 豐澤",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "零售",
+      "type": "企業",
+      "amount": "$10,000,000",
+      "amountRaw": 10000000,
+      "cashAmount": "$0",
+      "cashAmountRaw": 0,
+      "goodsAmount": "$10,000,000",
+      "goodsAmountRaw": 10000000,
+      "note": "我哋亦正緊急同政府部門，同埋長期合作嘅慈善機構安排緊總值一百萬嘅家電用品去支援受災住戶，包括電飯煲、風筒同熱水壺等等，用最迅速嘅行動回應災民需要，送上關懷同支持。",
+      "through": "",
+      "primarySource": "https://www.facebook.com/share/p/17ekNXFcvn/",
+      "secondarySource": "",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
       "entity": "港交所/港交所慈善基金",
       "entityEn": "",
       "group": "港資企業",
@@ -3341,15 +3381,15 @@
       "capital": "中國",
       "industry": "娛樂",
       "type": "社團",
-      "amount": "$9,900,000",
-      "amountRaw": 9900000,
-      "cashAmount": "$9,900,000",
-      "cashAmountRaw": 9900000,
+      "amount": "$24,090,000",
+      "amountRaw": 24090000,
+      "cashAmount": "$24,090,000",
+      "cashAmountRaw": 24090000,
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
-      "note": "感谢 @黄晓明 @佟丽娅 @许凯soso @万茜 @张远Bird @丁禹兮 @龚俊Simon @黄磊微博 @多妈7788 @李一桐Q @张子枫 @宋威龙99 @李沁 @那英 @我是李雪琴啊 @张晚意 @王栎鑫 @歐陽娜娜Nana @黄渤 携手聚力。目前爱心捐赠已达900万元，款项一半直接汇入香港，为受灾同胞的过渡安置、生活补给注入即时保障；一半根据香港当地建议，定向用于家园重建，协助流离的家庭早日拥有新的港湾。",
-      "through": "",
-      "primarySource": "https://weibo.com/5221445738/QgnlSx8Ur",
+      "note": "感谢 @黄晓明 @佟丽娅 @许凯soso @万茜 @张远Bird @丁禹兮 @龚俊Simon @黄磊微博 @多妈7788 @李一桐Q @张子枫 @宋威龙99 @李沁 @那英 @我是李雪琴啊 @张晚意 @王栎鑫 @歐陽娜娜Nana @黄渤 携手聚力。\n\n截至12月1日，“携手明天”项目组，已通过@中华社会救助基金会 向“大埔宏福苑援助基金”专用账户拨付善款1000万（人民币），结合当地建议，剩余1190万款项我们将确定3-5家在香港具备资质且执行能力强、落地成效好的机构进行合作，确保善款高效使用。",
+      "through": "大埔宏福苑援助基金",
+      "primarySource": "https://weibo.com/5221445738/QgHWZr9wQ",
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
@@ -3931,6 +3971,26 @@
       "through": "",
       "primarySource": "https://www.facebook.com/share/p/16ors2J9ZJ/",
       "secondarySource": "",
+      "verificationLink": "",
+      "date": ""
+    },
+    {
+      "entity": "南洋商業銀行",
+      "entityEn": "",
+      "group": "",
+      "capital": "中國",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$5,000,000",
+      "amountRaw": 5000000,
+      "cashAmount": "$5,000,000",
+      "cashAmountRaw": 5000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "",
+      "primarySource": "",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
       "verificationLink": "",
       "date": ""
     },
@@ -4968,7 +5028,7 @@
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
       "note": "",
-      "through": "",
+      "through": "東華三院",
       "primarySource": "",
       "secondarySource": "https://hk.ulifestyle.com.hk/topic/detail/20082848",
       "verificationLink": "",
@@ -6375,7 +6435,7 @@
       "date": ""
     },
     {
-      "entity": "Mister Donut",
+      "entity": "Mister Donut/龍環企業有限公司",
       "entityEn": "",
       "group": "",
       "capital": "香港",
@@ -6388,8 +6448,8 @@
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
       "note": "",
-      "through": "",
-      "primarySource": "",
+      "through": "公益金及時雨大埔火災援助基金",
+      "primarySource": "https://www.instagram.com/p/DRuANZakgtS/",
       "secondarySource": "https://www.am730.com.hk/%E7%94%9F%E6%B4%BB/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB-%E7%86%B1%E5%BF%83%E6%8D%90%E6%AC%BE%E8%B3%91%E7%81%BD%E9%A3%9F%E8%82%86%E4%B8%80%E8%A6%BD-bakehouse-beans-mister-donut-%E8%8F%AF%E5%BE%A1%E7%B5%90-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0-/624097",
       "verificationLink": "",
       "date": ""
@@ -6409,7 +6469,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.instagram.com/p/DRkH9ddk7bb/",
       "secondarySource": "https://www.am730.com.hk/%E7%94%9F%E6%B4%BB/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB-%E7%86%B1%E5%BF%83%E6%8D%90%E6%AC%BE%E8%B3%91%E7%81%BD%E9%A3%9F%E8%82%86%E4%B8%80%E8%A6%BD-bakehouse-beans-mister-donut-%E8%8F%AF%E5%BE%A1%E7%B5%90-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0-/624097",
       "verificationLink": "",
       "date": ""
@@ -6493,6 +6553,26 @@
       "secondarySource": "",
       "verificationLink": "",
       "date": ""
+    },
+    {
+      "entity": "盈立證券",
+      "entityEn": "",
+      "group": "",
+      "capital": "香港",
+      "industry": "金融",
+      "type": "企業",
+      "amount": "$1,000,000",
+      "amountRaw": 1000000,
+      "cashAmount": "$1,000,000",
+      "cashAmountRaw": 1000000,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "",
+      "through": "大埔宏福苑援助基金",
+      "primarySource": "https://www.usmart.hk/zh-hk/about-us/media-centre/detail/10221",
+      "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+      "verificationLink": "",
+      "date": "29/12/2025"
     },
     {
       "entity": "棋人娛樂製作有限公司",
@@ -6587,8 +6667,8 @@
       "cashAmountRaw": 613027,
       "goodsAmount": "$0",
       "goodsAmountRaw": 0,
-      "note": "\"善款上，在作出任何決定之前，我睇咗好多唔同嘅機構同團體，希望可以搵到唔單只係做實事，而且已經喺區內積極支援緊大埔火災受害者，並全心全意投入救援工作的機構。\"",
-      "through": "",
+      "note": "",
+      "through": "Habitat for Humanity (65%)\nSamaritan Befrienders (25%)\nHouse of Joy & Mercy (8%)\nFamily of Deceased Firefighter (2%)",
       "primarySource": "https://www.instagram.com/p/DRx58kIk94-/",
       "secondarySource": "",
       "verificationLink": "",
@@ -7169,7 +7249,7 @@
       "goodsAmountRaw": 0,
       "note": "",
       "through": "",
-      "primarySource": "",
+      "primarySource": "https://www.instagram.com/p/DRt2waPkVLr/",
       "secondarySource": "https://www.am730.com.hk/%E7%94%9F%E6%B4%BB/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB-%E7%86%B1%E5%BF%83%E6%8D%90%E6%AC%BE%E8%B3%91%E7%81%BD%E9%A3%9F%E8%82%86%E4%B8%80%E8%A6%BD-bakehouse-beans-mister-donut-%E8%8F%AF%E5%BE%A1%E7%B5%90-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0-/624097",
       "verificationLink": "",
       "date": ""
@@ -7181,15 +7261,15 @@
       "capital": "香港",
       "industry": "餐飲",
       "type": "企業",
-      "amount": "$200,000",
-      "amountRaw": 200000,
-      "cashAmount": "$200,000",
-      "cashAmountRaw": 200000,
-      "goodsAmount": "$0",
-      "goodsAmountRaw": 0,
-      "note": "",
-      "through": "",
-      "primarySource": "",
+      "amount": "$300,000",
+      "amountRaw": 300000,
+      "cashAmount": "$0",
+      "cashAmountRaw": 0,
+      "goodsAmount": "$300,000",
+      "goodsAmountRaw": 300000,
+      "note": "-韓印紅現金券200,000元\n-韓國生水500ml 10000瓶\n-韓國雞蛋2000盒\n總值：HKD 300,000",
+      "through": "惜食堂",
+      "primarySource": "https://www.instagram.com/p/DRjpuqGkrQ0/",
       "secondarySource": "https://www.am730.com.hk/%E7%94%9F%E6%B4%BB/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB-%E7%86%B1%E5%BF%83%E6%8D%90%E6%AC%BE%E8%B3%91%E7%81%BD%E9%A3%9F%E8%82%86%E4%B8%80%E8%A6%BD-bakehouse-beans-mister-donut-%E8%8F%AF%E5%BE%A1%E7%B5%90-%E6%8C%81%E7%BA%8C%E6%9B%B4%E6%96%B0-/624097",
       "verificationLink": "",
       "date": ""
@@ -7373,6 +7453,26 @@
       "secondarySource": "https://hk.ulifestyle.com.hk/topic/detail/20082848",
       "verificationLink": "",
       "date": ""
+    },
+    {
+      "entity": "Animoca Brands",
+      "entityEn": "",
+      "group": "",
+      "capital": "國際",
+      "industry": "加密貨幣",
+      "type": "企業",
+      "amount": "$2,602,517",
+      "amountRaw": 2602517,
+      "cashAmount": "$2,602,517",
+      "cashAmountRaw": 2602517,
+      "goodsAmount": "$0",
+      "goodsAmountRaw": 0,
+      "note": "HK$2,602,516.64 was raised and donated to through this initiative. Around 33% (HK$869,067.7) was contributed by members of global crypto communities. The remaining HK$1,733,448.94 was donated by Animoca Brands, its staff, its co-founder Yat Siu, various subsidiaries and projects (including Open Campus, Anichess, The Sandbox, Tower Ecosystem, and others), as well as close partners such as Moca Foundation. ",
+      "through": "香港紅十字會",
+      "primarySource": "https://www.animocabrands.com/animoca-brands-and-crypto-communities-donate-over-hkd2600000-for-hong-kong-tai-po-fire-relief",
+      "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+      "verificationLink": "",
+      "date": "3/12/2025"
     }
   ]
 }

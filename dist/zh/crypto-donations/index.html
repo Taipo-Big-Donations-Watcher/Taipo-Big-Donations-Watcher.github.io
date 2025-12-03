@@ -602,7 +602,8 @@
         }
 
         .note-wrapper:hover .note-tooltip,
-        .note-wrapper:focus-within .note-tooltip {
+        .note-wrapper:focus-within .note-tooltip,
+        .note-wrapper.open .note-tooltip {
             display: block;
         }
 
@@ -848,7 +849,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-03T10:25:16.759Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-03T16:06:17.344Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1298,6 +1299,32 @@
     "amountDisplay": "$3,000,000"
   },
   {
+    "entity": "Animoca Brands",
+    "entityEn": "",
+    "group": "",
+    "capital": "國際",
+    "industry": "加密貨幣",
+    "type": "企業",
+    "amount": "$2,602,517",
+    "amountRaw": 2602517,
+    "cashAmount": "$2,602,517",
+    "cashAmountRaw": 2602517,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "HK$2,602,516.64 was raised and donated to through this initiative. Around 33% (HK$869,067.7) was contributed by members of global crypto communities. The remaining HK$1,733,448.94 was donated by Animoca Brands, its staff, its co-founder Yat Siu, various subsidiaries and projects (including Open Campus, Anichess, The Sandbox, Tower Ecosystem, and others), as well as close partners such as Moca Foundation. ",
+    "through": "香港紅十字會",
+    "primarySource": "https://www.animocabrands.com/animoca-brands-and-crypto-communities-donate-over-hkd2600000-for-hong-kong-tai-po-fire-relief",
+    "secondarySource": "https://whaleagent.io/tai-po-wang-fuk-court-donations",
+    "verificationLink": "",
+    "date": "3/12/2025",
+    "entityDisplay": "Animoca Brands",
+    "capitalDisplay": "國際",
+    "industryDisplay": "加密貨幣",
+    "industryIcon": "🪙",
+    "typeDisplay": "企業",
+    "amountDisplay": "$2,602,517"
+  },
+  {
     "entity": "DL Holdings 德林控股",
     "entityEn": "",
     "group": "幣圈企業",
@@ -1691,7 +1718,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-03T10:25:16.759Z"}
+        {"lang": "zh", "buildTime": "2025-12-03T16:06:17.344Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -1724,6 +1751,37 @@
                     navMenu.classList.toggle('active');
                 });
             }
+
+            // Note tooltip toggle (better mobile support)
+            document.addEventListener('click', (event) => {
+                const icon = event.target.closest('.note-icon');
+                const openWrappers = document.querySelectorAll('.note-wrapper.open');
+
+                if (!icon) {
+                    // Clicked outside any note icon: close all tooltips
+                    openWrappers.forEach(w => w.classList.remove('open'));
+                    return;
+                }
+
+                const wrapper = icon.closest('.note-wrapper');
+                if (!wrapper) return;
+
+                const isOpen = wrapper.classList.contains('open');
+
+                // Close all others
+                openWrappers.forEach(w => {
+                    if (w !== wrapper) w.classList.remove('open');
+                });
+
+                // Toggle current
+                if (isOpen) {
+                    wrapper.classList.remove('open');
+                } else {
+                    wrapper.classList.add('open');
+                }
+
+                event.stopPropagation();
+            });
 
             // Flags Mapping
             const FLAGS = {

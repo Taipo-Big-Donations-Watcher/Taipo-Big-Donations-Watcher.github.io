@@ -602,7 +602,8 @@
         }
 
         .note-wrapper:hover .note-tooltip,
-        .note-wrapper:focus-within .note-tooltip {
+        .note-wrapper:focus-within .note-tooltip,
+        .note-wrapper.open .note-tooltip {
             display: block;
         }
 
@@ -848,7 +849,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-03T10:25:16.759Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-03T16:06:17.344Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -3300,6 +3301,32 @@
     "amountDisplay": "$5,000,000"
   },
   {
+    "entity": "南洋商業銀行",
+    "entityEn": "",
+    "group": "",
+    "capital": "中國",
+    "industry": "金融",
+    "type": "企業",
+    "amount": "$5,000,000",
+    "amountRaw": 5000000,
+    "cashAmount": "$5,000,000",
+    "cashAmountRaw": 5000000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "",
+    "through": "",
+    "primarySource": "",
+    "secondarySource": "https://www.stheadline.com/realtime-finance/3521753/%E5%A4%A7%E5%9F%94%E5%AE%8F%E7%A6%8F%E8%8B%91%E4%BA%94%E7%B4%9A%E7%81%AB%E5%90%84%E5%A4%A7%E4%BC%81%E6%A5%AD%E6%8D%90%E6%AC%BE%E9%80%BE13%E5%84%84-%E4%B8%AD%E8%B3%87%E8%87%B3%E5%B0%91%E6%8D%90%E9%80%BE7%E5%84%84-%E7%A7%91%E4%BC%81%E6%96%B0%E5%A2%9E%E5%8A%A0%E5%AF%86%E5%B9%A3%E9%8C%A2%E5%8C%85%E5%8B%9F%E6%8D%90",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "南洋商業銀行",
+    "capitalDisplay": "China",
+    "industryDisplay": "Finance",
+    "industryIcon": "💰",
+    "typeDisplay": "Enterprise",
+    "amountDisplay": "$5,000,000"
+  },
+  {
     "entity": "網龍",
     "entityEn": "",
     "group": "",
@@ -4343,7 +4370,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-03T10:25:16.759Z"}
+        {"lang": "en", "buildTime": "2025-12-03T16:06:17.344Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -4376,6 +4403,37 @@
                     navMenu.classList.toggle('active');
                 });
             }
+
+            // Note tooltip toggle (better mobile support)
+            document.addEventListener('click', (event) => {
+                const icon = event.target.closest('.note-icon');
+                const openWrappers = document.querySelectorAll('.note-wrapper.open');
+
+                if (!icon) {
+                    // Clicked outside any note icon: close all tooltips
+                    openWrappers.forEach(w => w.classList.remove('open'));
+                    return;
+                }
+
+                const wrapper = icon.closest('.note-wrapper');
+                if (!wrapper) return;
+
+                const isOpen = wrapper.classList.contains('open');
+
+                // Close all others
+                openWrappers.forEach(w => {
+                    if (w !== wrapper) w.classList.remove('open');
+                });
+
+                // Toggle current
+                if (isOpen) {
+                    wrapper.classList.remove('open');
+                } else {
+                    wrapper.classList.add('open');
+                }
+
+                event.stopPropagation();
+            });
 
             // Flags Mapping
             const FLAGS = {

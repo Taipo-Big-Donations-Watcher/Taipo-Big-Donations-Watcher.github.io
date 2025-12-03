@@ -602,7 +602,8 @@
         }
 
         .note-wrapper:hover .note-tooltip,
-        .note-wrapper:focus-within .note-tooltip {
+        .note-wrapper:focus-within .note-tooltip,
+        .note-wrapper.open .note-tooltip {
             display: block;
         }
 
@@ -778,7 +779,7 @@
     <div class="intro">
         <p class="intro-subtitle">2025年11月26日，香港新界大埔區宏福苑發生大火。目前已造成至少156人死亡、79人受傷，一名消防員殉職。各界機構、企業及個人紛紛承諾捐款支援火災救援工作。本網站致力追蹤所有超過港幣10萬元的公開捐款。</p>
         <hr>
-        <h2 class="summary-text" id="dynamic-summary">截至 2025年12月3日，<strong>356</strong>位捐款者 已承諾捐出 <strong>$2,869,741,527</strong> 支援火災救援。</h2>
+        <h2 class="summary-text" id="dynamic-summary">截至 2025年12月4日，<strong>361</strong>位捐款者 已承諾捐出 <strong>$2,902,634,044</strong> 支援火災救援。</h2>
     </div>
 
     
@@ -816,7 +817,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-03T10:25:16.759Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-03T16:06:17.344Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -826,7 +827,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-03T10:25:16.759Z"}
+        {"lang": "zh", "buildTime": "2025-12-03T16:06:17.344Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -859,6 +860,37 @@
                     navMenu.classList.toggle('active');
                 });
             }
+
+            // Note tooltip toggle (better mobile support)
+            document.addEventListener('click', (event) => {
+                const icon = event.target.closest('.note-icon');
+                const openWrappers = document.querySelectorAll('.note-wrapper.open');
+
+                if (!icon) {
+                    // Clicked outside any note icon: close all tooltips
+                    openWrappers.forEach(w => w.classList.remove('open'));
+                    return;
+                }
+
+                const wrapper = icon.closest('.note-wrapper');
+                if (!wrapper) return;
+
+                const isOpen = wrapper.classList.contains('open');
+
+                // Close all others
+                openWrappers.forEach(w => {
+                    if (w !== wrapper) w.classList.remove('open');
+                });
+
+                // Toggle current
+                if (isOpen) {
+                    wrapper.classList.remove('open');
+                } else {
+                    wrapper.classList.add('open');
+                }
+
+                event.stopPropagation();
+            });
 
             // Flags Mapping
             const FLAGS = {

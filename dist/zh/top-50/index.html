@@ -602,7 +602,8 @@
         }
 
         .note-wrapper:hover .note-tooltip,
-        .note-wrapper:focus-within .note-tooltip {
+        .note-wrapper:focus-within .note-tooltip,
+        .note-wrapper.open .note-tooltip {
             display: block;
         }
 
@@ -848,7 +849,7 @@
 
     <footer>
         <p class="disclaimer">資料來源於公開宣佈。 <a href="https://t.me/ayip002" target="_blank" style="color:inherit">如有錯漏，歡迎指正。</a></p>
-        <p>最後更新: <span id="build-time">2025-12-03T10:25:16.759Z</span></p>
+        <p>最後更新: <span id="build-time">2025-12-03T16:06:17.344Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1374,6 +1375,32 @@
     "industryIcon": "🏭",
     "typeDisplay": "企業",
     "amountDisplay": "$30,000,000"
+  },
+  {
+    "entity": "黄晓明明天爱心基金",
+    "entityEn": "Huang Xiaoming Tomorrow Love Fund",
+    "group": "中國社團",
+    "capital": "中國",
+    "industry": "娛樂",
+    "type": "社團",
+    "amount": "$24,090,000",
+    "amountRaw": 24090000,
+    "cashAmount": "$24,090,000",
+    "cashAmountRaw": 24090000,
+    "goodsAmount": "$0",
+    "goodsAmountRaw": 0,
+    "note": "感谢 @黄晓明 @佟丽娅 @许凯soso @万茜 @张远Bird @丁禹兮 @龚俊Simon @黄磊微博 @多妈7788 @李一桐Q @张子枫 @宋威龙99 @李沁 @那英 @我是李雪琴啊 @张晚意 @王栎鑫 @歐陽娜娜Nana @黄渤 携手聚力。\n\n截至12月1日，“携手明天”项目组，已通过@中华社会救助基金会 向“大埔宏福苑援助基金”专用账户拨付善款1000万（人民币），结合当地建议，剩余1190万款项我们将确定3-5家在香港具备资质且执行能力强、落地成效好的机构进行合作，确保善款高效使用。",
+    "through": "大埔宏福苑援助基金",
+    "primarySource": "https://weibo.com/5221445738/QgHWZr9wQ",
+    "secondarySource": "",
+    "verificationLink": "",
+    "date": "",
+    "entityDisplay": "黄晓明明天爱心基金",
+    "capitalDisplay": "中國",
+    "industryDisplay": "娛樂",
+    "industryIcon": "🎬",
+    "typeDisplay": "社團",
+    "amountDisplay": "$24,090,000"
   },
   {
     "entity": "中海外/中建",
@@ -2128,38 +2155,12 @@
     "industryIcon": "🏪",
     "typeDisplay": "企業",
     "amountDisplay": "$12,000,000"
-  },
-  {
-    "entity": "韓紅愛心慈善基金",
-    "entityEn": "Han Hong Love Charity Foundation",
-    "group": "韓國機構",
-    "capital": "中國",
-    "industry": "慈善",
-    "type": "機構",
-    "amount": "$11,000,000",
-    "amountRaw": 11000000,
-    "cashAmount": "$11,000,000",
-    "cashAmountRaw": 11000000,
-    "goodsAmount": "$0",
-    "goodsAmountRaw": 0,
-    "note": "10,000,000RMB",
-    "through": "",
-    "primarySource": "",
-    "secondarySource": "https://time-weekly.com/wap-article/325642",
-    "verificationLink": "",
-    "date": "",
-    "entityDisplay": "韓紅愛心慈善基金",
-    "capitalDisplay": "中國",
-    "industryDisplay": "慈善",
-    "industryIcon": "❤️",
-    "typeDisplay": "機構",
-    "amountDisplay": "$11,000,000"
   }
 ]
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "zh", "buildTime": "2025-12-03T10:25:16.759Z"}
+        {"lang": "zh", "buildTime": "2025-12-03T16:06:17.344Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -2192,6 +2193,37 @@
                     navMenu.classList.toggle('active');
                 });
             }
+
+            // Note tooltip toggle (better mobile support)
+            document.addEventListener('click', (event) => {
+                const icon = event.target.closest('.note-icon');
+                const openWrappers = document.querySelectorAll('.note-wrapper.open');
+
+                if (!icon) {
+                    // Clicked outside any note icon: close all tooltips
+                    openWrappers.forEach(w => w.classList.remove('open'));
+                    return;
+                }
+
+                const wrapper = icon.closest('.note-wrapper');
+                if (!wrapper) return;
+
+                const isOpen = wrapper.classList.contains('open');
+
+                // Close all others
+                openWrappers.forEach(w => {
+                    if (w !== wrapper) w.classList.remove('open');
+                });
+
+                // Toggle current
+                if (isOpen) {
+                    wrapper.classList.remove('open');
+                } else {
+                    wrapper.classList.add('open');
+                }
+
+                event.stopPropagation();
+            });
 
             // Flags Mapping
             const FLAGS = {
