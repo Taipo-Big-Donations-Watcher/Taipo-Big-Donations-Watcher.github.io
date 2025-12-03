@@ -89,8 +89,8 @@ async function scrape() {
             industry: '餐飲',
             type: '企業',
             note: '',
-            primarySource: SOURCE_URL,
-            secondarySource: '',
+            primarySource: '',
+            secondarySource: SOURCE_URL,
             verificationLink: '',
           });
           

@@ -74,7 +74,7 @@ function parseAmount(amountStr) {
  */
 function determineType(name) {
   if (name.includes('基金') || name.includes('基金會')) {
-    return '基金';
+    return '機構';
   }
   if (name.includes('公司') || name.includes('集團') || name.includes('娛樂')) {
     return '企業';
@@ -179,11 +179,11 @@ async function scrape() {
                   totalValue: parsed.amount,
                   cashValue: parsed.amount,
                   capital: capital,
-                  industry: '演藝',
+                  industry: '娛樂',
                   type: type,
                   note: parsed.originalNote || '',
-                  primarySource: SOURCE_URL,
-                  secondarySource: '',
+                  primarySource: '',
+                  secondarySource: SOURCE_URL,
                   verificationLink: '',
                 });
                 
