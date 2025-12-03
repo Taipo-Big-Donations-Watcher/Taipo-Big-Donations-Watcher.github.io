@@ -161,7 +161,7 @@ async function scrapeAccount(account) {
       cashValue: hkdAmount,
       goodsValue: null,
       capital: '中國',
-      industry: '演藝',
+      industry: '娛樂',
       type: '藝人',
       note: note,
       receiver: account.name,

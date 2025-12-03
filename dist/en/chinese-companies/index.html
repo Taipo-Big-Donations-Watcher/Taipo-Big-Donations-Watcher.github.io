@@ -552,18 +552,78 @@
             margin-top: 4px;
         }
         
+        .note-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-left: 4px;
+        }
+
         .note-icon {
             color: var(--accent-color);
-            margin-left: 5px;
-            cursor: help;
+            cursor: pointer;
             text-decoration: none;
             font-size: 0.9em;
+            border-radius: 999px;
+            border: 1px solid var(--accent-color);
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            background: transparent;
+        }
+
+        .note-tooltip {
+            position: absolute;
+            z-index: 20;
+            top: 120%;
+            left: 0;
+            min-width: 200px;
+            max-width: 280px;
+            padding: 8px 10px;
+            background: var(--card-bg);
+            border-radius: 6px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+            font-size: 0.8em;
+            color: var(--muted-text);
+            line-height: 1.4;
+            display: none;
+        }
+
+        .note-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 10px;
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent var(--card-bg) transparent;
+        }
+
+        .note-wrapper:hover .note-tooltip,
+        .note-wrapper:focus-within .note-tooltip {
+            display: block;
+        }
+
+        @media (hover: none) {
+            /* On touch devices, rely on focus/tap, ignore hover */
+            .note-wrapper:hover .note-tooltip {
+                display: none;
+            }
         }
 
         .amount {
             font-family: inherit; /* Match body font */
             font-weight: 700;
             color: var(--heading-color);
+        }
+
+        .amount-main {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap; /* Keep numeric amount and verification icon together */
+            gap: 4px;
         }
 
         .tag {
@@ -599,15 +659,33 @@
         }
         
         .verification-icon {
-            color: #b2bec3;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background-color: #2ecc71; /* Green */
+            color: white;
+            border-radius: 50%;
+            margin-left: 8px;
             text-decoration: none;
-            margin-left: 6px;
-            font-size: 0.9em;
-            transition: color 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
+            vertical-align: middle;
         }
         
         .verification-icon:hover {
-            color: var(--accent-color);
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+
+        .verification-icon svg {
+            width: 10px;
+            height: 10px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Mobile Responsiveness */
@@ -770,7 +848,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-03T00:26:05.738Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-03T10:25:16.759Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -886,7 +964,7 @@
     "entityEn": "",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$30,000,000",
     "amountRaw": 30000000,
@@ -1120,7 +1198,7 @@
     "entityEn": "Mixue Bingcheng (2097)",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$20,000,000",
     "amountRaw": 20000000,
@@ -1406,7 +1484,7 @@
     "entityEn": "Luckin Coffee",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$11,000,000",
     "amountRaw": 11000000,
@@ -1562,7 +1640,7 @@
     "entityEn": "Guoquan (2517)",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$10,000,000",
     "amountRaw": 10000000,
@@ -1718,7 +1796,7 @@
     "entityEn": "Haitian Flavouring",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$10,000,000",
     "amountRaw": 10000000,
@@ -2394,7 +2472,7 @@
     "entityEn": "Nongfu Spring",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$10,000,000",
     "amountRaw": 10000000,
@@ -2654,7 +2732,7 @@
     "entityEn": "",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$10,000,000",
     "amountRaw": 10000000,
@@ -2914,7 +2992,7 @@
     "entityEn": "ChaPanda",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$5,000,000",
     "amountRaw": 5000000,
@@ -3278,7 +3356,7 @@
     "entityEn": "Yum China",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$3,300,000",
     "amountRaw": 3300000,
@@ -3434,7 +3512,7 @@
     "entityEn": "Xiao Cai Yuan (0999)",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$3,000,000",
     "amountRaw": 3000000,
@@ -3486,7 +3564,7 @@
     "entityEn": "",
     "group": "",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$2,200,000",
     "amountRaw": 2200000,
@@ -3538,7 +3616,7 @@
     "entityEn": "",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "$2,000,000",
     "amountRaw": 2000000,
@@ -4240,7 +4318,7 @@
     "entityEn": "McDonald's Hong Kong",
     "group": "中資企業",
     "capital": "中國",
-    "industry": "食品飲料",
+    "industry": "餐飲",
     "type": "企業",
     "amount": "unclear",
     "amountRaw": null,
@@ -4265,7 +4343,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-03T00:26:05.738Z"}
+        {"lang": "en", "buildTime": "2025-12-03T10:25:16.759Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -4278,6 +4356,17 @@
             let sortField = 'amountRaw';
             let sortDir = 'desc';
             
+            // HTML Escaper for safe attribute / tooltip content
+            const escapeHtml = (str) => {
+                if (!str) return '';
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;')
+                    .replace(/'/g, '&#39;');
+            };
+
             // Burger Menu Toggle
             const burgerMenu = document.getElementById('burger-menu');
             const navMenu = document.getElementById('nav-menu');
@@ -4313,7 +4402,7 @@
                 'Technology': '💻', '科技': '💻',
                 'Real Estate': '🏢', '房地產': '🏢',
                 'Entertainment': '🎬', '娛樂': '🎬',
-                'Food & Beverage': '🍔', '食品飲料': '🍔',
+                'Food & Beverage': '🍔', '餐飲': '🍔',
                 'Retail': '🏪', '零售': '🏪'
             };
             
@@ -5104,13 +5193,14 @@
                 currentDonations.forEach(d => {
                     const tr = document.createElement('tr');
                     
-                    let entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}`;
-                    
-                    // Note Tooltip (i)
+                    // Entity name + optional note tooltip inline
+                    let entityHtml;
                     if (d.note) {
-                        entityHtml += `<span class="note-icon" title="${d.note}">ⓘ</span>`;
+                        const safeNote = escapeHtml(d.note);
+                        entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}<span class="note-wrapper"><button class="note-icon" type="button" aria-label="Notes">i</button><div class="note-tooltip" role="tooltip">${safeNote}</div></span></span>`;
+                    } else {
+                        entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
                     }
-                    entityHtml += `</span>`;
 
                     // Source Link Logic
                     if (d.primarySource) {
@@ -5138,11 +5228,12 @@
                         displayAmount = d.amountDisplay || d.amount || '-';
                     }
                     
-                    // Amount with verification icon
-                    let amountHtml = displayAmount;
+                    // Amount with verification icon (kept on one line)
+                    let amountHtml = `<span class="amount-main">${displayAmount}`;
                     if (d.verificationLink) {
-                        amountHtml += `<a href="${d.verificationLink}" target="_blank" class="verification-icon" title="Verified Payment">✓</a>`;
+                        amountHtml += `<a href="${d.verificationLink}" target="_blank" class="verification-icon" title="Verified Payment" aria-label="Verified Payment"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></a>`;
                     }
+                    amountHtml += `</span>`;
                     
                     // Add receiver if exists (just name)
                     if (d.through) {

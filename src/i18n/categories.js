@@ -43,7 +43,7 @@ const INDUSTRY_MAP = {
   '地產代理': { en: 'Real Estate Agency', zh: '地產代理', icon: '🔑' },
   
   // Consumer
-  '食品飲料': { en: 'Food & Beverage', zh: '食品飲料', icon: '🍔' },
+  '餐飲': { en: 'Food & Beverage', zh: '餐飲', icon: '🍔' },
   '零售': { en: 'Retail', zh: '零售', icon: '🏪' },
   '服裝': { en: 'Apparel', zh: '服裝', icon: '👕' },
   '服裝零售': { en: 'Fashion Retail', zh: '服裝零售', icon: '👗' },
