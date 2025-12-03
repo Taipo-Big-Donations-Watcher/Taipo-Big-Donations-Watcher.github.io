@@ -572,6 +572,8 @@
             justify-content: center;
             line-height: 1;
             background: transparent;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .note-tooltip {
@@ -604,7 +606,9 @@
         .note-wrapper:hover .note-tooltip,
         .note-wrapper:focus-within .note-tooltip,
         .note-wrapper.open .note-tooltip {
-            display: block;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         @media (hover: none) {
@@ -849,7 +853,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-03T16:06:17.344Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-03T16:17:04.952Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -2160,7 +2164,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-03T16:06:17.344Z"}
+        {"lang": "en", "buildTime": "2025-12-03T16:17:04.952Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -2194,35 +2198,26 @@
                 });
             }
 
-            // Note tooltip toggle (better mobile support)
+            // Close note tooltips when clicking outside
             document.addEventListener('click', (event) => {
-                const icon = event.target.closest('.note-icon');
-                const openWrappers = document.querySelectorAll('.note-wrapper.open');
-
-                if (!icon) {
-                    // Clicked outside any note icon: close all tooltips
-                    openWrappers.forEach(w => w.classList.remove('open'));
-                    return;
+                const clickedNoteIcon = event.target.closest('.note-icon');
+                const clickedNoteTooltip = event.target.closest('.note-tooltip');
+                
+                if (!clickedNoteIcon && !clickedNoteTooltip) {
+                    // Clicked outside: close all tooltips
+                    document.querySelectorAll('.note-wrapper.open').forEach(w => w.classList.remove('open'));
                 }
-
-                const wrapper = icon.closest('.note-wrapper');
-                if (!wrapper) return;
-
-                const isOpen = wrapper.classList.contains('open');
-
-                // Close all others
-                openWrappers.forEach(w => {
-                    if (w !== wrapper) w.classList.remove('open');
-                });
-
-                // Toggle current
-                if (isOpen) {
-                    wrapper.classList.remove('open');
-                } else {
-                    wrapper.classList.add('open');
+            });
+            
+            // Also handle touch events for mobile
+            document.addEventListener('touchend', (event) => {
+                const clickedNoteIcon = event.target.closest('.note-icon');
+                const clickedNoteTooltip = event.target.closest('.note-tooltip');
+                
+                if (!clickedNoteIcon && !clickedNoteTooltip) {
+                    // Touched outside: close all tooltips
+                    document.querySelectorAll('.note-wrapper.open').forEach(w => w.classList.remove('open'));
                 }
-
-                event.stopPropagation();
             });
 
             // Flags Mapping
@@ -3045,7 +3040,8 @@
                     let entityHtml;
                     if (d.note) {
                         const safeNote = escapeHtml(d.note);
-                        entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}<span class="note-wrapper"><button class="note-icon" type="button" aria-label="Notes">i</button><div class="note-tooltip" role="tooltip">${safeNote}</div></span></span>`;
+                        const noteId = `note-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+                        entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}<span class="note-wrapper"><button class="note-icon" type="button" aria-label="Notes" data-note-id="${noteId}">i</button><div class="note-tooltip" id="${noteId}" role="tooltip">${safeNote}</div></span></span>`;
                     } else {
                         entityHtml = `<span class="entity-name">${d.entityDisplay || d.entity}</span>`;
                     }
@@ -3097,6 +3093,37 @@
                         <td style="white-space:nowrap; font-size:0.9em; color:#666">${d.date || '-'}</td>
                     `;
                     tableBody.appendChild(tr);
+                    
+                    // Attach note tooltip handlers directly to this row's button
+                    if (d.note) {
+                        const noteButton = tr.querySelector('.note-icon');
+                        const noteTooltip = tr.querySelector('.note-tooltip');
+                        const noteWrapper = tr.querySelector('.note-wrapper');
+                        
+                        if (noteButton && noteTooltip && noteWrapper) {
+                            const toggleTooltip = (e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                
+                                const isOpen = noteWrapper.classList.contains('open');
+                                
+                                // Close all other tooltips
+                                document.querySelectorAll('.note-wrapper.open').forEach(w => {
+                                    if (w !== noteWrapper) w.classList.remove('open');
+                                });
+                                
+                                // Toggle this one
+                                if (isOpen) {
+                                    noteWrapper.classList.remove('open');
+                                } else {
+                                    noteWrapper.classList.add('open');
+                                }
+                            };
+                            
+                            noteButton.addEventListener('click', toggleTooltip);
+                            noteButton.addEventListener('touchend', toggleTooltip);
+                        }
+                    }
                 });
             }
 
