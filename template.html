@@ -599,15 +599,33 @@
         }
         
         .verification-icon {
-            color: #b2bec3;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background-color: #2ecc71; /* Green */
+            color: white;
+            border-radius: 50%;
+            margin-left: 8px;
             text-decoration: none;
-            margin-left: 6px;
-            font-size: 0.9em;
-            transition: color 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
+            vertical-align: middle;
         }
         
         .verification-icon:hover {
-            color: var(--accent-color);
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+
+        .verification-icon svg {
+            width: 10px;
+            height: 10px;
+            stroke: white;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         /* Mobile Responsiveness */
@@ -1656,7 +1674,7 @@
                     // Amount with verification icon
                     let amountHtml = displayAmount;
                     if (d.verificationLink) {
-                        amountHtml += `<a href="${d.verificationLink}" target="_blank" class="verification-icon" title="Verified Payment">✓</a>`;
+                        amountHtml += `<a href="${d.verificationLink}" target="_blank" class="verification-icon" title="Verified Payment" aria-label="Verified Payment"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></a>`;
                     }
                     
                     // Add receiver if exists (just name)
