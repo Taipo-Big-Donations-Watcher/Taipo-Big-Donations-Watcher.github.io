@@ -16,6 +16,8 @@ const stheadline = require('./stheadline');
 const redcrossChina = require('./redcross-china');
 const whaleagent = require('./whaleagent');
 const weibo = require('./weibo');
+const am730 = require('./am730');
+const ulifestyle = require('./ulifestyle');
 
 const ALL_SCRAPERS = [
   { name: 'Po Leung Kuk', module: poleungkuk },
@@ -23,6 +25,8 @@ const ALL_SCRAPERS = [
   { name: 'China Red Cross', module: redcrossChina },
   { name: 'WhaleAgent', module: whaleagent },
   { name: 'Weibo', module: weibo },
+  { name: 'AM730', module: am730 },
+  { name: 'ULifestyle', module: ulifestyle },
 ];
 
 /**
