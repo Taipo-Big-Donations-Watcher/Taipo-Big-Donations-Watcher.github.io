@@ -355,6 +355,28 @@
             color: var(--muted-text);
         }
 
+        .amount-display {
+            cursor: text;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: background 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .amount-display:hover {
+            background: var(--highlight-bg);
+            border-color: #ddd;
+        }
+
+        .amount-editable-input {
+            width: 80px;
+            padding: 2px 6px;
+            font-size: 1em;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            outline: none;
+        }
+
         /* noUiSlider Customization */
         .noUi-connect {
             background: var(--accent-color);
@@ -698,8 +720,8 @@
             </button>
             <div id="amount-popup" class="amount-popup">
                 <div class="amount-inputs">
-                    <span id="amount-min-display">$0</span>
-                    <span id="amount-max-display">$10M+</span>
+                    <span id="amount-min-display" class="amount-display">$0</span>
+                    <span id="amount-max-display" class="amount-display">$10M+</span>
                 </div>
                 <div id="amount-slider" class="slider-container"></div>
                 <!-- Hidden inputs for compatibility with existing logic -->
@@ -741,7 +763,7 @@
 
     <footer>
         <p class="disclaimer">Data sourced from public announcements. <a href="https://t.me/ayip002" target="_blank" style="color:inherit">Corrections welcome.</a></p>
-        <p>Last Updated: <span id="build-time">2025-12-02T23:50:37.798Z</span></p>
+        <p>Last Updated: <span id="build-time">2025-12-03T00:00:46.209Z</span></p>
         <p style="margin-top:10px">Made by <a href="https://www.threads.com/@angusflies" target="_blank" style="color:inherit">@angusflies</a></p>
     </footer>
 
@@ -1168,7 +1190,7 @@
     </script>
 
     <script type="application/json" id="page-meta">
-        {"lang": "en", "buildTime": "2025-12-02T23:50:37.798Z"}
+        {"lang": "en", "buildTime": "2025-12-03T00:00:46.209Z"}
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
@@ -1575,37 +1597,34 @@
                 const slider = document.getElementById('amount-slider');
                 if (!slider) return;
                 
-                // Calculate global max amount (rounded up to nearest million or so)
+                // Calculate global max amount
                 let maxVal = 0;
                 allDonations.forEach(d => {
                     const val = Math.max(d.amountRaw || 0, d.cashAmountRaw || 0, d.goodsAmountRaw || 0);
                     if (val > maxVal) maxVal = val;
                 });
                 
-                if (maxVal === 0) maxVal = 1000000; // Default fallback
-                
-                // Round up maxVal for nice UI
+                if (maxVal === 0) maxVal = 1000000;
                 if (maxVal > 1000000) {
                     maxVal = Math.ceil(maxVal / 1000000) * 1000000;
-                } else {
-                    maxVal = Math.ceil(maxVal / 100000) * 100000;
                 }
-                
+
+                // Create non-linear scale (log-like)
+                // Set 50% point to 1M if max is huge, or 10% of max
+                const midPoint = Math.min(1000000, maxVal * 0.1);
+
                 noUiSlider.create(slider, {
                     start: [0, maxVal],
                     connect: true,
                     range: {
                         'min': 0,
+                        '50%': midPoint, // Log-like scale: 50% slider width = 1M (or 10% max)
                         'max': maxVal
                     },
                     step: 10000,
                     format: {
-                        to: function (value) {
-                            return Math.round(value);
-                        },
-                        from: function (value) {
-                            return Number(value);
-                        }
+                        to: value => Math.round(value),
+                        from: value => Number(value)
                     }
                 });
                 
@@ -1614,21 +1633,69 @@
                 const minInput = document.getElementById('filter-min-amount');
                 const maxInput = document.getElementById('filter-max-amount');
                 
+                // Helper to format amount
+                const formatAmount = (val) => {
+                    if (val === 0) return '$0';
+                    if (val >= 1000000) return '$' + (val/1000000).toFixed(1).replace('.0', '') + 'M';
+                    if (val >= 1000) return '$' + (val/1000).toFixed(0) + 'k';
+                    return '$' + val;
+                };
+
                 slider.noUiSlider.on('update', function (values, handle) {
                     const val = Math.round(values[handle]);
-                    const formatted = '$' + (val >= 1000000 ? (val/1000000).toFixed(1) + 'M' : (val/1000).toFixed(0) + 'k');
+                    const el = handle === 0 ? minDisplay : maxDisplay;
+                    const input = handle === 0 ? minInput : maxInput;
                     
-                    if (handle === 0) {
-                        minDisplay.textContent = formatted;
-                        minInput.value = val; // Update hidden input
-                    } else {
-                        maxDisplay.textContent = formatted;
-                        maxInput.value = val; // Update hidden input
+                    // Only update text if not currently editing
+                    if (!el.querySelector('input')) {
+                        el.textContent = formatAmount(val);
                     }
+                    input.value = val;
                 });
                 
                 slider.noUiSlider.on('change', function () {
-                    handleFilter(); // Trigger filter when slider dragging stops
+                    handleFilter();
+                });
+
+                // Click to edit logic
+                [minDisplay, maxDisplay].forEach((el, index) => {
+                    el.addEventListener('click', function() {
+                        if (this.querySelector('input')) return; // Already editing
+                        
+                        const currentVal = index === 0 ? minInput.value : maxInput.value;
+                        const input = document.createElement('input');
+                        input.type = 'number';
+                        input.className = 'amount-editable-input';
+                        input.value = currentVal;
+                        
+                        this.innerHTML = '';
+                        this.appendChild(input);
+                        input.focus();
+                        
+                        const finishEdit = () => {
+                            let val = parseFloat(input.value) || 0;
+                            // Validation
+                            if (val < 0) val = 0;
+                            if (val > maxVal) val = maxVal;
+                            
+                            const values = slider.noUiSlider.get();
+                            if (index === 0) values[0] = val;
+                            else values[1] = val;
+                            
+                            slider.noUiSlider.set(values);
+                            // Trigger filter immediately
+                            handleFilter();
+                            
+                            // Text update will happen via slider update event
+                        };
+                        
+                        input.addEventListener('blur', finishEdit);
+                        input.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter') {
+                                input.blur();
+                            }
+                        });
+                    });
                 });
             }
 
