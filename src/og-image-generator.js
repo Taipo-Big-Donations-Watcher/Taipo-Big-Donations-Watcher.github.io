@@ -1,6 +1,64 @@
 const { registerFont, createCanvas } = require('canvas');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');
+
+/**
+ * Download font file if it doesn't exist
+ * @param {string} url 
+ * @param {string} dest 
+ */
+function downloadFont(url, dest) {
+  if (fs.existsSync(dest)) {
+    const stats = fs.statSync(dest);
+    if (stats.size > 0) {
+      return Promise.resolve();
+    }
+    // Delete empty/corrupt file
+    fs.unlinkSync(dest);
+  }
+  
+  // Ensure directory exists
+  const dir = path.dirname(dest);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  return new Promise((resolve, reject) => {
+    const request = https.get(url, (response) => {
+      // Handle redirects
+      if (response.statusCode === 302 || response.statusCode === 301) {
+        downloadFont(response.headers.location, dest).then(resolve).catch(reject);
+        return;
+      }
+      
+      if (response.statusCode !== 200) {
+        reject(new Error(`Failed to download font: ${response.statusCode}`));
+        return;
+      }
+      
+      console.log(`Downloading font to ${dest}...`);
+      const file = fs.createWriteStream(dest);
+      response.pipe(file);
+      
+      file.on('finish', () => {
+        file.close();
+        console.log('Font downloaded.');
+        resolve();
+      });
+
+      file.on('error', (err) => {
+        fs.unlink(dest, () => {});
+        reject(err);
+      });
+    });
+    
+    request.on('error', (err) => {
+      if (fs.existsSync(dest)) fs.unlinkSync(dest);
+      reject(err);
+    });
+  });
+}
 
 // Helper to format money
 function formatMoney(amount) {
@@ -30,6 +88,17 @@ function formatMoneyEn(amount) {
 async function generateOgImages(totalAmount, outputDir, buildTime) {
   const width = 1200;
   const height = 630;
+  
+  // Setup Font
+  const fontPath = path.join(process.cwd(), 'fonts', 'NotoSansCJKtc-Bold.otf');
+  try {
+    await downloadFont('https://github.com/googlefonts/noto-cjk/raw/main/Sans/OTF/TraditionalChinese/NotoSansCJKtc-Bold.otf', fontPath);
+    registerFont(fontPath, { family: 'Noto Sans HK' });
+    console.log('Registered font: Noto Sans HK');
+  } catch (err) {
+    console.error('Error setting up font:', err);
+    // Continue with fallback
+  }
   
   // Ensure output directory exists
   if (!fs.existsSync(outputDir)) {
@@ -73,7 +142,7 @@ async function generateOgImages(totalAmount, outputDir, buildTime) {
     
     // Font selection - Use simpler font family to ensure it loads
     const labelFontSize = 40;
-    ctx.font = `bold ${labelFontSize}px Arial, sans-serif`;
+    ctx.font = `bold ${labelFontSize}px "Noto Sans HK", Arial, sans-serif`;
     
     // Draw Label above center
     ctx.fillText(config.label, width / 2, height / 2 - 40);
@@ -81,7 +150,7 @@ async function generateOgImages(totalAmount, outputDir, buildTime) {
     // 3. Text 2: Amount (Big, Gradient)
     ctx.textBaseline = 'top';
     const amountFontSize = 100;
-    ctx.font = `900 ${amountFontSize}px Arial, sans-serif`;
+    ctx.font = `900 ${amountFontSize}px "Noto Sans HK", Arial, sans-serif`;
     
     // Measure text to center gradient correctly
     const textMetrics = ctx.measureText(config.amountText);
