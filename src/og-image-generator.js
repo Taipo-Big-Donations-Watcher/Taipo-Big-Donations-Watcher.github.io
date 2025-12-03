@@ -37,19 +37,19 @@ async function generateOgImages(totalAmount, outputDir, buildTime) {
   }
 
   const date = new Date(buildTime);
-  const dateZh = date.toLocaleDateString('zh-HK', { month: 'long', day: 'numeric' });
-  const dateEn = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const dateZh = date.toLocaleDateString('zh-HK', { year: 'numeric', month: 'long', day: 'numeric' });
+  const dateEn = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
   const configs = [
     {
       lang: 'zh',
-      label: `截止 ${dateZh}，捐款承諾達`,
+      label: `截止 ${dateZh}，捐款承諾已達`,
       amountText: 'HK$' + totalAmount.toLocaleString(),
       filename: 'og-image-zh.png'
     },
     {
       lang: 'en',
-      label: `As of ${dateEn}, total pledged donation reached`,
+      label: `As of ${dateEn}, the total pledged donation has reached`,
       amountText: 'HK$' + totalAmount.toLocaleString(),
       filename: 'og-image-en.png'
     }
@@ -72,7 +72,7 @@ async function generateOgImages(totalAmount, outputDir, buildTime) {
     ctx.fillStyle = '#1d1d1f'; // Apple dark gray
     
     // Font selection - Use simpler font family to ensure it loads
-    const labelFontSize = 60;
+    const labelFontSize = 40;
     ctx.font = `bold ${labelFontSize}px Arial, sans-serif`;
     
     // Draw Label above center
