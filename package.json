@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/Taipo-Big-Donations-Watcher/Taipo-Big-Donations-Watcher.github.io#readme",
   "dependencies": {
+    "canvas": "^3.2.0",
     "cheerio": "^1.1.2",
     "googleapis": "^166.0.0",
     "opencc-js": "^1.0.5",

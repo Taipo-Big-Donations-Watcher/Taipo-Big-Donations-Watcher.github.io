@@ -20,6 +20,7 @@ const {
   applyFilter,
   translateDonations 
 } = require('./src/data-processor');
+const { generateOgImages } = require('./src/og-image-generator');
 
 const DIST_DIR = path.join(__dirname, 'dist');
 const TEMPLATE_PATH = path.join(__dirname, 'template.html');
@@ -133,6 +134,7 @@ function generateLangPages(template, donations, stats, lang, buildTime) {
     page_description: i18n.page_description
       .replace('{count}', stats.totalCount.toLocaleString())
       .replace('{amount}', '$' + stats.totalAmount.toLocaleString()),
+    og_image_url: `${SITE_URL}/og-image-${lang}.png`,
   };
   
   // Apply i18n and inject data
@@ -253,6 +255,7 @@ function generateAboutPages(template, donations, stats, buildTime) {
       footer_disclaimer: i18n.footer_disclaimer_pre + ' ' + i18n.footer_corrections,
       page_description: lang === 'zh' ? '關於大埔火災捐款追蹤器項目' : 'About the Tai Po Fire Donations Watcher project',
       site_title: (lang === 'zh' ? '關於 - ' : 'About - ') + i18n.site_title,
+      og_image_url: `${SITE_URL}/og-image-${lang}.png`,
     };
     
     let html = applyI18n(template, i18n, pageVars);
@@ -381,6 +384,7 @@ function generateSeoPages(template, donations, seoConfigs, buildTime) {
         footer_disclaimer: lang === 'zh' 
           ? '資料來源於公開宣佈。如有錯誤，歡迎指正。'
           : 'Data sourced from public announcements. Corrections welcome.',
+        og_image_url: `${SITE_URL}/og-image-${lang}.png`,
       };
       
       let html = applyI18n(template, i18n, pageVars);
@@ -500,6 +504,11 @@ async function build() {
     console.log(`  ✓ Processed ${donations.length} valid donations`);
     console.log(`  ✓ Total pledged: HKD ${stats.totalAmount.toLocaleString()}`);
     console.log(`  ✓ Known amounts: ${stats.withKnownAmount}/${stats.totalCount}\n`);
+    
+    // Generate OG Images
+    console.log('Generating OG Images...');
+    await generateOgImages(stats.totalAmount, DIST_DIR, buildTime);
+    console.log('  ✓ Generated og-image-en.png and og-image-zh.png\n');
     
     // Generate pages for each language
     console.log('Generating bilingual pages...');
